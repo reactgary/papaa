@@ -1,0 +1,42 @@
+
+package convolution;
+
+import com.maxeler.maxcompiler.v2.build.EngineParameters;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.EngineInterface;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.InterfaceParam;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager.IOType;
+
+class ConvolutionManager {
+	private static int nxMax = 4096;
+
+	public static void main(String[] args) {
+		Manager m = new Manager(new EngineParameters(args));
+		m.setKernel(new ConvolutionKernel(m.makeKernelParameters(),nxMax));
+		m.setIO(IOType.ALL_CPU);
+		m.createSLiCinterface(interfaceDefault());
+		m.build();
+	}
+
+	private static EngineInterface interfaceDefault() {
+		EngineInterface ae = new EngineInterface();
+
+		InterfaceParam width = ae.addParam("width", CPUTypes.INT);
+		InterfaceParam height = ae.addParam("height", CPUTypes.INT);
+
+		InterfaceParam size = width * height;
+		InterfaceParam sizeOut = (width-2) * (height -2);
+		CPUTypes streamType = CPUTypes.FLOAT;
+		InterfaceParam sizeBytes= size * streamType.sizeInBytes();
+		InterfaceParam sizeBytesOut= sizeOut * streamType.sizeInBytes();
+
+		ae.setTicks("ConvolutionKernel", size);
+		ae.setScalar("ConvolutionKernel", "width", width);
+		ae.setScalar("ConvolutionKernel", "height", height);
+		ae.setStream("inStream", streamType, sizeBytes);
+		ae.setStream("outStream", streamType, sizeBytesOut);
+		return ae;
+	}
+
+}

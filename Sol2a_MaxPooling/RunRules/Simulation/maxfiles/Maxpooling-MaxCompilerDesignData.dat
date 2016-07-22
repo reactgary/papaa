@@ -1,0 +1,1400 @@
+#ifdef MAXCOMPILER_VERSION_INFO
+#define MAXCOMPILER_VERSION_INFO_PRESENT 1
+#define MAXFILE_MAXCOMPILER_VERSION_YEAR         2015
+#define MAXFILE_MAXCOMPILER_VERSION_NUM          2
+#define MAXFILE_MAXCOMPILER_VERSION_POINT        0
+#define MAXFILE_MAXCOMPILER_VERSION_PATCH        ""
+#define MAXFILE_MAXCOMPILER_VERSION_REV          46290
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_DATE "2015-11-17"
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_MODE true
+#endif
+
+#ifdef MAXFILE_BUILD_INFO
+#define MAXFILE_BUILD_INFO_PRESENT 1
+#define MAXFILE_BUILD_NAME "Maxpooling"
+#define MAXFILE_BUILD_DIR  "/home/demo/Desktop/MaxCompiler-Builds/Maxpooling_MAIA_DFE_SIM"
+#define MAXFILE_BUILD_DATE  20160714
+#define MAXFILE_BUILD_REV   1
+#endif
+
+#ifdef PARAM
+#define PARAM_PRESENT 1
+PARAM(APP_ID, 0)
+PARAM(REV_ID, 0)
+PARAM(CHAIN_LENGTH, 35)
+PARAM(IS_SIMULATION, 1)
+PARAM(MEC_SUPPORTED, 1)
+PARAM(PCIE_SLAVE_STREAMING, 0)
+PARAM(PCIE_ALIGNMENT, 16)
+PARAM(NUM_IFPGA_LINKS, 0)
+#endif
+
+#ifdef STRING_PARAM
+#define STRING_PARAM_PRESENT 1
+STRING_PARAM(BOARD_MODEL, "MAX4848A")
+#endif
+
+
+
+#ifdef INCLUDE_GENERATED_CPP_HEADERS
+#include "MaxpoolingKernel.h"
+#endif
+
+
+
+
+
+
+
+
+
+
+#ifdef MANAGER_NODE
+#define MANAGER_NODE_PRESENT 1
+MANAGER_NODE(MaxpoolingKernel, Kernel)
+MANAGER_NODE(inStream, PCIe_From_Host)
+MANAGER_NODE(outStream, PCIe_To_Host)
+MANAGER_NODE(Stream_1, DualAspectMux)
+MANAGER_NODE(Stream_6, DualAspectReg)
+MANAGER_NODE(Stream_14, StreamPullPushAdapter)
+MANAGER_NODE(Stream_8, Fifo)
+MANAGER_NODE(Stream_10, Fifo)
+MANAGER_NODE(Stream_12, Fifo)
+#endif
+
+#ifdef MANAGER_NODE_IO
+#define MANAGER_NODE_IO_PRESENT 1
+MANAGER_NODE_IO(MaxpoolingKernel, inStream, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(MaxpoolingKernel, outStream, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(inStream, inStream, OUT, PCIE, 128, PUSH)
+MANAGER_NODE_IO(outStream, outStream, IN, PCIE, 128, PUSH)
+MANAGER_NODE_IO(Stream_1, input, IN, PCIE, 128, PULL)
+MANAGER_NODE_IO(Stream_1, output, OUT, PCIE, 32, PUSH)
+MANAGER_NODE_IO(Stream_6, input, IN, PCIE, 32, PULL)
+MANAGER_NODE_IO(Stream_6, output, OUT, PCIE, 128, PULL)
+MANAGER_NODE_IO(Stream_14, input, IN, PCIE, 128, PULL)
+MANAGER_NODE_IO(Stream_14, output, OUT, PCIE, 128, PUSH)
+MANAGER_NODE_IO(Stream_8, input, IN, PCIE, 128, PUSH)
+MANAGER_NODE_IO(Stream_8, output, OUT, PCIE, 128, PULL)
+MANAGER_NODE_IO(Stream_10, input, IN, PCIE, 32, PUSH)
+MANAGER_NODE_IO(Stream_10, output, OUT, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_12, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_12, output, OUT, PCIE, 32, PULL)
+#endif
+
+#ifdef MANAGER_STREAM
+#define MANAGER_STREAM_PRESENT 1
+MANAGER_STREAM(inStream, inStream, Stream_8, input, 128)
+MANAGER_STREAM(MaxpoolingKernel, outStream, Stream_12, input, 32)
+MANAGER_STREAM(Stream_1, output, Stream_10, input, 32)
+MANAGER_STREAM(Stream_6, output, Stream_14, input, 128)
+MANAGER_STREAM(Stream_14, output, outStream, outStream, 128)
+MANAGER_STREAM(Stream_8, output, Stream_1, input, 128)
+MANAGER_STREAM(Stream_10, output, MaxpoolingKernel, inStream, 32)
+MANAGER_STREAM(Stream_12, output, Stream_6, input, 32)
+#endif
+
+#ifdef MANAGER_NODE_STACK_TRACE
+#define MANAGER_NODE_STACK_TRACE_PRESENT 1
+MANAGER_NODE_STACK_TRACE(MaxpoolingKernel, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(inStream, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(outStream, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_1, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_6, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_14, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_8, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_10, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_12, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+#endif
+
+
+#ifdef MANAGER_NODE_PROPERTY
+#define MANAGER_NODE_PROPERTY_PRESENT 1
+MANAGER_NODE_PROPERTY(MaxpoolingKernel, control_pipelining_depth, 2)
+#endif
+
+
+#ifdef KERNEL_CORE
+#define KERNEL_CORE_PRESENT 1
+KERNEL_CORE(MaxpoolingKernel)
+#endif
+
+#ifdef KERNEL_HOST_CONTROLLED
+#define KERNEL_HOST_CONTROLLED_PRESENT 1
+KERNEL_HOST_CONTROLLED(MaxpoolingKernel, MaxpoolingKernel)
+#endif
+
+#ifdef DEBUG_INPUT_BITS
+#define DEBUG_INPUT_BITS_PRESENT 1
+DEBUG_INPUT_BITS(MaxpoolingKernel, inStream, 0)
+#endif
+
+#ifdef DEBUG_OUTPUT_BITS
+#define DEBUG_OUTPUT_BITS_PRESENT 1
+DEBUG_OUTPUT_BITS(MaxpoolingKernel, outStream, 0)
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_CTOR
+#define MANAGER_NODE_CPP_SIM_MODEL_CTOR_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(inStream, PCIePushSourceSyncMax4, "inStream")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_8, FifoPushToPullSync, "Stream_8", false, 512, 128)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_1, DualAspectMuxSync, "Stream_1", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_10, FifoPushToPullSync, "Stream_10", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(MaxpoolingKernel, MaxpoolingKernel, "MaxpoolingKernel")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_12, FifoPushToPullSync, "Stream_12", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_6, DualAspectRegSync, "Stream_6", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_14, PullToPushAdapterSync, "Stream_14")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(outStream, PCIePushSinkSyncMax3, "outStream")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(CapabilityReg, CapRegs, "CapabilityReg", 0, 1, 1, 0, 0, 0, 0, 0, 35)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ifpga, IFPGARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(sfa, SFARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ChecksumMemory, ChecksumMem, "ChecksumMemory", "cd312dba7d521164cae5c7bf5f85a359bf68befebc0df31c8372d82304b69e50")
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_SETUP
+#define MANAGER_NODE_CPP_SIM_MODEL_SETUP_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_ctld_almost_empty, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_ctld_done, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_ctld_empty, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_ctld_read, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_ctld_read_pipe_dbg, 3, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_ctld_request, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_done_out, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_fill_level, 5, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_flush_level, 5, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_flush_start, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_flush_start_level, 5, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_flushing, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_full_level, 5, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_out_stall, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_out_valid, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MaxpoolingKernel, addDebugRegister, reg_dbg_stall_vector, 1, 0)
+#endif
+
+#ifdef PCIE_STREAM
+#define PCIE_STREAM_PRESENT 1
+PCIE_STREAM(inStream, STREAM_FROM_HOST, 0)
+PCIE_STREAM(outStream, STREAM_TO_HOST, 0)
+#endif
+
+#ifdef REG
+#define REG_PRESENT 1
+REG(MaxpoolingKernel.io_inStream_force_disabled, 0x0, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(MaxpoolingKernel.io_outStream_force_disabled, 0x1, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(MaxpoolingKernel.run_cycle_count, 0x2, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(MaxpoolingKernel.current_run_cycle_count, 0x8, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(MaxpoolingKernel.dbg_ctld_almost_empty, 0xe, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_ctld_done, 0xf, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_ctld_empty, 0x10, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_ctld_read, 0x11, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_ctld_read_pipe_dbg, 0x12, 1, hwBits(3))
+REG(MaxpoolingKernel.dbg_ctld_request, 0x13, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_done_out, 0x14, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_fill_level, 0x15, 1, hwBits(5))
+REG(MaxpoolingKernel.dbg_flush_level, 0x16, 1, hwBits(5))
+REG(MaxpoolingKernel.dbg_flush_start, 0x17, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_flush_start_level, 0x18, 1, hwBits(5))
+REG(MaxpoolingKernel.dbg_flushing, 0x19, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_full_level, 0x1a, 1, hwBits(5))
+REG(MaxpoolingKernel.dbg_out_stall, 0x1b, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_out_valid, 0x1c, 1, hwBits(1))
+REG(MaxpoolingKernel.dbg_stall_vector, 0x1d, 1, hwBits(1))
+REG(ifpga.ifpga_ctrl, 0x1e, 1, hwBits(8))
+REG(SignalForwardingAdapter.SFA_FORWARD_EN, 0x1f, 4, hwBits(32))
+#endif
+
+#ifdef REG_V2
+#define REG_V2_PRESENT 1
+REG_V2(MaxpoolingKernel.io_inStream_force_disabled, 0x0, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(MaxpoolingKernel.io_outStream_force_disabled, 0x1, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(MaxpoolingKernel.run_cycle_count, 0x2, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_WRITE_ONLY, false)
+REG_V2(MaxpoolingKernel.current_run_cycle_count, 0x8, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_ctld_almost_empty, 0xe, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_ctld_done, 0xf, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_ctld_empty, 0x10, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_ctld_read, 0x11, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_ctld_read_pipe_dbg, 0x12, 1, hwBits(3), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_ctld_request, 0x13, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_done_out, 0x14, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_fill_level, 0x15, 1, hwBits(5), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_flush_level, 0x16, 1, hwBits(5), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_flush_start, 0x17, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_flush_start_level, 0x18, 1, hwBits(5), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_flushing, 0x19, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_full_level, 0x1a, 1, hwBits(5), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_out_stall, 0x1b, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_out_valid, 0x1c, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MaxpoolingKernel.dbg_stall_vector, 0x1d, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(ifpga.ifpga_ctrl, 0x1e, 1, hwBits(8), HOST_READ_WRITE, false)
+REG_V2(SignalForwardingAdapter.SFA_FORWARD_EN, 0x1f, 4, hwBits(32), HOST_READ_WRITE, false)
+#endif
+
+
+
+
+#ifdef CHECKSUM
+#define CHECKSUM_PRESENT 1
+CHECKSUM("cd312dba7d521164cae5c7bf5f85a359bf68befebc0df31c8372d82304b69e50")
+#endif
+
+
+
+
+#ifdef CAPABILITY
+#define CAPABILITY_PRESENT 1
+CAPABILITY(MAIAREV, MAIAREVA)
+CAPABILITY(MAIARAM, DDR3_48GB)
+CAPABILITY(MAIAFPGA, 5SGSMD8N2F45C2)
+#endif
+
+#ifdef DEFINE_DESIGN_NAME
+#define DESIGN_NAME Maxpooling
+#endif /* DEFINE_DESIGN_NAME */
+
+#ifndef SLIC_NO_DECLARATIONS
+/**\file */
+#ifndef SLIC_DECLARATIONS_Maxpooling_H
+#define SLIC_DECLARATIONS_Maxpooling_H
+#include "MaxSLiCInterface.h"
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+#define Maxpooling_PCIE_ALIGNMENT (16)
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+
+/**
+ * \brief Basic static function for the interface 'default'.
+ * 
+ * \param [in] param_size Interface Parameter "size".
+ * \param [in] instream_inStream The stream should be of size (param_size * 4) bytes.
+ * \param [out] outstream_outStream The stream should be of size ((param_size * 4) / 4) bytes.
+ */
+void Maxpooling(
+	int32_t param_size,
+	const uint32_t *instream_inStream,
+	uint32_t *outstream_outStream);
+
+/**
+ * \brief Basic static non-blocking function for the interface 'default'.
+ * 
+ * Schedule to run on an engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ * 
+ * 
+ * \param [in] param_size Interface Parameter "size".
+ * \param [in] instream_inStream The stream should be of size (param_size * 4) bytes.
+ * \param [out] outstream_outStream The stream should be of size ((param_size * 4) / 4) bytes.
+ * \return A handle on the execution status, or NULL in case of error.
+ */
+max_run_t *Maxpooling_nonblock(
+	int32_t param_size,
+	const uint32_t *instream_inStream,
+	uint32_t *outstream_outStream);
+
+/**
+ * \brief Advanced static interface, structure for the engine interface 'default'
+ * 
+ */
+typedef struct { 
+	int32_t param_size; /**<  [in] Interface Parameter "size". */
+	const uint32_t *instream_inStream; /**<  [in] The stream should be of size (param_size * 4) bytes. */
+	uint32_t *outstream_outStream; /**<  [out] The stream should be of size ((param_size * 4) / 4) bytes. */
+} Maxpooling_actions_t;
+
+/**
+ * \brief Advanced static function for the interface 'default'.
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in,out] interface_actions Actions to be executed.
+ */
+void Maxpooling_run(
+	max_engine_t *engine,
+	Maxpooling_actions_t *interface_actions);
+
+/**
+ * \brief Advanced static non-blocking function for the interface 'default'.
+ *
+ * Schedule the actions to run on the engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in] interface_actions Actions to be executed.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Maxpooling_run_nonblock(
+	max_engine_t *engine,
+	Maxpooling_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void Maxpooling_run_group(max_group_t *group, Maxpooling_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Maxpooling_run_group_nonblock(max_group_t *group, Maxpooling_actions_t *interface_actions);
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void Maxpooling_run_array(max_engarray_t *engarray, Maxpooling_actions_t *interface_actions[]);
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Maxpooling_run_array_nonblock(max_engarray_t *engarray, Maxpooling_actions_t *interface_actions[]);
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* Maxpooling_convert(max_file_t *maxfile, Maxpooling_actions_t *interface_actions);
+
+/**
+ * \brief Initialise a maxfile.
+ */
+max_file_t* Maxpooling_init(void);
+
+/* Error handling functions */
+int Maxpooling_has_errors(void);
+const char* Maxpooling_get_errors(void);
+void Maxpooling_clear_errors(void);
+/* Free statically allocated maxfile data */
+void Maxpooling_free(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int Maxpooling_simulator_start(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int Maxpooling_simulator_stop(void);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* SLIC_DECLARATIONS_Maxpooling_H */
+
+#endif /* SLIC_NO_DECLARATIONS */
+
+#ifdef PHOTON_NODE_DATA
+#define PHOTON_NODE_DATA_PRESENT 1
+PHOTON_NODE_DATA(MaxpoolingKernel, 3, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Count.makeCounterChain(Count.java:498)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:23)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 60, NodeConstantRawBits, "{HWOffsetFix:4, 0, UNSIGNED}\n0x8; 8.0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:504)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:25)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 7, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:504)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:25)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 59, NodeConstantRawBits, "{HWOffsetFix:4, 0, UNSIGNED}\n0x8; 8.0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:504)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:24)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 5, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:504)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:24)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 20, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.and(DFEVar.java:530)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:34)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 58, NodeConstantRawBits, "{HWOffsetFix:3, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.and(DFEVar.java:545)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:34)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 22, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.and(DFEVar.java:545)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:34)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 57, NodeConstantRawBits, "{HWOffsetFix:3, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:34)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 24, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:34)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 25, NodeInputMappedReg, "Scalar input (io_outStream_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:37)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 26, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:37)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 27, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:37)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 0, NodeInputMappedReg, "Scalar input (io_inStream_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:20)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 1, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:20)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 2, NodeInput, "Input(inStream)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:20)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 43, NodeFIFO, "FIFO(1)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 51, NodeFIFO, "FIFO(1)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 52, NodeFIFO, "FIFO(8)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 53, NodeFIFO, "FIFO(1)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 54, NodeFIFO, "FIFO(2)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 16, NodeStreamOffset, "stream offset: -9", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:225)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:31)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 12, NodeStreamOffset, "stream offset: -8", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:225)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:30)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 8, NodeStreamOffset, "stream offset: -1", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:225)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:29)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 9, NodeGt, ">", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.gt(DFEVar.java:784)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:29)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 10, NodeStreamOffset, "stream offset: -1", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:225)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:29)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 11, NodeMux, "MUX", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1160)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:29)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 13, NodeGt, ">", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.gt(DFEVar.java:784)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:30)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 47, NodeFIFO, "FIFO(1)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 14, NodeStreamOffset, "stream offset: -8", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:225)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:30)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 15, NodeMux, "MUX", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1160)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:30)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 17, NodeGt, ">", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.gt(DFEVar.java:784)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:31)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 49, NodeFIFO, "FIFO(1)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 18, NodeStreamOffset, "stream offset: -9", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:225)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:31)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 50, NodeFIFO, "FIFO(1)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 19, NodeMux, "MUX", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1160)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:31)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 28, NodeOutput, "Output(outStream)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nmaxpooling.MaxpoolingKernel.<init>(MaxpoolingKernel.maxj:37)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:24)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 33, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 56, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 30, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 31, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 32, NodeStreamOffset, "stream offset: 1", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 34, NodeOutputMappedReg, "Scalar output (current_run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 55, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 36, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 37, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 39, NodeInputMappedReg, "Scalar input (run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 40, NodeEq, "==", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+PHOTON_NODE_DATA(MaxpoolingKernel, 38, NodeFlush, "flush on trigger", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmaxpooling.MaxpoolingManager.main(MaxpoolingManager.maxj:27)\n")
+#endif
+
+#ifdef SLIC_USE_DEFINITIONS
+#include <stdio.h>
+#include <math.h>
+#include <pthread.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+static max_file_t *stored_maxfile = NULL;
+static max_engine_t *stored_engine = NULL;
+static char *stored_error = NULL;
+static int stored_has_error = 0;
+static pthread_once_t slic_bs_is_initialised = PTHREAD_ONCE_INIT;
+
+static void set_error(const char *error_str)
+{
+	stored_has_error = 1; 
+	if(stored_error == NULL) {
+		stored_error = strdup(error_str);
+	} else {
+		char *nerr = malloc(strlen(stored_error) + strlen(error_str) + 2);
+		sprintf(nerr, "%s\n%s", stored_error, error_str);
+		free(stored_error);
+		stored_error = nerr;
+	}
+}
+static void set_error_and_free(char *error_str){
+	set_error(error_str);
+	free(error_str);
+}
+int Maxpooling_has_errors(void)
+{	return stored_has_error; }
+const char* Maxpooling_get_errors(void)
+{	return stored_error; }
+void Maxpooling_clear_errors(void)
+{
+	free(stored_error);
+	stored_error = NULL;
+	stored_has_error = 0;
+}
+
+static char Maxpooling_use_simulation[16];
+static void Maxpooling_def_use_simulation(void)
+{
+	long pid = ((long) getpid()) % 100000;
+	snprintf(Maxpooling_use_simulation, 16, "Maxpooli_%05ld_", pid);
+}
+static const char *Maxpooling_check_use_simulation(void)
+{
+	Maxpooling_def_use_simulation();
+	const char *use_sim = max_config_get_string(MAX_CONFIG_USE_SIMULATION);
+	if (use_sim == NULL) {
+		use_sim = Maxpooling_use_simulation;
+		max_config_set_string(MAX_CONFIG_USE_SIMULATION, use_sim);
+	}
+	return use_sim;
+}
+
+static int Maxpooling_simulation_launch = 0;
+int Maxpooling_simulator_start(void)
+{
+	int retval = 0;
+	const char *use_sim = Maxpooling_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX4848A -S simutils restart", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		if (strstr(buff, "Error")) {
+			set_error(buff);
+			retval = -1;
+		}
+	}
+	pclose(pipe_fp);
+	return retval;
+}
+
+int Maxpooling_simulator_stop(void)
+{
+	const char *use_sim = Maxpooling_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX4848A -S simutils stop", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		;
+	}
+	pclose(pipe_fp);
+	return 0;
+}
+
+static void Maxpooling_static_init(void) 
+{
+	stored_maxfile = Maxpooling_init();
+	if (stored_maxfile == NULL || !max_ok(stored_maxfile->errors)) {
+		stored_maxfile = NULL;
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) abort();
+		else { set_error("Unable to load maxfile"); return; }
+	}
+	if(!max_ok(max_global_errors())) {
+		set_error_and_free(max_errors_trace(max_global_errors()));
+		return;
+	}
+	if(!max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR))
+		max_errors_mode(stored_maxfile->errors, 0);
+	time_t timeout_previous = max_load_timeout(stored_maxfile, 30);
+	const char *use_sim = Maxpooling_check_use_simulation();
+	if (max_ping_daemon(stored_maxfile, use_sim) == 0) {
+		int sim_stat = Maxpooling_simulator_start();
+		if ((sim_stat == 0) && (max_ping_daemon(stored_maxfile, use_sim) == 1)) {
+			Maxpooling_simulation_launch = 1;
+		} else {
+			set_error("Error: An error occurred while trying to start the simulation infrastructure automatically.");
+			set_error("Error: Check that 'use_simulation=<simulator_name>' is set correctly in your SLiC configuration");
+			set_error("Error: and that the associated simulated system daemon is running.");
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		}
+	}
+	stored_engine = max_load(stored_maxfile, "*");
+	if (!max_ok(stored_maxfile->errors)) {
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) {
+			fprintf(stderr, "\nUnable to load engine: aborting now.\n\n");
+			fflush(stderr);
+			abort();
+		} else {
+			set_error_and_free(max_errors_trace(stored_maxfile->errors));
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		} 
+	} 
+	max_load_timeout(stored_maxfile, timeout_previous);
+}
+void Maxpooling_free(void)
+{
+	if (stored_engine != NULL) {
+		max_unload(stored_engine);
+		stored_engine = NULL;
+	}
+	if (stored_maxfile != NULL) {
+		max_file_free(stored_maxfile);
+		stored_maxfile = NULL;
+	}
+	if (stored_error != NULL) {
+		free(stored_error);
+		stored_error = NULL;
+	}
+	if (Maxpooling_simulation_launch == 1) {
+		int sim_stat = Maxpooling_simulator_stop();
+		if (sim_stat != 0 ) {
+			fprintf(stderr, "Error stopping simulator.");
+		}
+		Maxpooling_simulation_launch = 0;
+	}
+}
+
+static int Maxpooling_get_pcie_alignment(void)
+{
+#ifdef Maxpooling_PCIE_ALIGNMENT
+	return ((Maxpooling_PCIE_ALIGNMENT < 1) ? 16 : Maxpooling_PCIE_ALIGNMENT);
+#else
+	return 16;
+#endif
+}
+
+static int Maxpooling_check_aligned(const void *data)
+{
+	uintptr_t pointer = (uintptr_t) data;
+	int alignment = Maxpooling_get_pcie_alignment();
+	return (pointer % alignment) ? 1 : 0;
+}
+
+static void *Maxpooling_malloc_aligned(const size_t size)
+{
+	void *ptr;
+	int alignment = Maxpooling_get_pcie_alignment();
+	posix_memalign(&ptr, alignment, size);
+	return ptr;
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+#define CHECK_ERRORS_ST(ST, RET) if(!max_ok(ST->errors)) { if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n", max_errors_trace(ST->errors)); abort(); } set_error_and_free(max_errors_trace(ST->errors)); return RET; } 
+#define CHECK_NULL(VALUE, MESSAGE, RET) if(VALUE == NULL) { if (max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n%s\n", (stored_error == NULL) ? "" : stored_error, MESSAGE); abort(); } set_error(MESSAGE); return RET; }
+
+ 
+typedef struct Maxpooling_callback_stream {
+	uint8_t *user_ptr;
+	uint8_t *aligned_ptr;
+	size_t   size;
+	int      is_output;
+} Maxpooling_callback_stream_t;
+
+typedef struct Maxpooling_callback_data {
+	Maxpooling_callback_stream_t stream[2]; 
+	int count;
+	int max_count;
+} Maxpooling_callback_data_t;
+
+static void Maxpooling_callback_internal(void *cb_data)
+{
+	Maxpooling_callback_data_t *data = (Maxpooling_callback_data_t*) cb_data;
+	for (int i = 0 ; i < data->count ; i++ ) {
+		Maxpooling_callback_stream_t *s = &data->stream[i];
+		if (s->is_output && (s->size > 0)) {
+			memcpy(s->user_ptr, s->aligned_ptr, s->size);
+		}
+		free(s->aligned_ptr);
+	}
+	free(data);
+}
+
+static max_actions_t* Maxpooling_convert_internal(
+	max_file_t *maxfile,
+	Maxpooling_actions_t *interface_actions,
+	int  is_internal_call,
+	void (**callback_func)(void*),
+	void **callback_data)
+{
+	max_actions_t *actions = max_actions_init(maxfile, NULL);
+	if(actions == NULL) return NULL;
+
+#define CHECK_ERRORS if(!max_ok(actions->errors)) { set_error_and_free(max_errors_trace(actions->errors)); return NULL; } 
+
+	Maxpooling_callback_data_t *cb_data = NULL;
+	int use_callback = (callback_func != NULL) && (callback_data != NULL);
+	if (use_callback) {
+		cb_data = malloc(sizeof(Maxpooling_callback_data_t));
+		if (cb_data == NULL) {
+			fprintf(stderr, "Unable to allocate memory for stream callback data in function Maxpooling_convert_internal\n");
+			return NULL;
+		}
+		cb_data->max_count = 2;
+		cb_data->count     = 0;
+		*callback_data     = cb_data;
+		*callback_func     = &Maxpooling_callback_internal;
+	}
+
+	int32_t param_size = interface_actions->param_size;
+	
+	/* code for scalar MaxpoolingKernel.run_cycle_count */
+	uint64_t ticks_MaxpoolingKernel = param_size;
+	max_set_ticks(actions, "MaxpoolingKernel", param_size);
+	CHECK_ERRORS;
+	/* end of code for scalar MaxpoolingKernel.run_cycle_count*/
+	
+	int64_t tmp_0 = (param_size * 4);
+	
+	/* code for stream inStream */
+	size_t instream_size_inStream = tmp_0;
+	if (instream_size_inStream > 0) {
+		const uint32_t *stream_ptr = interface_actions->instream_inStream;
+		if (use_callback && (1 == Maxpooling_check_aligned(interface_actions->instream_inStream))) {
+			uint32_t *aligned_instream_inStream = malloc(instream_size_inStream);
+			if (aligned_instream_inStream == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'inStream'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_inStream;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_inStream;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_inStream;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_inStream, interface_actions->instream_inStream, instream_size_inStream);
+			stream_ptr = aligned_instream_inStream;
+		}
+		max_queue_input(actions, "inStream", stream_ptr, instream_size_inStream);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream inStream */
+	
+	int64_t tmp_1 = (tmp_0 / 4);
+	
+	/* code for stream outStream */
+	size_t outstream_size_outStream = tmp_1;
+	if (outstream_size_outStream > 0) {
+		uint32_t *stream_ptr = interface_actions->outstream_outStream;
+		if (use_callback && (1 == Maxpooling_check_aligned(interface_actions->outstream_outStream))) {
+			uint32_t *aligned_outstream_outStream = malloc(outstream_size_outStream);
+			if (aligned_outstream_outStream == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'outStream'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->outstream_outStream;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_outstream_outStream;
+			(&cb_data->stream[cb_data->count])->size        = outstream_size_outStream;
+			(&cb_data->stream[cb_data->count])->is_output   = 1;
+			cb_data->count += 1;
+			stream_ptr = aligned_outstream_outStream;
+		}
+		max_queue_output(actions, "outStream", stream_ptr, outstream_size_outStream);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream outStream */
+	
+	if (use_callback && cb_data->count == 0) {
+		*callback_data = NULL;
+		*callback_func = NULL;
+		free(cb_data);
+	}
+	return actions;
+#undef CHECK_ERRORS
+}
+
+void Maxpooling(
+	int32_t param_size,
+	const uint32_t *instream_inStream,
+	uint32_t *outstream_outStream)
+{
+	(void) pthread_once(&slic_bs_is_initialised, Maxpooling_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", );
+	max_run_t *run = Maxpooling_nonblock(param_size, instream_inStream, outstream_outStream);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *Maxpooling_nonblock(
+	int32_t param_size,
+	const uint32_t *instream_inStream,
+	uint32_t *outstream_outStream)
+{
+	Maxpooling_actions_t interface_actions;
+	interface_actions.param_size = param_size;
+	interface_actions.instream_inStream = instream_inStream;
+	interface_actions.outstream_outStream = outstream_outStream;
+	(void) pthread_once(&slic_bs_is_initialised, Maxpooling_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", NULL);
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = Maxpooling_convert_internal(stored_maxfile, &interface_actions, 1, &cb_func, &cb_data);
+	CHECK_NULL(actions, "Unable to build actions", NULL);
+	max_validate(actions);
+	CHECK_ERRORS_ST(actions, NULL);
+	CHECK_ERRORS_ST(stored_engine, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(stored_engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(stored_engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+void Maxpooling_run(
+	max_engine_t *engine,
+	Maxpooling_actions_t *interface_actions)
+{
+	max_run_t *run = Maxpooling_run_nonblock(engine, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *Maxpooling_run_nonblock(
+	max_engine_t *engine,
+	Maxpooling_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_engine_get_max_file(engine); 
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = Maxpooling_convert_internal(maxfile, interface_actions, 1, &cb_func, &cb_data);
+	CHECK_NULL(actions, "Unable to build actions", NULL);
+	max_validate(actions);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void Maxpooling_run_group(max_group_t *group, Maxpooling_actions_t *interface_actions)
+{
+	max_run_t *run = Maxpooling_run_group_nonblock(group, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Maxpooling_run_group_nonblock(max_group_t *group, Maxpooling_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_group_get_max_file(group);
+	max_actions_t *actions = Maxpooling_convert_internal(maxfile, interface_actions, 1, NULL, NULL);
+	if(actions == NULL) return NULL;
+	if(!max_ok(actions->errors)) return NULL;
+	max_validate(actions);
+	max_run_t *run = max_run_group_nonblock(group, actions);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void Maxpooling_run_array(max_engarray_t *engarray, Maxpooling_actions_t *interface_actions[])
+{
+	max_run_t *run = Maxpooling_run_array_nonblock(engarray, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Maxpooling_run_array_nonblock(max_engarray_t *engarray, Maxpooling_actions_t *interface_actions[])
+{
+	max_file_t *maxfile = max_engarray_get_max_file(engarray, 0);
+	int i;
+	max_actarray_t *actarray = max_actarray_init(maxfile, engarray->size);
+	if (actarray == NULL) return NULL;
+	max_actions_t **arr_actions = malloc(engarray->size * sizeof(max_actions_t*));
+	for ( i = 0 ; i < actarray->size; i++ ) {
+		max_actions_t *actions = Maxpooling_convert_internal(maxfile, interface_actions[i], 1, NULL, NULL);
+		if (actions == NULL) return NULL;
+		arr_actions[i] = actions;
+		max_set_action(actarray, i, actions);
+	}
+	max_run_t *run = max_run_array_nonblock(engarray, actarray);
+	for ( i = 0 ; i < actarray->size ; i++ ) { max_actions_free(arr_actions[i]); }
+	max_actarray_free(actarray);
+	free(arr_actions);
+	return run;
+}
+
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* Maxpooling_convert(max_file_t *maxfile, Maxpooling_actions_t *interface_actions)
+{
+	return Maxpooling_convert_internal(maxfile, interface_actions, 0, NULL, NULL);
+}
+
+#undef CHECK_ERRORS_ST
+#undef CHECK_NULL
+
+
+
+#endif /* SLIC_USE_DEFINITIONS */
+
+#ifdef SLIC_DYNAMIC_CODE
+SLIC_MODE_START(default)	
+SLIC_PARAMETER_UINT64(int32_t, size, param_size)	
+SLIC_SET_TICKS(MaxpoolingKernel, param_size)	
+SLIC_TEMP_VAR(int64_t tmp_0 = (param_size * 4);)	
+SLIC_STREAM(inStream, tmp_0)	
+SLIC_TEMP_VAR(int64_t tmp_1 = (tmp_0 / 4);)	
+SLIC_STREAM(outStream, tmp_1)	
+SLIC_MODE_END(default)
+
+#endif /* SLIC_DYNAMIC_CODE */
+
+#ifdef SKIN_META_DATA
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PG1h
+eGZpbGUgZm9ybWF0LXZlcnNpb249IjIwMTIwMjAwIiBoZWFkZXI9Ik1heHBvb2xpbmcuaCIgbmFt
+ZT0iTWF4cG9vbGluZyI+PGNvbnN0YW50IG5hbWU9IlBDSUVfQUxJR05NRU5UIiB0eXBlPSJsb25n
+IiB2YWx1ZT0iMTYiLz48ZW5naW5lbW9kZSBuYW1lPSJkZWZhdWx0Ij48ZnVuY3Rpb24gbmFtZT0i
+TWF4cG9vbGluZyIgcmV0dXJuLXZhbHVlPSJ2b2lkIj48c2NhbGFyIGRlc2M9IkludGVyZmFjZSBQ
+YXJhbWV0ZXIgJnF1b3Q7c2l6ZSZxdW90Oy4iIGRpcmVjdGlvbj0iSW5wdXQiIG5hbWU9InBhcmFt
+X3NpemUiIHR5cGU9ImludDMyX3QiLz48YXJyYXkgZGVzYz0iVGhlIHN0cmVhbSBzaG91bGQgYmUg
+b2Ygc2l6ZSAocGFyYW1fc2l6ZSAqIDQpIGJ5dGVzLiIgZGlyZWN0aW9uPSJJbnB1dCIgbmFtZT0i
+aW5zdHJlYW1faW5TdHJlYW0iIHNpemU9IihwYXJhbV9zaXplICogNCkiIHRyYW5zcG9zZT0idHJ1
+ZSIgdHlwZT0idWludDMyX3QiPjxkaW1lbnNpb24gaW5kZXg9IjAiPjxsZW5ndGg+PGZ1bmN0aW9u
+Q2FsbD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9Ii8iIHZhbHVlPSIoKHBhcmFtX3NpemUg
+KiA0KSAvIDQpIj48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBvcGVyYXRvcj0iKiIg
+dmFsdWU9IihwYXJhbV9zaXplICogNCkiPjx1c2VyUGFyYW0gdmFsdWU9InBhcmFtX3NpemUiLz48
+Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNh
+bGw+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQiLz48L251bUJpbmFyeU9wZXJhdG9yPjwvZnVuY3Rp
+b25DYWxsPjwvbGVuZ3RoPjwvZGltZW5zaW9uPjwvYXJyYXk+PGFycmF5IGRlc2M9IlRoZSBzdHJl
+YW0gc2hvdWxkIGJlIG9mIHNpemUgKChwYXJhbV9zaXplICogNCkgLyA0KSBieXRlcy4iIGRpcmVj
+dGlvbj0iT3V0cHV0IiBuYW1lPSJvdXRzdHJlYW1fb3V0U3RyZWFtIiBzaXplPSIoKHBhcmFtX3Np
+emUgKiA0KSAvIDQpIiB0cmFuc3Bvc2U9InRydWUiIHR5cGU9InVpbnQzMl90Ij48ZGltZW5zaW9u
+IGluZGV4PSIwIj48bGVuZ3RoPjxmdW5jdGlvbkNhbGw+PG51bUJpbmFyeU9wZXJhdG9yIG9wZXJh
+dG9yPSIvIiB2YWx1ZT0iKCgocGFyYW1fc2l6ZSAqIDQpIC8gNCkgLyA0KSI+PGZ1bmN0aW9uQ2Fs
+bD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9Ii8iIHZhbHVlPSIoKHBhcmFtX3NpemUgKiA0
+KSAvIDQpIj48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBvcGVyYXRvcj0iKiIgdmFs
+dWU9IihwYXJhbV9zaXplICogNCkiPjx1c2VyUGFyYW0gdmFsdWU9InBhcmFtX3NpemUiLz48Y29u
+c3RhbnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+
+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQiLz48L251bUJpbmFyeU9wZXJhdG9yPjwvZnVuY3Rpb25D
+YWxsPjxjb25zdGFudFZhbHVlIHZhbHVlPSI0Ii8+PC9udW1CaW5hcnlPcGVyYXRvcj48L2Z1bmN0
+aW9uQ2FsbD48L2xlbmd0aD48L2RpbWVuc2lvbj48L2FycmF5PjwvZnVuY3Rpb24+PC9lbmdpbmVt
+b2RlPjwvbWF4ZmlsZT4=
+#endif /* SKIN_META_DATA */
+
+#ifdef SLIC_B64_DEFINITIONS
+I2luY2x1ZGUgPHN0ZGlvLmg+CiNpbmNsdWRlIDxtYXRoLmg+CiNpbmNsdWRlIDxwdGhyZWFkLmg+
+CiNpbmNsdWRlIDxzdHJpbmcuaD4KI2luY2x1ZGUgPHVuaXN0ZC5oPgojaW5jbHVkZSA8c3RkbGli
+Lmg+CnN0YXRpYyBtYXhfZmlsZV90ICpzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7CnN0YXRpYyBtYXhf
+ZW5naW5lX3QgKnN0b3JlZF9lbmdpbmUgPSBOVUxMOwpzdGF0aWMgY2hhciAqc3RvcmVkX2Vycm9y
+ID0gTlVMTDsKc3RhdGljIGludCBzdG9yZWRfaGFzX2Vycm9yID0gMDsKc3RhdGljIHB0aHJlYWRf
+b25jZV90IHNsaWNfYnNfaXNfaW5pdGlhbGlzZWQgPSBQVEhSRUFEX09OQ0VfSU5JVDsKCnN0YXRp
+YyB2b2lkIHNldF9lcnJvcihjb25zdCBjaGFyICplcnJvcl9zdHIpCnsKCXN0b3JlZF9oYXNfZXJy
+b3IgPSAxOyAKCWlmKHN0b3JlZF9lcnJvciA9PSBOVUxMKSB7CgkJc3RvcmVkX2Vycm9yID0gc3Ry
+ZHVwKGVycm9yX3N0cik7Cgl9IGVsc2UgewoJCWNoYXIgKm5lcnIgPSBtYWxsb2Moc3RybGVuKHN0
+b3JlZF9lcnJvcikgKyBzdHJsZW4oZXJyb3Jfc3RyKSArIDIpOwoJCXNwcmludGYobmVyciwgIiVz
+XG4lcyIsIHN0b3JlZF9lcnJvciwgZXJyb3Jfc3RyKTsKCQlmcmVlKHN0b3JlZF9lcnJvcik7CgkJ
+c3RvcmVkX2Vycm9yID0gbmVycjsKCX0KfQpzdGF0aWMgdm9pZCBzZXRfZXJyb3JfYW5kX2ZyZWUo
+Y2hhciAqZXJyb3Jfc3RyKXsKCXNldF9lcnJvcihlcnJvcl9zdHIpOwoJZnJlZShlcnJvcl9zdHIp
+Owp9CmludCBNYXhwb29saW5nX2hhc19lcnJvcnModm9pZCkKewlyZXR1cm4gc3RvcmVkX2hhc19l
+cnJvcjsgfQpjb25zdCBjaGFyKiBNYXhwb29saW5nX2dldF9lcnJvcnModm9pZCkKewlyZXR1cm4g
+c3RvcmVkX2Vycm9yOyB9CnZvaWQgTWF4cG9vbGluZ19jbGVhcl9lcnJvcnModm9pZCkKewoJZnJl
+ZShzdG9yZWRfZXJyb3IpOwoJc3RvcmVkX2Vycm9yID0gTlVMTDsKCXN0b3JlZF9oYXNfZXJyb3Ig
+PSAwOwp9CgpzdGF0aWMgY2hhciBNYXhwb29saW5nX3VzZV9zaW11bGF0aW9uWzE2XTsKc3RhdGlj
+IHZvaWQgTWF4cG9vbGluZ19kZWZfdXNlX3NpbXVsYXRpb24odm9pZCkKewoJbG9uZyBwaWQgPSAo
+KGxvbmcpIGdldHBpZCgpKSAlIDEwMDAwMDsKCXNucHJpbnRmKE1heHBvb2xpbmdfdXNlX3NpbXVs
+YXRpb24sIDE2LCAiTWF4cG9vbGlfJTA1bGRfIiwgcGlkKTsKfQpzdGF0aWMgY29uc3QgY2hhciAq
+TWF4cG9vbGluZ19jaGVja191c2Vfc2ltdWxhdGlvbih2b2lkKQp7CglNYXhwb29saW5nX2RlZl91
+c2Vfc2ltdWxhdGlvbigpOwoJY29uc3QgY2hhciAqdXNlX3NpbSA9IG1heF9jb25maWdfZ2V0X3N0
+cmluZyhNQVhfQ09ORklHX1VTRV9TSU1VTEFUSU9OKTsKCWlmICh1c2Vfc2ltID09IE5VTEwpIHsK
+CQl1c2Vfc2ltID0gTWF4cG9vbGluZ191c2Vfc2ltdWxhdGlvbjsKCQltYXhfY29uZmlnX3NldF9z
+dHJpbmcoTUFYX0NPTkZJR19VU0VfU0lNVUxBVElPTiwgdXNlX3NpbSk7Cgl9CglyZXR1cm4gdXNl
+X3NpbTsKfQoKc3RhdGljIGludCBNYXhwb29saW5nX3NpbXVsYXRpb25fbGF1bmNoID0gMDsKaW50
+IE1heHBvb2xpbmdfc2ltdWxhdG9yX3N0YXJ0KHZvaWQpCnsKCWludCByZXR2YWwgPSAwOwoJY29u
+c3QgY2hhciAqdXNlX3NpbSA9IE1heHBvb2xpbmdfY2hlY2tfdXNlX3NpbXVsYXRpb24oKTsKCWNo
+YXIgYnVmZlsxMDI0XTsKCXNucHJpbnRmKGJ1ZmYsIDEwMjQsICJQQVRIPXNpbXV0aWxzOiRQQVRI
+IG1heGNvbXBpbGVyc2ltIC1kIDEgLW4gJXMgLWMgTUFYNDg0OEEgLVMgc2ltdXRpbHMgcmVzdGFy
+dCIsIHVzZV9zaW0pOwoJRklMRSAqcGlwZV9mcCA9IHBvcGVuKGJ1ZmYsICJyIik7CglpZiAocGlw
+ZV9mcCA9PSBOVUxMKSB7CgkJc3RybmNhdChidWZmLCAiIDogZmFpbGVkIHRvIGV4ZWN1dGUuIiwg
+KDEwMjQgLSBzdHJsZW4oYnVmZikpKTsKCQlzZXRfZXJyb3IoYnVmZik7CgkJcmV0dXJuIC0xOwoJ
+fQoJd2hpbGUgKGZnZXRzKGJ1ZmYsIDEwMjQsIHBpcGVfZnApICE9IE5VTEwpIHsKCQkvKiBVbmNv
+bW1lbnQgdGhpcyB0byBnZXQgc2ltdWxhdG9yIGNvbW1hbmQgb3V0cHV0ICovCgkJLyogZnByaW50
+ZihzdGRlcnIsIGJ1ZmYpOyAqLwoJCWlmIChzdHJzdHIoYnVmZiwgIkVycm9yIikpIHsKCQkJc2V0
+X2Vycm9yKGJ1ZmYpOwoJCQlyZXR2YWwgPSAtMTsKCQl9Cgl9CglwY2xvc2UocGlwZV9mcCk7Cgly
+ZXR1cm4gcmV0dmFsOwp9CgppbnQgTWF4cG9vbGluZ19zaW11bGF0b3Jfc3RvcCh2b2lkKQp7Cglj
+b25zdCBjaGFyICp1c2Vfc2ltID0gTWF4cG9vbGluZ19jaGVja191c2Vfc2ltdWxhdGlvbigpOwoJ
+Y2hhciBidWZmWzEwMjRdOwoJc25wcmludGYoYnVmZiwgMTAyNCwgIlBBVEg9c2ltdXRpbHM6JFBB
+VEggbWF4Y29tcGlsZXJzaW0gLWQgMSAtbiAlcyAtYyBNQVg0ODQ4QSAtUyBzaW11dGlscyBzdG9w
+IiwgdXNlX3NpbSk7CglGSUxFICpwaXBlX2ZwID0gcG9wZW4oYnVmZiwgInIiKTsKCWlmIChwaXBl
+X2ZwID09IE5VTEwpIHsKCQlzdHJuY2F0KGJ1ZmYsICIgOiBmYWlsZWQgdG8gZXhlY3V0ZS4iLCAo
+MTAyNCAtIHN0cmxlbihidWZmKSkpOwoJCXNldF9lcnJvcihidWZmKTsKCQlyZXR1cm4gLTE7Cgl9
+Cgl3aGlsZSAoZmdldHMoYnVmZiwgMTAyNCwgcGlwZV9mcCkgIT0gTlVMTCkgewoJCS8qIFVuY29t
+bWVudCB0aGlzIHRvIGdldCBzaW11bGF0b3IgY29tbWFuZCBvdXRwdXQgKi8KCQkvKiBmcHJpbnRm
+KHN0ZGVyciwgYnVmZik7ICovCgkJOwoJfQoJcGNsb3NlKHBpcGVfZnApOwoJcmV0dXJuIDA7Cn0K
+CnN0YXRpYyB2b2lkIE1heHBvb2xpbmdfc3RhdGljX2luaXQodm9pZCkgCnsKCXN0b3JlZF9tYXhm
+aWxlID0gTWF4cG9vbGluZ19pbml0KCk7CglpZiAoc3RvcmVkX21heGZpbGUgPT0gTlVMTCB8fCAh
+bWF4X29rKHN0b3JlZF9tYXhmaWxlLT5lcnJvcnMpKSB7CgkJc3RvcmVkX21heGZpbGUgPSBOVUxM
+OwoJCWlmKG1heF9jb25maWdfZ2V0X2Jvb2woTUFYX0NPTkZJR19TVEFUSUNfSU5URVJGQUNFX0FC
+T1JUX09OX0VSUk9SKSkgYWJvcnQoKTsKCQllbHNlIHsgc2V0X2Vycm9yKCJVbmFibGUgdG8gbG9h
+ZCBtYXhmaWxlIik7IHJldHVybjsgfQoJfQoJaWYoIW1heF9vayhtYXhfZ2xvYmFsX2Vycm9ycygp
+KSkgewoJCXNldF9lcnJvcl9hbmRfZnJlZShtYXhfZXJyb3JzX3RyYWNlKG1heF9nbG9iYWxfZXJy
+b3JzKCkpKTsKCQlyZXR1cm47Cgl9CglpZighbWF4X2NvbmZpZ19nZXRfYm9vbChNQVhfQ09ORklH
+X1NUQVRJQ19JTlRFUkZBQ0VfQUJPUlRfT05fRVJST1IpKQoJCW1heF9lcnJvcnNfbW9kZShzdG9y
+ZWRfbWF4ZmlsZS0+ZXJyb3JzLCAwKTsKCXRpbWVfdCB0aW1lb3V0X3ByZXZpb3VzID0gbWF4X2xv
+YWRfdGltZW91dChzdG9yZWRfbWF4ZmlsZSwgMzApOwoJY29uc3QgY2hhciAqdXNlX3NpbSA9IE1h
+eHBvb2xpbmdfY2hlY2tfdXNlX3NpbXVsYXRpb24oKTsKCWlmIChtYXhfcGluZ19kYWVtb24oc3Rv
+cmVkX21heGZpbGUsIHVzZV9zaW0pID09IDApIHsKCQlpbnQgc2ltX3N0YXQgPSBNYXhwb29saW5n
+X3NpbXVsYXRvcl9zdGFydCgpOwoJCWlmICgoc2ltX3N0YXQgPT0gMCkgJiYgKG1heF9waW5nX2Rh
+ZW1vbihzdG9yZWRfbWF4ZmlsZSwgdXNlX3NpbSkgPT0gMSkpIHsKCQkJTWF4cG9vbGluZ19zaW11
+bGF0aW9uX2xhdW5jaCA9IDE7CgkJfSBlbHNlIHsKCQkJc2V0X2Vycm9yKCJFcnJvcjogQW4gZXJy
+b3Igb2NjdXJyZWQgd2hpbGUgdHJ5aW5nIHRvIHN0YXJ0IHRoZSBzaW11bGF0aW9uIGluZnJhc3Ry
+dWN0dXJlIGF1dG9tYXRpY2FsbHkuIik7CgkJCXNldF9lcnJvcigiRXJyb3I6IENoZWNrIHRoYXQg
+J3VzZV9zaW11bGF0aW9uPTxzaW11bGF0b3JfbmFtZT4nIGlzIHNldCBjb3JyZWN0bHkgaW4geW91
+ciBTTGlDIGNvbmZpZ3VyYXRpb24iKTsKCQkJc2V0X2Vycm9yKCJFcnJvcjogYW5kIHRoYXQgdGhl
+IGFzc29jaWF0ZWQgc2ltdWxhdGVkIHN5c3RlbSBkYWVtb24gaXMgcnVubmluZy4iKTsKCQkJbWF4
+X2ZpbGVfZnJlZShzdG9yZWRfbWF4ZmlsZSk7CgkJCXN0b3JlZF9tYXhmaWxlID0gTlVMTDsKCQkJ
+cmV0dXJuOwoJCX0KCX0KCXN0b3JlZF9lbmdpbmUgPSBtYXhfbG9hZChzdG9yZWRfbWF4ZmlsZSwg
+IioiKTsKCWlmICghbWF4X29rKHN0b3JlZF9tYXhmaWxlLT5lcnJvcnMpKSB7CgkJaWYobWF4X2Nv
+bmZpZ19nZXRfYm9vbChNQVhfQ09ORklHX1NUQVRJQ19JTlRFUkZBQ0VfQUJPUlRfT05fRVJST1Ip
+KSB7CgkJCWZwcmludGYoc3RkZXJyLCAiXG5VbmFibGUgdG8gbG9hZCBlbmdpbmU6IGFib3J0aW5n
+IG5vdy5cblxuIik7CgkJCWZmbHVzaChzdGRlcnIpOwoJCQlhYm9ydCgpOwoJCX0gZWxzZSB7CgkJ
+CXNldF9lcnJvcl9hbmRfZnJlZShtYXhfZXJyb3JzX3RyYWNlKHN0b3JlZF9tYXhmaWxlLT5lcnJv
+cnMpKTsKCQkJbWF4X2ZpbGVfZnJlZShzdG9yZWRfbWF4ZmlsZSk7CgkJCXN0b3JlZF9tYXhmaWxl
+ID0gTlVMTDsKCQkJcmV0dXJuOwoJCX0gCgl9IAoJbWF4X2xvYWRfdGltZW91dChzdG9yZWRfbWF4
+ZmlsZSwgdGltZW91dF9wcmV2aW91cyk7Cn0Kdm9pZCBNYXhwb29saW5nX2ZyZWUodm9pZCkKewoJ
+aWYgKHN0b3JlZF9lbmdpbmUgIT0gTlVMTCkgewoJCW1heF91bmxvYWQoc3RvcmVkX2VuZ2luZSk7
+CgkJc3RvcmVkX2VuZ2luZSA9IE5VTEw7Cgl9CglpZiAoc3RvcmVkX21heGZpbGUgIT0gTlVMTCkg
+ewoJCW1heF9maWxlX2ZyZWUoc3RvcmVkX21heGZpbGUpOwoJCXN0b3JlZF9tYXhmaWxlID0gTlVM
+TDsKCX0KCWlmIChzdG9yZWRfZXJyb3IgIT0gTlVMTCkgewoJCWZyZWUoc3RvcmVkX2Vycm9yKTsK
+CQlzdG9yZWRfZXJyb3IgPSBOVUxMOwoJfQoJaWYgKE1heHBvb2xpbmdfc2ltdWxhdGlvbl9sYXVu
+Y2ggPT0gMSkgewoJCWludCBzaW1fc3RhdCA9IE1heHBvb2xpbmdfc2ltdWxhdG9yX3N0b3AoKTsK
+CQlpZiAoc2ltX3N0YXQgIT0gMCApIHsKCQkJZnByaW50ZihzdGRlcnIsICJFcnJvciBzdG9wcGlu
+ZyBzaW11bGF0b3IuIik7CgkJfQoJCU1heHBvb2xpbmdfc2ltdWxhdGlvbl9sYXVuY2ggPSAwOwoJ
+fQp9CgpzdGF0aWMgaW50IE1heHBvb2xpbmdfZ2V0X3BjaWVfYWxpZ25tZW50KHZvaWQpCnsKI2lm
+ZGVmIE1heHBvb2xpbmdfUENJRV9BTElHTk1FTlQKCXJldHVybiAoKE1heHBvb2xpbmdfUENJRV9B
+TElHTk1FTlQgPCAxKSA/IDE2IDogTWF4cG9vbGluZ19QQ0lFX0FMSUdOTUVOVCk7CiNlbHNlCgly
+ZXR1cm4gMTY7CiNlbmRpZgp9CgpzdGF0aWMgaW50IE1heHBvb2xpbmdfY2hlY2tfYWxpZ25lZChj
+b25zdCB2b2lkICpkYXRhKQp7Cgl1aW50cHRyX3QgcG9pbnRlciA9ICh1aW50cHRyX3QpIGRhdGE7
+CglpbnQgYWxpZ25tZW50ID0gTWF4cG9vbGluZ19nZXRfcGNpZV9hbGlnbm1lbnQoKTsKCXJldHVy
+biAocG9pbnRlciAlIGFsaWdubWVudCkgPyAxIDogMDsKfQoKc3RhdGljIHZvaWQgKk1heHBvb2xp
+bmdfbWFsbG9jX2FsaWduZWQoY29uc3Qgc2l6ZV90IHNpemUpCnsKCXZvaWQgKnB0cjsKCWludCBh
+bGlnbm1lbnQgPSBNYXhwb29saW5nX2dldF9wY2llX2FsaWdubWVudCgpOwoJcG9zaXhfbWVtYWxp
+Z24oJnB0ciwgYWxpZ25tZW50LCBzaXplKTsKCXJldHVybiBwdHI7Cn0KCgoKLyotLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tKi8KLyotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIEludGVyZmFjZSBkZWZh
+dWx0IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKi8KLyotLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+Ki8KCgoKI2RlZmluZSBDSEVDS19FUlJPUlNfU1QoU1QsIFJFVCkgaWYoIW1heF9vayhTVC0+ZXJy
+b3JzKSkgeyBpZihtYXhfY29uZmlnX2dldF9ib29sKE1BWF9DT05GSUdfU1RBVElDX0lOVEVSRkFD
+RV9BQk9SVF9PTl9FUlJPUikpIHsgZnByaW50ZihzdGRlcnIsICIlc1xuIiwgbWF4X2Vycm9yc190
+cmFjZShTVC0+ZXJyb3JzKSk7IGFib3J0KCk7IH0gc2V0X2Vycm9yX2FuZF9mcmVlKG1heF9lcnJv
+cnNfdHJhY2UoU1QtPmVycm9ycykpOyByZXR1cm4gUkVUOyB9IAojZGVmaW5lIENIRUNLX05VTEwo
+VkFMVUUsIE1FU1NBR0UsIFJFVCkgaWYoVkFMVUUgPT0gTlVMTCkgeyBpZiAobWF4X2NvbmZpZ19n
+ZXRfYm9vbChNQVhfQ09ORklHX1NUQVRJQ19JTlRFUkZBQ0VfQUJPUlRfT05fRVJST1IpKSB7IGZw
+cmludGYoc3RkZXJyLCAiJXNcbiVzXG4iLCAoc3RvcmVkX2Vycm9yID09IE5VTEwpID8gIiIgOiBz
+dG9yZWRfZXJyb3IsIE1FU1NBR0UpOyBhYm9ydCgpOyB9IHNldF9lcnJvcihNRVNTQUdFKTsgcmV0
+dXJuIFJFVDsgfQoKIAp0eXBlZGVmIHN0cnVjdCBNYXhwb29saW5nX2NhbGxiYWNrX3N0cmVhbSB7
+Cgl1aW50OF90ICp1c2VyX3B0cjsKCXVpbnQ4X3QgKmFsaWduZWRfcHRyOwoJc2l6ZV90ICAgc2l6
+ZTsKCWludCAgICAgIGlzX291dHB1dDsKfSBNYXhwb29saW5nX2NhbGxiYWNrX3N0cmVhbV90OwoK
+dHlwZWRlZiBzdHJ1Y3QgTWF4cG9vbGluZ19jYWxsYmFja19kYXRhIHsKCU1heHBvb2xpbmdfY2Fs
+bGJhY2tfc3RyZWFtX3Qgc3RyZWFtWzJdOyAKCWludCBjb3VudDsKCWludCBtYXhfY291bnQ7Cn0g
+TWF4cG9vbGluZ19jYWxsYmFja19kYXRhX3Q7CgpzdGF0aWMgdm9pZCBNYXhwb29saW5nX2NhbGxi
+YWNrX2ludGVybmFsKHZvaWQgKmNiX2RhdGEpCnsKCU1heHBvb2xpbmdfY2FsbGJhY2tfZGF0YV90
+ICpkYXRhID0gKE1heHBvb2xpbmdfY2FsbGJhY2tfZGF0YV90KikgY2JfZGF0YTsKCWZvciAoaW50
+IGkgPSAwIDsgaSA8IGRhdGEtPmNvdW50IDsgaSsrICkgewoJCU1heHBvb2xpbmdfY2FsbGJhY2tf
+c3RyZWFtX3QgKnMgPSAmZGF0YS0+c3RyZWFtW2ldOwoJCWlmIChzLT5pc19vdXRwdXQgJiYgKHMt
+PnNpemUgPiAwKSkgewoJCQltZW1jcHkocy0+dXNlcl9wdHIsIHMtPmFsaWduZWRfcHRyLCBzLT5z
+aXplKTsKCQl9CgkJZnJlZShzLT5hbGlnbmVkX3B0cik7Cgl9CglmcmVlKGRhdGEpOwp9CgpzdGF0
+aWMgbWF4X2FjdGlvbnNfdCogTWF4cG9vbGluZ19jb252ZXJ0X2ludGVybmFsKAoJbWF4X2ZpbGVf
+dCAqbWF4ZmlsZSwKCU1heHBvb2xpbmdfYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9ucywKCWlu
+dCAgaXNfaW50ZXJuYWxfY2FsbCwKCXZvaWQgKCoqY2FsbGJhY2tfZnVuYykodm9pZCopLAoJdm9p
+ZCAqKmNhbGxiYWNrX2RhdGEpCnsKCW1heF9hY3Rpb25zX3QgKmFjdGlvbnMgPSBtYXhfYWN0aW9u
+c19pbml0KG1heGZpbGUsIE5VTEwpOwoJaWYoYWN0aW9ucyA9PSBOVUxMKSByZXR1cm4gTlVMTDsK
+CiNkZWZpbmUgQ0hFQ0tfRVJST1JTIGlmKCFtYXhfb2soYWN0aW9ucy0+ZXJyb3JzKSkgeyBzZXRf
+ZXJyb3JfYW5kX2ZyZWUobWF4X2Vycm9yc190cmFjZShhY3Rpb25zLT5lcnJvcnMpKTsgcmV0dXJu
+IE5VTEw7IH0gCgoJTWF4cG9vbGluZ19jYWxsYmFja19kYXRhX3QgKmNiX2RhdGEgPSBOVUxMOwoJ
+aW50IHVzZV9jYWxsYmFjayA9IChjYWxsYmFja19mdW5jICE9IE5VTEwpICYmIChjYWxsYmFja19k
+YXRhICE9IE5VTEwpOwoJaWYgKHVzZV9jYWxsYmFjaykgewoJCWNiX2RhdGEgPSBtYWxsb2Moc2l6
+ZW9mKE1heHBvb2xpbmdfY2FsbGJhY2tfZGF0YV90KSk7CgkJaWYgKGNiX2RhdGEgPT0gTlVMTCkg
+ewoJCQlmcHJpbnRmKHN0ZGVyciwgIlVuYWJsZSB0byBhbGxvY2F0ZSBtZW1vcnkgZm9yIHN0cmVh
+bSBjYWxsYmFjayBkYXRhIGluIGZ1bmN0aW9uIE1heHBvb2xpbmdfY29udmVydF9pbnRlcm5hbFxu
+Iik7CgkJCXJldHVybiBOVUxMOwoJCX0KCQljYl9kYXRhLT5tYXhfY291bnQgPSAyOwoJCWNiX2Rh
+dGEtPmNvdW50ICAgICA9IDA7CgkJKmNhbGxiYWNrX2RhdGEgICAgID0gY2JfZGF0YTsKCQkqY2Fs
+bGJhY2tfZnVuYyAgICAgPSAmTWF4cG9vbGluZ19jYWxsYmFja19pbnRlcm5hbDsKCX0KCglpbnQz
+Ml90IHBhcmFtX3NpemUgPSBpbnRlcmZhY2VfYWN0aW9ucy0+cGFyYW1fc2l6ZTsKCQoJLyogY29k
+ZSBmb3Igc2NhbGFyIE1heHBvb2xpbmdLZXJuZWwucnVuX2N5Y2xlX2NvdW50ICovCgl1aW50NjRf
+dCB0aWNrc19NYXhwb29saW5nS2VybmVsID0gcGFyYW1fc2l6ZTsKCW1heF9zZXRfdGlja3MoYWN0
+aW9ucywgIk1heHBvb2xpbmdLZXJuZWwiLCBwYXJhbV9zaXplKTsKCUNIRUNLX0VSUk9SUzsKCS8q
+IGVuZCBvZiBjb2RlIGZvciBzY2FsYXIgTWF4cG9vbGluZ0tlcm5lbC5ydW5fY3ljbGVfY291bnQq
+LwoJCglpbnQ2NF90IHRtcF8wID0gKHBhcmFtX3NpemUgKiA0KTsKCQoJLyogY29kZSBmb3Igc3Ry
+ZWFtIGluU3RyZWFtICovCglzaXplX3QgaW5zdHJlYW1fc2l6ZV9pblN0cmVhbSA9IHRtcF8wOwoJ
+aWYgKGluc3RyZWFtX3NpemVfaW5TdHJlYW0gPiAwKSB7CgkJY29uc3QgdWludDMyX3QgKnN0cmVh
+bV9wdHIgPSBpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1faW5TdHJlYW07CgkJaWYgKHVzZV9j
+YWxsYmFjayAmJiAoMSA9PSBNYXhwb29saW5nX2NoZWNrX2FsaWduZWQoaW50ZXJmYWNlX2FjdGlv
+bnMtPmluc3RyZWFtX2luU3RyZWFtKSkpIHsKCQkJdWludDMyX3QgKmFsaWduZWRfaW5zdHJlYW1f
+aW5TdHJlYW0gPSBtYWxsb2MoaW5zdHJlYW1fc2l6ZV9pblN0cmVhbSk7CgkJCWlmIChhbGlnbmVk
+X2luc3RyZWFtX2luU3RyZWFtID09IE5VTEwpIHsKCQkJCW1heF9yZXBvcnRfZXJyb3Jfc2xpYyhh
+Y3Rpb25zLT5lcnJvcnMsIF9fRklMRV9fLCBfX0xJTkVfXywgNTI2LCAiRmFpbGVkIHRvIGFsbG9j
+YXRlIGFsaWduZWQgbWVtb3J5IGZvciBzdHJlYW0gJ2luU3RyZWFtJyIpOwoJCQkJQ0hFQ0tfRVJS
+T1JTOwoJCQl9CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnVzZXJfcHRy
+ICAgID0gKHVpbnQ4X3QqKSBpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1faW5TdHJlYW07CgkJ
+CSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmFsaWduZWRfcHRyID0gKHVpbnQ4
+X3QqKSBhbGlnbmVkX2luc3RyZWFtX2luU3RyZWFtOwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9k
+YXRhLT5jb3VudF0pLT5zaXplICAgICAgICA9IGluc3RyZWFtX3NpemVfaW5TdHJlYW07CgkJCSgm
+Y2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmlzX291dHB1dCAgID0gMDsKCQkJY2Jf
+ZGF0YS0+Y291bnQgKz0gMTsKCQkJbWVtY3B5KGFsaWduZWRfaW5zdHJlYW1faW5TdHJlYW0sIGlu
+dGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV9pblN0cmVhbSwgaW5zdHJlYW1fc2l6ZV9pblN0cmVh
+bSk7CgkJCXN0cmVhbV9wdHIgPSBhbGlnbmVkX2luc3RyZWFtX2luU3RyZWFtOwoJCX0KCQltYXhf
+cXVldWVfaW5wdXQoYWN0aW9ucywgImluU3RyZWFtIiwgc3RyZWFtX3B0ciwgaW5zdHJlYW1fc2l6
+ZV9pblN0cmVhbSk7CgkJQ0hFQ0tfRVJST1JTOwoJfQoJLyogZW5kIG9mIGNvZGUgZm9yIHN0cmVh
+bSBpblN0cmVhbSAqLwoJCglpbnQ2NF90IHRtcF8xID0gKHRtcF8wIC8gNCk7CgkKCS8qIGNvZGUg
+Zm9yIHN0cmVhbSBvdXRTdHJlYW0gKi8KCXNpemVfdCBvdXRzdHJlYW1fc2l6ZV9vdXRTdHJlYW0g
+PSB0bXBfMTsKCWlmIChvdXRzdHJlYW1fc2l6ZV9vdXRTdHJlYW0gPiAwKSB7CgkJdWludDMyX3Qg
+KnN0cmVhbV9wdHIgPSBpbnRlcmZhY2VfYWN0aW9ucy0+b3V0c3RyZWFtX291dFN0cmVhbTsKCQlp
+ZiAodXNlX2NhbGxiYWNrICYmICgxID09IE1heHBvb2xpbmdfY2hlY2tfYWxpZ25lZChpbnRlcmZh
+Y2VfYWN0aW9ucy0+b3V0c3RyZWFtX291dFN0cmVhbSkpKSB7CgkJCXVpbnQzMl90ICphbGlnbmVk
+X291dHN0cmVhbV9vdXRTdHJlYW0gPSBtYWxsb2Mob3V0c3RyZWFtX3NpemVfb3V0U3RyZWFtKTsK
+CQkJaWYgKGFsaWduZWRfb3V0c3RyZWFtX291dFN0cmVhbSA9PSBOVUxMKSB7CgkJCQltYXhfcmVw
+b3J0X2Vycm9yX3NsaWMoYWN0aW9ucy0+ZXJyb3JzLCBfX0ZJTEVfXywgX19MSU5FX18sIDUyNiwg
+IkZhaWxlZCB0byBhbGxvY2F0ZSBhbGlnbmVkIG1lbW9yeSBmb3Igc3RyZWFtICdvdXRTdHJlYW0n
+Iik7CgkJCQlDSEVDS19FUlJPUlM7CgkJCX0KCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+
+Y291bnRdKS0+dXNlcl9wdHIgICAgPSAodWludDhfdCopIGludGVyZmFjZV9hY3Rpb25zLT5vdXRz
+dHJlYW1fb3V0U3RyZWFtOwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5h
+bGlnbmVkX3B0ciA9ICh1aW50OF90KikgYWxpZ25lZF9vdXRzdHJlYW1fb3V0U3RyZWFtOwoJCQko
+JmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5zaXplICAgICAgICA9IG91dHN0cmVh
+bV9zaXplX291dFN0cmVhbTsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+
+aXNfb3V0cHV0ICAgPSAxOwoJCQljYl9kYXRhLT5jb3VudCArPSAxOwoJCQlzdHJlYW1fcHRyID0g
+YWxpZ25lZF9vdXRzdHJlYW1fb3V0U3RyZWFtOwoJCX0KCQltYXhfcXVldWVfb3V0cHV0KGFjdGlv
+bnMsICJvdXRTdHJlYW0iLCBzdHJlYW1fcHRyLCBvdXRzdHJlYW1fc2l6ZV9vdXRTdHJlYW0pOwoJ
+CUNIRUNLX0VSUk9SUzsKCX0KCS8qIGVuZCBvZiBjb2RlIGZvciBzdHJlYW0gb3V0U3RyZWFtICov
+CgkKCWlmICh1c2VfY2FsbGJhY2sgJiYgY2JfZGF0YS0+Y291bnQgPT0gMCkgewoJCSpjYWxsYmFj
+a19kYXRhID0gTlVMTDsKCQkqY2FsbGJhY2tfZnVuYyA9IE5VTEw7CgkJZnJlZShjYl9kYXRhKTsK
+CX0KCXJldHVybiBhY3Rpb25zOwojdW5kZWYgQ0hFQ0tfRVJST1JTCn0KCnZvaWQgTWF4cG9vbGlu
+ZygKCWludDMyX3QgcGFyYW1fc2l6ZSwKCWNvbnN0IHVpbnQzMl90ICppbnN0cmVhbV9pblN0cmVh
+bSwKCXVpbnQzMl90ICpvdXRzdHJlYW1fb3V0U3RyZWFtKQp7Cgkodm9pZCkgcHRocmVhZF9vbmNl
+KCZzbGljX2JzX2lzX2luaXRpYWxpc2VkLCBNYXhwb29saW5nX3N0YXRpY19pbml0KTsKCUNIRUNL
+X05VTEwoc3RvcmVkX21heGZpbGUsICJNYXhmaWxlIHdhcyBub3QgbG9hZGVkIiwgKTsKCW1heF9y
+dW5fdCAqcnVuID0gTWF4cG9vbGluZ19ub25ibG9jayhwYXJhbV9zaXplLCBpbnN0cmVhbV9pblN0
+cmVhbSwgb3V0c3RyZWFtX291dFN0cmVhbSk7CglDSEVDS19OVUxMKHJ1biwgIlVuYWJsZSB0byBy
+dW4gYWN0aW9ucyIsICk7CgltYXhfd2FpdChydW4pOwp9CgptYXhfcnVuX3QgKk1heHBvb2xpbmdf
+bm9uYmxvY2soCglpbnQzMl90IHBhcmFtX3NpemUsCgljb25zdCB1aW50MzJfdCAqaW5zdHJlYW1f
+aW5TdHJlYW0sCgl1aW50MzJfdCAqb3V0c3RyZWFtX291dFN0cmVhbSkKewoJTWF4cG9vbGluZ19h
+Y3Rpb25zX3QgaW50ZXJmYWNlX2FjdGlvbnM7CglpbnRlcmZhY2VfYWN0aW9ucy5wYXJhbV9zaXpl
+ID0gcGFyYW1fc2l6ZTsKCWludGVyZmFjZV9hY3Rpb25zLmluc3RyZWFtX2luU3RyZWFtID0gaW5z
+dHJlYW1faW5TdHJlYW07CglpbnRlcmZhY2VfYWN0aW9ucy5vdXRzdHJlYW1fb3V0U3RyZWFtID0g
+b3V0c3RyZWFtX291dFN0cmVhbTsKCSh2b2lkKSBwdGhyZWFkX29uY2UoJnNsaWNfYnNfaXNfaW5p
+dGlhbGlzZWQsIE1heHBvb2xpbmdfc3RhdGljX2luaXQpOwoJQ0hFQ0tfTlVMTChzdG9yZWRfbWF4
+ZmlsZSwgIk1heGZpbGUgd2FzIG5vdCBsb2FkZWQiLCBOVUxMKTsKCXZvaWQgKCpjYl9mdW5jKSh2
+b2lkKikgPSBOVUxMOwoJdm9pZCAgKmNiX2RhdGEgICAgICAgICA9IE5VTEw7CgltYXhfYWN0aW9u
+c190ICphY3Rpb25zID0gTWF4cG9vbGluZ19jb252ZXJ0X2ludGVybmFsKHN0b3JlZF9tYXhmaWxl
+LCAmaW50ZXJmYWNlX2FjdGlvbnMsIDEsICZjYl9mdW5jLCAmY2JfZGF0YSk7CglDSEVDS19OVUxM
+KGFjdGlvbnMsICJVbmFibGUgdG8gYnVpbGQgYWN0aW9ucyIsIE5VTEwpOwoJbWF4X3ZhbGlkYXRl
+KGFjdGlvbnMpOwoJQ0hFQ0tfRVJST1JTX1NUKGFjdGlvbnMsIE5VTEwpOwoJQ0hFQ0tfRVJST1JT
+X1NUKHN0b3JlZF9lbmdpbmUsIE5VTEwpOwoJbWF4X3J1bl90ICpydW47CglpZiAoY2JfZnVuYyA9
+PSBOVUxMKSB7CgkJcnVuID0gbWF4X3J1bl9ub25ibG9jayhzdG9yZWRfZW5naW5lLCBhY3Rpb25z
+KTsKCX0gZWxzZSB7CgkJcnVuID0gbWF4X3J1bl9ub25ibG9ja193aXRoX2NiKHN0b3JlZF9lbmdp
+bmUsIGFjdGlvbnMsIGNiX2Z1bmMsIGNiX2RhdGEpOwoJfQoJQ0hFQ0tfTlVMTChydW4sICJVbmFi
+bGUgdG8gcnVuIGFjdGlvbnMiLCBOVUxMKTsKCUNIRUNLX0VSUk9SU19TVChhY3Rpb25zLCBOVUxM
+KTsKCW1heF9hY3Rpb25zX2ZyZWUoYWN0aW9ucyk7CglyZXR1cm4gcnVuOwp9Cgp2b2lkIE1heHBv
+b2xpbmdfcnVuKAoJbWF4X2VuZ2luZV90ICplbmdpbmUsCglNYXhwb29saW5nX2FjdGlvbnNfdCAq
+aW50ZXJmYWNlX2FjdGlvbnMpCnsKCW1heF9ydW5fdCAqcnVuID0gTWF4cG9vbGluZ19ydW5fbm9u
+YmxvY2soZW5naW5lLCBpbnRlcmZhY2VfYWN0aW9ucyk7CglDSEVDS19OVUxMKHJ1biwgIlVuYWJs
+ZSB0byBydW4gYWN0aW9ucyIsICk7CgltYXhfd2FpdChydW4pOwp9CgptYXhfcnVuX3QgKk1heHBv
+b2xpbmdfcnVuX25vbmJsb2NrKAoJbWF4X2VuZ2luZV90ICplbmdpbmUsCglNYXhwb29saW5nX2Fj
+dGlvbnNfdCAqaW50ZXJmYWNlX2FjdGlvbnMpCnsKCW1heF9maWxlX3QgKm1heGZpbGUgPSBtYXhf
+ZW5naW5lX2dldF9tYXhfZmlsZShlbmdpbmUpOyAKCXZvaWQgKCpjYl9mdW5jKSh2b2lkKikgPSBO
+VUxMOwoJdm9pZCAgKmNiX2RhdGEgICAgICAgICA9IE5VTEw7CgltYXhfYWN0aW9uc190ICphY3Rp
+b25zID0gTWF4cG9vbGluZ19jb252ZXJ0X2ludGVybmFsKG1heGZpbGUsIGludGVyZmFjZV9hY3Rp
+b25zLCAxLCAmY2JfZnVuYywgJmNiX2RhdGEpOwoJQ0hFQ0tfTlVMTChhY3Rpb25zLCAiVW5hYmxl
+IHRvIGJ1aWxkIGFjdGlvbnMiLCBOVUxMKTsKCW1heF92YWxpZGF0ZShhY3Rpb25zKTsKCUNIRUNL
+X0VSUk9SU19TVChhY3Rpb25zLCBOVUxMKTsKCW1heF9ydW5fdCAqcnVuOwoJaWYgKGNiX2Z1bmMg
+PT0gTlVMTCkgewoJCXJ1biA9IG1heF9ydW5fbm9uYmxvY2soZW5naW5lLCBhY3Rpb25zKTsKCX0g
+ZWxzZSB7CgkJcnVuID0gbWF4X3J1bl9ub25ibG9ja193aXRoX2NiKGVuZ2luZSwgYWN0aW9ucywg
+Y2JfZnVuYywgY2JfZGF0YSk7Cgl9CglDSEVDS19OVUxMKHJ1biwgIlVuYWJsZSB0byBydW4gYWN0
+aW9ucyIsIE5VTEwpOwoJbWF4X2FjdGlvbnNfZnJlZShhY3Rpb25zKTsKCXJldHVybiBydW47Cn0K
+CgovKioKICogXGJyaWVmIEdyb3VwIHJ1biBhZHZhbmNlZCBzdGF0aWMgZnVuY3Rpb24gZm9yIHRo
+ZSBpbnRlcmZhY2UgJ2RlZmF1bHQnLgogKiAKICogXHBhcmFtIFtpbl0gZ3JvdXAgR3JvdXAgdG8g
+dXNlLgogKiBccGFyYW0gW2luLG91dF0gaW50ZXJmYWNlX2FjdGlvbnMgQWN0aW9ucyB0byBydW4u
+CiAqCiAqIFJ1biB0aGUgYWN0aW9ucyBvbiB0aGUgZmlyc3QgZGV2aWNlIGF2YWlsYWJsZSBpbiB0
+aGUgZ3JvdXAuCiAqLwp2b2lkIE1heHBvb2xpbmdfcnVuX2dyb3VwKG1heF9ncm91cF90ICpncm91
+cCwgTWF4cG9vbGluZ19hY3Rpb25zX3QgKmludGVyZmFjZV9hY3Rpb25zKQp7CgltYXhfcnVuX3Qg
+KnJ1biA9IE1heHBvb2xpbmdfcnVuX2dyb3VwX25vbmJsb2NrKGdyb3VwLCBpbnRlcmZhY2VfYWN0
+aW9ucyk7CglDSEVDS19OVUxMKHJ1biwgIlVuYWJsZSB0byBydW4gYWN0aW9ucyIsICk7CgltYXhf
+d2FpdChydW4pOwp9CgoKLyoqCiAqIFxicmllZiBHcm91cCBydW4gYWR2YW5jZWQgc3RhdGljIG5v
+bi1ibG9ja2luZyBmdW5jdGlvbiBmb3IgdGhlIGludGVyZmFjZSAnZGVmYXVsdCcuCiAqIAogKgog
+KiBTY2hlZHVsZSB0aGUgYWN0aW9ucyB0byBydW4gb24gdGhlIGZpcnN0IGRldmljZSBhdmFpbGFi
+bGUgaW4gdGhlIGdyb3VwIGFuZCByZXR1cm4gaW1tZWRpYXRlbHkuCiAqIFRoZSBzdGF0dXMgb2Yg
+dGhlIHJ1biBtdXN0IGJlIGNoZWNrZWQgd2l0aCA6Om1heF93YWl0LiAKICogTm90ZSB0aGF0IHVz
+ZSBvZiA6Om1heF9ub3dhaXQgaXMgcHJvaGliaXRlZCB3aXRoIG5vbi1ibG9ja2luZyBydW5uaW5n
+IG9uIGdyb3VwczoKICogc2VlIHRoZSA6Om1heF9ydW5fZ3JvdXBfbm9uYmxvY2sgZG9jdW1lbnRh
+dGlvbiBmb3IgbW9yZSBleHBsYW5hdGlvbi4KICoKICogXHBhcmFtIFtpbl0gZ3JvdXAgR3JvdXAg
+dG8gdXNlLgogKiBccGFyYW0gW2luXSBpbnRlcmZhY2VfYWN0aW9ucyBBY3Rpb25zIHRvIHJ1bi4K
+ICogXHJldHVybiBBIGhhbmRsZSBvbiB0aGUgZXhlY3V0aW9uIHN0YXR1cyBvZiB0aGUgYWN0aW9u
+cywgb3IgTlVMTCBpbiBjYXNlIG9mIGVycm9yLgogKi8KbWF4X3J1bl90ICpNYXhwb29saW5nX3J1
+bl9ncm91cF9ub25ibG9jayhtYXhfZ3JvdXBfdCAqZ3JvdXAsIE1heHBvb2xpbmdfYWN0aW9uc190
+ICppbnRlcmZhY2VfYWN0aW9ucykKewoJbWF4X2ZpbGVfdCAqbWF4ZmlsZSA9IG1heF9ncm91cF9n
+ZXRfbWF4X2ZpbGUoZ3JvdXApOwoJbWF4X2FjdGlvbnNfdCAqYWN0aW9ucyA9IE1heHBvb2xpbmdf
+Y29udmVydF9pbnRlcm5hbChtYXhmaWxlLCBpbnRlcmZhY2VfYWN0aW9ucywgMSwgTlVMTCwgTlVM
+TCk7CglpZihhY3Rpb25zID09IE5VTEwpIHJldHVybiBOVUxMOwoJaWYoIW1heF9vayhhY3Rpb25z
+LT5lcnJvcnMpKSByZXR1cm4gTlVMTDsKCW1heF92YWxpZGF0ZShhY3Rpb25zKTsKCW1heF9ydW5f
+dCAqcnVuID0gbWF4X3J1bl9ncm91cF9ub25ibG9jayhncm91cCwgYWN0aW9ucyk7CgltYXhfYWN0
+aW9uc19mcmVlKGFjdGlvbnMpOwoJcmV0dXJuIHJ1bjsKfQoKCi8qKgogKiBcYnJpZWYgQXJyYXkg
+cnVuIGFkdmFuY2VkIHN0YXRpYyBmdW5jdGlvbiBmb3IgdGhlIGludGVyZmFjZSAnZGVmYXVsdCcu
+CiAqIAogKiBccGFyYW0gW2luXSBlbmdhcnJheSBUaGUgYXJyYXkgb2YgZGV2aWNlcyB0byB1c2Uu
+CiAqIFxwYXJhbSBbaW4sb3V0XSBpbnRlcmZhY2VfYWN0aW9ucyBUaGUgYXJyYXkgb2YgYWN0aW9u
+cyB0byBydW4uCiAqCiAqIFJ1biB0aGUgYXJyYXkgb2YgYWN0aW9ucyBvbiB0aGUgYXJyYXkgb2Yg
+ZW5naW5lcy4gIFRoZSBsZW5ndGggb2YgaW50ZXJmYWNlX2FjdGlvbnMKICogbXVzdCBtYXRjaCB0
+aGUgc2l6ZSBvZiBlbmdhcnJheS4KICovCnZvaWQgTWF4cG9vbGluZ19ydW5fYXJyYXkobWF4X2Vu
+Z2FycmF5X3QgKmVuZ2FycmF5LCBNYXhwb29saW5nX2FjdGlvbnNfdCAqaW50ZXJmYWNlX2FjdGlv
+bnNbXSkKewoJbWF4X3J1bl90ICpydW4gPSBNYXhwb29saW5nX3J1bl9hcnJheV9ub25ibG9jayhl
+bmdhcnJheSwgaW50ZXJmYWNlX2FjdGlvbnMpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8g
+cnVuIGFjdGlvbnMiLCApOwoJbWF4X3dhaXQocnVuKTsKfQoKCi8qKgogKiBcYnJpZWYgQXJyYXkg
+cnVuIGFkdmFuY2VkIHN0YXRpYyBub24tYmxvY2tpbmcgZnVuY3Rpb24gZm9yIHRoZSBpbnRlcmZh
+Y2UgJ2RlZmF1bHQnLgogKiAKICoKICogU2NoZWR1bGUgdG8gcnVuIHRoZSBhcnJheSBvZiBhY3Rp
+b25zIG9uIHRoZSBhcnJheSBvZiBlbmdpbmVzLCBhbmQgcmV0dXJuIGltbWVkaWF0ZWx5LgogKiBU
+aGUgbGVuZ3RoIG9mIGludGVyZmFjZV9hY3Rpb25zIG11c3QgbWF0Y2ggdGhlIHNpemUgb2YgZW5n
+YXJyYXkuCiAqIFRoZSBzdGF0dXMgb2YgdGhlIHJ1biBjYW4gYmUgY2hlY2tlZCBlaXRoZXIgYnkg
+OjptYXhfd2FpdCBvciA6Om1heF9ub3dhaXQ7CiAqIG5vdGUgdGhhdCBvbmUgb2YgdGhlc2UgKm11
+c3QqIGJlIGNhbGxlZCwgc28gdGhhdCBhc3NvY2lhdGVkIG1lbW9yeSBjYW4gYmUgcmVsZWFzZWQu
+CiAqCiAqIFxwYXJhbSBbaW5dIGVuZ2FycmF5IFRoZSBhcnJheSBvZiBkZXZpY2VzIHRvIHVzZS4K
+ICogXHBhcmFtIFtpbl0gaW50ZXJmYWNlX2FjdGlvbnMgVGhlIGFycmF5IG9mIGFjdGlvbnMgdG8g
+cnVuLgogKiBccmV0dXJuIEEgaGFuZGxlIG9uIHRoZSBleGVjdXRpb24gc3RhdHVzIG9mIHRoZSBh
+Y3Rpb25zLCBvciBOVUxMIGluIGNhc2Ugb2YgZXJyb3IuCiAqLwptYXhfcnVuX3QgKk1heHBvb2xp
+bmdfcnVuX2FycmF5X25vbmJsb2NrKG1heF9lbmdhcnJheV90ICplbmdhcnJheSwgTWF4cG9vbGlu
+Z19hY3Rpb25zX3QgKmludGVyZmFjZV9hY3Rpb25zW10pCnsKCW1heF9maWxlX3QgKm1heGZpbGUg
+PSBtYXhfZW5nYXJyYXlfZ2V0X21heF9maWxlKGVuZ2FycmF5LCAwKTsKCWludCBpOwoJbWF4X2Fj
+dGFycmF5X3QgKmFjdGFycmF5ID0gbWF4X2FjdGFycmF5X2luaXQobWF4ZmlsZSwgZW5nYXJyYXkt
+PnNpemUpOwoJaWYgKGFjdGFycmF5ID09IE5VTEwpIHJldHVybiBOVUxMOwoJbWF4X2FjdGlvbnNf
+dCAqKmFycl9hY3Rpb25zID0gbWFsbG9jKGVuZ2FycmF5LT5zaXplICogc2l6ZW9mKG1heF9hY3Rp
+b25zX3QqKSk7Cglmb3IgKCBpID0gMCA7IGkgPCBhY3RhcnJheS0+c2l6ZTsgaSsrICkgewoJCW1h
+eF9hY3Rpb25zX3QgKmFjdGlvbnMgPSBNYXhwb29saW5nX2NvbnZlcnRfaW50ZXJuYWwobWF4Zmls
+ZSwgaW50ZXJmYWNlX2FjdGlvbnNbaV0sIDEsIE5VTEwsIE5VTEwpOwoJCWlmIChhY3Rpb25zID09
+IE5VTEwpIHJldHVybiBOVUxMOwoJCWFycl9hY3Rpb25zW2ldID0gYWN0aW9uczsKCQltYXhfc2V0
+X2FjdGlvbihhY3RhcnJheSwgaSwgYWN0aW9ucyk7Cgl9CgltYXhfcnVuX3QgKnJ1biA9IG1heF9y
+dW5fYXJyYXlfbm9uYmxvY2soZW5nYXJyYXksIGFjdGFycmF5KTsKCWZvciAoIGkgPSAwIDsgaSA8
+IGFjdGFycmF5LT5zaXplIDsgaSsrICkgeyBtYXhfYWN0aW9uc19mcmVlKGFycl9hY3Rpb25zW2ld
+KTsgfQoJbWF4X2FjdGFycmF5X2ZyZWUoYWN0YXJyYXkpOwoJZnJlZShhcnJfYWN0aW9ucyk7Cgly
+ZXR1cm4gcnVuOwp9CgoKLyoqCiAqIFxicmllZiBDb252ZXJ0cyBhIHN0YXRpYy1pbnRlcmZhY2Ug
+YWN0aW9uIHN0cnVjdCBpbnRvIGEgZHluYW1pYy1pbnRlcmZhY2UgbWF4X2FjdGlvbnNfdCBzdHJ1
+Y3QuCiAqCiAqIE5vdGUgdGhhdCB0aGlzIGlzIGFuIGludGVybmFsIHV0aWxpdHkgZnVuY3Rpb24g
+dXNlZCBieSBvdGhlciBmdW5jdGlvbnMgaW4gdGhlIHN0YXRpYyBpbnRlcmZhY2UuCiAqCiAqIFxw
+YXJhbSBbaW5dIG1heGZpbGUgVGhlIG1heGZpbGUgdG8gdXNlLgogKiBccGFyYW0gW2luXSBpbnRl
+cmZhY2VfYWN0aW9ucyBUaGUgaW50ZXJmYWNlLXNwZWNpZmljIGFjdGlvbnMgdG8gcnVuLgogKiBc
+cmV0dXJuIFRoZSBkeW5hbWljLWludGVyZmFjZSBhY3Rpb25zIHRvIHJ1biwgb3IgTlVMTCBpbiBj
+YXNlIG9mIGVycm9yLgogKi8KbWF4X2FjdGlvbnNfdCogTWF4cG9vbGluZ19jb252ZXJ0KG1heF9m
+aWxlX3QgKm1heGZpbGUsIE1heHBvb2xpbmdfYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9ucykK
+ewoJcmV0dXJuIE1heHBvb2xpbmdfY29udmVydF9pbnRlcm5hbChtYXhmaWxlLCBpbnRlcmZhY2Vf
+YWN0aW9ucywgMCwgTlVMTCwgTlVMTCk7Cn0KCiN1bmRlZiBDSEVDS19FUlJPUlNfU1QKI3VuZGVm
+IENIRUNLX05VTEwKCgo=
+#endif /* SLIC_B64_DEFINITIONS */
+
+#ifdef SLIC_EXTRA_FILES
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHVz
+ZXJmaWxlcyBmb3JtYXQtdmVyc2lvbj0iMjAxMjAyMDAiLz4=
+#endif /* SLIC_EXTRA_FILES */
+
+#ifdef PHOTON_NODE_ADD_DATA
+#define PHOTON_NODE_ADD_DATA_PRESENT 1
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 3, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 60, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 7, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 59, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 5, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 20, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 58, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 22, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 57, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 24, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 25, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 26, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 27, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 0, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 1, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 2, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 43, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 51, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 52, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 53, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 54, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 16, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 12, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 8, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 9, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 10, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 11, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 13, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 47, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 14, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 15, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 17, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 49, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 18, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 50, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 19, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 28, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 33, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 56, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 30, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 31, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 32, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 34, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 55, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 36, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 37, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 39, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 40, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MaxpoolingKernel, 38, "SquashFactor", 0.0)
+#endif
+
+#ifdef MAXFILE_SIGNATURE
+#define MAXFILE_SIGNATURE_PRESENT 1
+MAXFILE_SIGNATURE("302c021467d66696ff059874cae0d9f0fd8072fde954c51c02144179a65ebe227250cfb4ecfe9a0743e41966e3bf")
+#endif
+

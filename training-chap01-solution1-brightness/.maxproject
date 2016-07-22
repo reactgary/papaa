@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<maxCompilerManager>
+<enginePart internalEngineSubproject="training-chap01-solution1-brightness_EngineCode" isSrcBin="false" isUseDefaultSelected="false" outputLocation="/training-chap01-solution1-brightness_EngineCode/bin" projectName="training-chap01-solution1-brightness"/>
+<cpuPart internalCpuSubproject="training-chap01-solution1-brightness_CPUCode"/>
+</maxCompilerManager>

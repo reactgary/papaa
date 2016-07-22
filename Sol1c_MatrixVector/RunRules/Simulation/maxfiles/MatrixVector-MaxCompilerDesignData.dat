@@ -1,0 +1,1526 @@
+#ifdef MAXCOMPILER_VERSION_INFO
+#define MAXCOMPILER_VERSION_INFO_PRESENT 1
+#define MAXFILE_MAXCOMPILER_VERSION_YEAR         2015
+#define MAXFILE_MAXCOMPILER_VERSION_NUM          2
+#define MAXFILE_MAXCOMPILER_VERSION_POINT        0
+#define MAXFILE_MAXCOMPILER_VERSION_PATCH        ""
+#define MAXFILE_MAXCOMPILER_VERSION_REV          46290
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_DATE "2015-11-17"
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_MODE true
+#endif
+
+#ifdef MAXFILE_BUILD_INFO
+#define MAXFILE_BUILD_INFO_PRESENT 1
+#define MAXFILE_BUILD_NAME "MatrixVector"
+#define MAXFILE_BUILD_DIR  "/home/demo/Desktop/MaxCompiler-Builds/MatrixVector_VECTIS_DFE_SIM"
+#define MAXFILE_BUILD_DATE  20160720
+#define MAXFILE_BUILD_REV   1
+#endif
+
+#ifdef PARAM
+#define PARAM_PRESENT 1
+PARAM(N, 4)
+PARAM(APP_ID, 0)
+PARAM(REV_ID, 0)
+PARAM(CHAIN_LENGTH, 36)
+PARAM(IS_SIMULATION, 1)
+PARAM(MEC_SUPPORTED, 1)
+PARAM(PCIE_SLAVE_STREAMING, 0)
+PARAM(PCIE_ALIGNMENT, 16)
+PARAM(NUM_IFPGA_LINKS, 0)
+#endif
+
+#ifdef STRING_PARAM
+#define STRING_PARAM_PRESENT 1
+STRING_PARAM(BOARD_MODEL, "MAX3424A")
+#endif
+
+
+
+#ifdef INCLUDE_GENERATED_CPP_HEADERS
+#include "MatrixVectorKernel.h"
+#endif
+
+
+
+
+
+
+
+
+
+
+#ifdef MANAGER_NODE
+#define MANAGER_NODE_PRESENT 1
+MANAGER_NODE(MatrixVectorKernel, Kernel)
+MANAGER_NODE(inMat, PCIe_From_Host_fwd)
+MANAGER_NODE(inVec, PCIe_From_Host_fwd)
+MANAGER_NODE(output, PCIe_To_Host_fwd)
+MANAGER_NODE(Stream_1, DualAspectReg)
+MANAGER_NODE(Stream_13, Fifo)
+#endif
+
+#ifdef MANAGER_NODE_IO
+#define MANAGER_NODE_IO_PRESENT 1
+MANAGER_NODE_IO(MatrixVectorKernel, inMat, IN, STREAM, 512, PULL)
+MANAGER_NODE_IO(MatrixVectorKernel, inVec, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(MatrixVectorKernel, output, OUT, STREAM, 128, PUSH)
+MANAGER_NODE_IO(inMat, inMat, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(inVec, inVec, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(output, output, IN, STREAM, 128, PUSH)
+MANAGER_NODE_IO(Stream_1, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_1, output, OUT, STREAM, 512, PULL)
+MANAGER_NODE_IO(Stream_13, input, IN, STREAM, 512, PULL)
+MANAGER_NODE_IO(Stream_13, output, OUT, STREAM, 512, PULL)
+#endif
+
+#ifdef MANAGER_STREAM
+#define MANAGER_STREAM_PRESENT 1
+MANAGER_STREAM(inMat, inMat, Stream_1, input, 128)
+MANAGER_STREAM(inVec, inVec, MatrixVectorKernel, inVec, 128)
+MANAGER_STREAM(MatrixVectorKernel, output, output, output, 128)
+MANAGER_STREAM(Stream_1, output, Stream_13, input, 512)
+MANAGER_STREAM(Stream_13, output, MatrixVectorKernel, inMat, 512)
+#endif
+
+#ifdef MANAGER_NODE_STACK_TRACE
+#define MANAGER_NODE_STACK_TRACE_PRESENT 1
+MANAGER_NODE_STACK_TRACE(MatrixVectorKernel, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+MANAGER_NODE_STACK_TRACE(inMat, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+MANAGER_NODE_STACK_TRACE(inVec, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+MANAGER_NODE_STACK_TRACE(output, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+MANAGER_NODE_STACK_TRACE(Stream_1, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+MANAGER_NODE_STACK_TRACE(Stream_13, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+#endif
+
+
+#ifdef MANAGER_NODE_PROPERTY
+#define MANAGER_NODE_PROPERTY_PRESENT 1
+MANAGER_NODE_PROPERTY(MatrixVectorKernel, control_pipelining_depth, 2)
+#endif
+
+
+#ifdef KERNEL_CORE
+#define KERNEL_CORE_PRESENT 1
+KERNEL_CORE(MatrixVectorKernel)
+#endif
+
+#ifdef KERNEL_HOST_CONTROLLED
+#define KERNEL_HOST_CONTROLLED_PRESENT 1
+KERNEL_HOST_CONTROLLED(MatrixVectorKernel, MatrixVectorKernel)
+#endif
+
+#ifdef DEBUG_INPUT_BITS
+#define DEBUG_INPUT_BITS_PRESENT 1
+DEBUG_INPUT_BITS(MatrixVectorKernel, inMat, 0)
+DEBUG_INPUT_BITS(MatrixVectorKernel, inVec, 1)
+#endif
+
+#ifdef DEBUG_OUTPUT_BITS
+#define DEBUG_OUTPUT_BITS_PRESENT 1
+DEBUG_OUTPUT_BITS(MatrixVectorKernel, output, 0)
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_CTOR
+#define MANAGER_NODE_CPP_SIM_MODEL_CTOR_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(inMat, PCIePullSourceSyncMax3, "inMat")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(inVec, PCIePullSourceSyncMax3, "inVec")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_1, DualAspectRegSync, "Stream_1", 128, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_13, FifoPullToPullSync, "Stream_13", false, 512, 512)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(MatrixVectorKernel, MatrixVectorKernel, "MatrixVectorKernel")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(output, PCIePushSinkSyncMax3, "output")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(CapabilityReg, CapRegs, "CapabilityReg", 0, 2, 1, 0, 0, 0, 0, 0, 36)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ifpga, IFPGARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(sfa, SFARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ChecksumMemory, ChecksumMem, "ChecksumMemory", "6298fff7a34833e47c30e1a7e9488619bd26aa97f76d84561b482c1c695bc667")
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_SETUP
+#define MANAGER_NODE_CPP_SIM_MODEL_SETUP_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_ctld_almost_empty, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_ctld_done, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_ctld_empty, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_ctld_read, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_ctld_read_pipe_dbg, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_ctld_request, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_done_out, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_fill_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_flush_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_flush_start, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_flush_start_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_flushing, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_full_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_out_stall, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_out_valid, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(MatrixVectorKernel, addDebugRegister, reg_dbg_stall_vector, 1, 0)
+#endif
+
+#ifdef PCIE_STREAM
+#define PCIE_STREAM_PRESENT 1
+PCIE_STREAM(inMat, STREAM_FROM_HOST, 0)
+PCIE_STREAM(inVec, STREAM_FROM_HOST, 1)
+PCIE_STREAM(output, STREAM_TO_HOST, 0)
+#endif
+
+#ifdef REG
+#define REG_PRESENT 1
+REG(MatrixVectorKernel.io_inMat_force_disabled, 0x0, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(MatrixVectorKernel.io_inVec_force_disabled, 0x1, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(MatrixVectorKernel.io_output_force_disabled, 0x2, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(MatrixVectorKernel.run_cycle_count, 0x3, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(MatrixVectorKernel.current_run_cycle_count, 0x9, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(MatrixVectorKernel.dbg_ctld_almost_empty, 0xf, 1, hwBits(2))
+REG(MatrixVectorKernel.dbg_ctld_done, 0x10, 1, hwBits(2))
+REG(MatrixVectorKernel.dbg_ctld_empty, 0x11, 1, hwBits(2))
+REG(MatrixVectorKernel.dbg_ctld_read, 0x12, 1, hwBits(2))
+REG(MatrixVectorKernel.dbg_ctld_read_pipe_dbg, 0x13, 1, hwBits(6))
+REG(MatrixVectorKernel.dbg_ctld_request, 0x14, 1, hwBits(2))
+REG(MatrixVectorKernel.dbg_done_out, 0x15, 1, hwBits(1))
+REG(MatrixVectorKernel.dbg_fill_level, 0x16, 1, hwBits(6))
+REG(MatrixVectorKernel.dbg_flush_level, 0x17, 1, hwBits(6))
+REG(MatrixVectorKernel.dbg_flush_start, 0x18, 1, hwBits(1))
+REG(MatrixVectorKernel.dbg_flush_start_level, 0x19, 1, hwBits(6))
+REG(MatrixVectorKernel.dbg_flushing, 0x1a, 1, hwBits(1))
+REG(MatrixVectorKernel.dbg_full_level, 0x1b, 1, hwBits(6))
+REG(MatrixVectorKernel.dbg_out_stall, 0x1c, 1, hwBits(1))
+REG(MatrixVectorKernel.dbg_out_valid, 0x1d, 1, hwBits(1))
+REG(MatrixVectorKernel.dbg_stall_vector, 0x1e, 1, hwBits(1))
+REG(ifpga.ifpga_ctrl, 0x1f, 1, hwBits(8))
+REG(SignalForwardingAdapter.SFA_FORWARD_EN, 0x20, 4, hwBits(32))
+#endif
+
+#ifdef REG_V2
+#define REG_V2_PRESENT 1
+REG_V2(MatrixVectorKernel.io_inMat_force_disabled, 0x0, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(MatrixVectorKernel.io_inVec_force_disabled, 0x1, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(MatrixVectorKernel.io_output_force_disabled, 0x2, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(MatrixVectorKernel.run_cycle_count, 0x3, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_WRITE_ONLY, false)
+REG_V2(MatrixVectorKernel.current_run_cycle_count, 0x9, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_ctld_almost_empty, 0xf, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_ctld_done, 0x10, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_ctld_empty, 0x11, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_ctld_read, 0x12, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_ctld_read_pipe_dbg, 0x13, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_ctld_request, 0x14, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_done_out, 0x15, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_fill_level, 0x16, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_flush_level, 0x17, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_flush_start, 0x18, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_flush_start_level, 0x19, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_flushing, 0x1a, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_full_level, 0x1b, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_out_stall, 0x1c, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_out_valid, 0x1d, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(MatrixVectorKernel.dbg_stall_vector, 0x1e, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(ifpga.ifpga_ctrl, 0x1f, 1, hwBits(8), HOST_READ_WRITE, false)
+REG_V2(SignalForwardingAdapter.SFA_FORWARD_EN, 0x20, 4, hwBits(32), HOST_READ_WRITE, false)
+#endif
+
+
+
+
+#ifdef CHECKSUM
+#define CHECKSUM_PRESENT 1
+CHECKSUM("6298fff7a34833e47c30e1a7e9488619bd26aa97f76d84561b482c1c695bc667")
+#endif
+
+
+
+
+#ifdef CAPABILITY
+#define CAPABILITY_PRESENT 1
+CAPABILITY(MAX3REV, MAX3REVA)
+CAPABILITY(MAX3RAM, DDR3_24GB)
+CAPABILITY(MAX3FPGA, SXT475_2ES)
+#endif
+
+#ifdef DEFINE_DESIGN_NAME
+#define DESIGN_NAME MatrixVector
+#endif /* DEFINE_DESIGN_NAME */
+
+#ifndef SLIC_NO_DECLARATIONS
+/**\file */
+#ifndef SLIC_DECLARATIONS_MatrixVector_H
+#define SLIC_DECLARATIONS_MatrixVector_H
+#include "MaxSLiCInterface.h"
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+#define MatrixVector_PCIE_ALIGNMENT (16)
+#define MatrixVector_N (4)
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+
+/**
+ * \brief Basic static function for the interface 'default'.
+ * 
+ * \param [in] instream_inMat The stream should be of size 64 bytes.
+ * \param [in] instream_inVec The stream should be of size 16 bytes.
+ * \param [out] outstream_output The stream should be of size 16 bytes.
+ */
+void MatrixVector(
+	const float *instream_inMat,
+	const float *instream_inVec,
+	float *outstream_output);
+
+/**
+ * \brief Basic static non-blocking function for the interface 'default'.
+ * 
+ * Schedule to run on an engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ * 
+ * 
+ * \param [in] instream_inMat The stream should be of size 64 bytes.
+ * \param [in] instream_inVec The stream should be of size 16 bytes.
+ * \param [out] outstream_output The stream should be of size 16 bytes.
+ * \return A handle on the execution status, or NULL in case of error.
+ */
+max_run_t *MatrixVector_nonblock(
+	const float *instream_inMat,
+	const float *instream_inVec,
+	float *outstream_output);
+
+/**
+ * \brief Advanced static interface, structure for the engine interface 'default'
+ * 
+ */
+typedef struct { 
+	const float *instream_inMat; /**<  [in] The stream should be of size 64 bytes. */
+	const float *instream_inVec; /**<  [in] The stream should be of size 16 bytes. */
+	float *outstream_output; /**<  [out] The stream should be of size 16 bytes. */
+} MatrixVector_actions_t;
+
+/**
+ * \brief Advanced static function for the interface 'default'.
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in,out] interface_actions Actions to be executed.
+ */
+void MatrixVector_run(
+	max_engine_t *engine,
+	MatrixVector_actions_t *interface_actions);
+
+/**
+ * \brief Advanced static non-blocking function for the interface 'default'.
+ *
+ * Schedule the actions to run on the engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in] interface_actions Actions to be executed.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *MatrixVector_run_nonblock(
+	max_engine_t *engine,
+	MatrixVector_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void MatrixVector_run_group(max_group_t *group, MatrixVector_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *MatrixVector_run_group_nonblock(max_group_t *group, MatrixVector_actions_t *interface_actions);
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void MatrixVector_run_array(max_engarray_t *engarray, MatrixVector_actions_t *interface_actions[]);
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *MatrixVector_run_array_nonblock(max_engarray_t *engarray, MatrixVector_actions_t *interface_actions[]);
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* MatrixVector_convert(max_file_t *maxfile, MatrixVector_actions_t *interface_actions);
+
+/**
+ * \brief Initialise a maxfile.
+ */
+max_file_t* MatrixVector_init(void);
+
+/* Error handling functions */
+int MatrixVector_has_errors(void);
+const char* MatrixVector_get_errors(void);
+void MatrixVector_clear_errors(void);
+/* Free statically allocated maxfile data */
+void MatrixVector_free(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int MatrixVector_simulator_start(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int MatrixVector_simulator_stop(void);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* SLIC_DECLARATIONS_MatrixVector_H */
+
+#endif /* SLIC_NO_DECLARATIONS */
+
+#ifdef PHOTON_NODE_DATA
+#define PHOTON_NODE_DATA_PRESENT 1
+PHOTON_NODE_DATA(MatrixVectorKernel, 83, NodeInputMappedReg, "Scalar input (io_output_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 84, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 0, NodeInputMappedReg, "Scalar input (io_inMat_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 1, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 2, NodeInput, "Input(inMat)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 27, NodeSlice, "[415:384]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 28, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 35, NodeInputMappedReg, "Scalar input (io_inVec_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 36, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 37, NodeInput, "Input(inVec)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 38, NodeSlice, "[31:0]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 39, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 74, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 29, NodeSlice, "[447:416]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 30, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 40, NodeSlice, "[63:32]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 41, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 76, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 77, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 31, NodeSlice, "[479:448]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 32, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 42, NodeSlice, "[95:64]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 43, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 78, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 106, NodeFIFO, "FIFO(12)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 79, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 33, NodeSlice, "[511:480]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 34, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 44, NodeSlice, "[127:96]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 45, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:24)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 80, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 107, NodeFIFO, "FIFO(24)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 81, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 92, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 19, NodeSlice, "[287:256]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 20, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 65, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 21, NodeSlice, "[319:288]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 22, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 67, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 68, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 23, NodeSlice, "[351:320]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 24, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 69, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 108, NodeFIFO, "FIFO(12)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 70, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 25, NodeSlice, "[383:352]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 26, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 71, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 109, NodeFIFO, "FIFO(24)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 72, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 90, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 11, NodeSlice, "[159:128]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 12, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 56, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 13, NodeSlice, "[191:160]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 14, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 58, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 59, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 15, NodeSlice, "[223:192]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 16, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 60, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 110, NodeFIFO, "FIFO(12)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 61, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 17, NodeSlice, "[255:224]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 18, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 62, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 111, NodeFIFO, "FIFO(24)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 63, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 88, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 3, NodeSlice, "[31:0]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 4, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 47, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 5, NodeSlice, "[63:32]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 6, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 49, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 50, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 7, NodeSlice, "[95:64]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 8, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 51, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 112, NodeFIFO, "FIFO(12)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 52, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 9, NodeSlice, "[127:96]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 10, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:23)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 53, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 113, NodeFIFO, "FIFO(24)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 54, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:876)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:34)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 87, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 89, NodeCat, "@", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 91, NodeCat, "@", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 93, NodeCat, "@", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 86, NodeOutput, "Output(output)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\nmatrixvector.MatrixVectorKernel.<init>(MatrixVectorKernel.maxj:39)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:19)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 98, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 115, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 95, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 96, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 97, NodeStreamOffset, "stream offset: 1", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 99, NodeOutputMappedReg, "Scalar output (current_run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 114, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 101, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 102, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 104, NodeInputMappedReg, "Scalar input (run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 105, NodeEq, "==", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+PHOTON_NODE_DATA(MatrixVectorKernel, 103, NodeFlush, "flush on trigger", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\nmatrixvector.MatrixVectorManager.main(MatrixVectorManager.maxj:24)\n")
+#endif
+
+#ifdef SLIC_USE_DEFINITIONS
+#include <stdio.h>
+#include <math.h>
+#include <pthread.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+static max_file_t *stored_maxfile = NULL;
+static max_engine_t *stored_engine = NULL;
+static char *stored_error = NULL;
+static int stored_has_error = 0;
+static pthread_once_t slic_bs_is_initialised = PTHREAD_ONCE_INIT;
+
+static void set_error(const char *error_str)
+{
+	stored_has_error = 1; 
+	if(stored_error == NULL) {
+		stored_error = strdup(error_str);
+	} else {
+		char *nerr = malloc(strlen(stored_error) + strlen(error_str) + 2);
+		sprintf(nerr, "%s\n%s", stored_error, error_str);
+		free(stored_error);
+		stored_error = nerr;
+	}
+}
+static void set_error_and_free(char *error_str){
+	set_error(error_str);
+	free(error_str);
+}
+int MatrixVector_has_errors(void)
+{	return stored_has_error; }
+const char* MatrixVector_get_errors(void)
+{	return stored_error; }
+void MatrixVector_clear_errors(void)
+{
+	free(stored_error);
+	stored_error = NULL;
+	stored_has_error = 0;
+}
+
+static char MatrixVector_use_simulation[16];
+static void MatrixVector_def_use_simulation(void)
+{
+	long pid = ((long) getpid()) % 100000;
+	snprintf(MatrixVector_use_simulation, 16, "MatrixVe_%05ld_", pid);
+}
+static const char *MatrixVector_check_use_simulation(void)
+{
+	MatrixVector_def_use_simulation();
+	const char *use_sim = max_config_get_string(MAX_CONFIG_USE_SIMULATION);
+	if (use_sim == NULL) {
+		use_sim = MatrixVector_use_simulation;
+		max_config_set_string(MAX_CONFIG_USE_SIMULATION, use_sim);
+	}
+	return use_sim;
+}
+
+static int MatrixVector_simulation_launch = 0;
+int MatrixVector_simulator_start(void)
+{
+	int retval = 0;
+	const char *use_sim = MatrixVector_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX3424A -S simutils restart", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		if (strstr(buff, "Error")) {
+			set_error(buff);
+			retval = -1;
+		}
+	}
+	pclose(pipe_fp);
+	return retval;
+}
+
+int MatrixVector_simulator_stop(void)
+{
+	const char *use_sim = MatrixVector_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX3424A -S simutils stop", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		;
+	}
+	pclose(pipe_fp);
+	return 0;
+}
+
+static void MatrixVector_static_init(void) 
+{
+	stored_maxfile = MatrixVector_init();
+	if (stored_maxfile == NULL || !max_ok(stored_maxfile->errors)) {
+		stored_maxfile = NULL;
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) abort();
+		else { set_error("Unable to load maxfile"); return; }
+	}
+	if(!max_ok(max_global_errors())) {
+		set_error_and_free(max_errors_trace(max_global_errors()));
+		return;
+	}
+	if(!max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR))
+		max_errors_mode(stored_maxfile->errors, 0);
+	time_t timeout_previous = max_load_timeout(stored_maxfile, 30);
+	const char *use_sim = MatrixVector_check_use_simulation();
+	if (max_ping_daemon(stored_maxfile, use_sim) == 0) {
+		int sim_stat = MatrixVector_simulator_start();
+		if ((sim_stat == 0) && (max_ping_daemon(stored_maxfile, use_sim) == 1)) {
+			MatrixVector_simulation_launch = 1;
+		} else {
+			set_error("Error: An error occurred while trying to start the simulation infrastructure automatically.");
+			set_error("Error: Check that 'use_simulation=<simulator_name>' is set correctly in your SLiC configuration");
+			set_error("Error: and that the associated simulated system daemon is running.");
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		}
+	}
+	stored_engine = max_load(stored_maxfile, "*");
+	if (!max_ok(stored_maxfile->errors)) {
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) {
+			fprintf(stderr, "\nUnable to load engine: aborting now.\n\n");
+			fflush(stderr);
+			abort();
+		} else {
+			set_error_and_free(max_errors_trace(stored_maxfile->errors));
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		} 
+	} 
+	max_load_timeout(stored_maxfile, timeout_previous);
+}
+void MatrixVector_free(void)
+{
+	if (stored_engine != NULL) {
+		max_unload(stored_engine);
+		stored_engine = NULL;
+	}
+	if (stored_maxfile != NULL) {
+		max_file_free(stored_maxfile);
+		stored_maxfile = NULL;
+	}
+	if (stored_error != NULL) {
+		free(stored_error);
+		stored_error = NULL;
+	}
+	if (MatrixVector_simulation_launch == 1) {
+		int sim_stat = MatrixVector_simulator_stop();
+		if (sim_stat != 0 ) {
+			fprintf(stderr, "Error stopping simulator.");
+		}
+		MatrixVector_simulation_launch = 0;
+	}
+}
+
+static int MatrixVector_get_pcie_alignment(void)
+{
+#ifdef MatrixVector_PCIE_ALIGNMENT
+	return ((MatrixVector_PCIE_ALIGNMENT < 1) ? 16 : MatrixVector_PCIE_ALIGNMENT);
+#else
+	return 16;
+#endif
+}
+
+static int MatrixVector_check_aligned(const void *data)
+{
+	uintptr_t pointer = (uintptr_t) data;
+	int alignment = MatrixVector_get_pcie_alignment();
+	return (pointer % alignment) ? 1 : 0;
+}
+
+static void *MatrixVector_malloc_aligned(const size_t size)
+{
+	void *ptr;
+	int alignment = MatrixVector_get_pcie_alignment();
+	posix_memalign(&ptr, alignment, size);
+	return ptr;
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+#define CHECK_ERRORS_ST(ST, RET) if(!max_ok(ST->errors)) { if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n", max_errors_trace(ST->errors)); abort(); } set_error_and_free(max_errors_trace(ST->errors)); return RET; } 
+#define CHECK_NULL(VALUE, MESSAGE, RET) if(VALUE == NULL) { if (max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n%s\n", (stored_error == NULL) ? "" : stored_error, MESSAGE); abort(); } set_error(MESSAGE); return RET; }
+
+ 
+typedef struct MatrixVector_callback_stream {
+	uint8_t *user_ptr;
+	uint8_t *aligned_ptr;
+	size_t   size;
+	int      is_output;
+} MatrixVector_callback_stream_t;
+
+typedef struct MatrixVector_callback_data {
+	MatrixVector_callback_stream_t stream[3]; 
+	int count;
+	int max_count;
+} MatrixVector_callback_data_t;
+
+static void MatrixVector_callback_internal(void *cb_data)
+{
+	MatrixVector_callback_data_t *data = (MatrixVector_callback_data_t*) cb_data;
+	for (int i = 0 ; i < data->count ; i++ ) {
+		MatrixVector_callback_stream_t *s = &data->stream[i];
+		if (s->is_output && (s->size > 0)) {
+			memcpy(s->user_ptr, s->aligned_ptr, s->size);
+		}
+		free(s->aligned_ptr);
+	}
+	free(data);
+}
+
+static max_actions_t* MatrixVector_convert_internal(
+	max_file_t *maxfile,
+	MatrixVector_actions_t *interface_actions,
+	int  is_internal_call,
+	void (**callback_func)(void*),
+	void **callback_data)
+{
+	max_actions_t *actions = max_actions_init(maxfile, NULL);
+	if(actions == NULL) return NULL;
+
+#define CHECK_ERRORS if(!max_ok(actions->errors)) { set_error_and_free(max_errors_trace(actions->errors)); return NULL; } 
+
+	MatrixVector_callback_data_t *cb_data = NULL;
+	int use_callback = (callback_func != NULL) && (callback_data != NULL);
+	if (use_callback) {
+		cb_data = malloc(sizeof(MatrixVector_callback_data_t));
+		if (cb_data == NULL) {
+			fprintf(stderr, "Unable to allocate memory for stream callback data in function MatrixVector_convert_internal\n");
+			return NULL;
+		}
+		cb_data->max_count = 3;
+		cb_data->count     = 0;
+		*callback_data     = cb_data;
+		*callback_func     = &MatrixVector_callback_internal;
+	}
+
+	/* code for scalar MatrixVectorKernel.run_cycle_count */
+	uint64_t ticks_MatrixVectorKernel = 1;
+	max_set_ticks(actions, "MatrixVectorKernel", 1);
+	CHECK_ERRORS;
+	/* end of code for scalar MatrixVectorKernel.run_cycle_count*/
+	
+	/* code for stream inMat */
+	size_t instream_size_inMat = 64;
+	if (instream_size_inMat > 0) {
+		const float *stream_ptr = interface_actions->instream_inMat;
+		if (use_callback && (1 == MatrixVector_check_aligned(interface_actions->instream_inMat))) {
+			float *aligned_instream_inMat = malloc(instream_size_inMat);
+			if (aligned_instream_inMat == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'inMat'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_inMat;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_inMat;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_inMat;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_inMat, interface_actions->instream_inMat, instream_size_inMat);
+			stream_ptr = aligned_instream_inMat;
+		}
+		max_queue_input(actions, "inMat", stream_ptr, instream_size_inMat);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream inMat */
+	
+	/* code for stream inVec */
+	size_t instream_size_inVec = 16;
+	if (instream_size_inVec > 0) {
+		const float *stream_ptr = interface_actions->instream_inVec;
+		if (use_callback && (1 == MatrixVector_check_aligned(interface_actions->instream_inVec))) {
+			float *aligned_instream_inVec = malloc(instream_size_inVec);
+			if (aligned_instream_inVec == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'inVec'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_inVec;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_inVec;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_inVec;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_inVec, interface_actions->instream_inVec, instream_size_inVec);
+			stream_ptr = aligned_instream_inVec;
+		}
+		max_queue_input(actions, "inVec", stream_ptr, instream_size_inVec);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream inVec */
+	
+	/* code for stream output */
+	size_t outstream_size_output = 16;
+	if (outstream_size_output > 0) {
+		float *stream_ptr = interface_actions->outstream_output;
+		if (use_callback && (1 == MatrixVector_check_aligned(interface_actions->outstream_output))) {
+			float *aligned_outstream_output = malloc(outstream_size_output);
+			if (aligned_outstream_output == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'output'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->outstream_output;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_outstream_output;
+			(&cb_data->stream[cb_data->count])->size        = outstream_size_output;
+			(&cb_data->stream[cb_data->count])->is_output   = 1;
+			cb_data->count += 1;
+			stream_ptr = aligned_outstream_output;
+		}
+		max_queue_output(actions, "output", stream_ptr, outstream_size_output);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream output */
+	
+	if (use_callback && cb_data->count == 0) {
+		*callback_data = NULL;
+		*callback_func = NULL;
+		free(cb_data);
+	}
+	return actions;
+#undef CHECK_ERRORS
+}
+
+void MatrixVector(
+	const float *instream_inMat,
+	const float *instream_inVec,
+	float *outstream_output)
+{
+	(void) pthread_once(&slic_bs_is_initialised, MatrixVector_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", );
+	max_run_t *run = MatrixVector_nonblock(instream_inMat, instream_inVec, outstream_output);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *MatrixVector_nonblock(
+	const float *instream_inMat,
+	const float *instream_inVec,
+	float *outstream_output)
+{
+	MatrixVector_actions_t interface_actions;
+	interface_actions.instream_inMat = instream_inMat;
+	interface_actions.instream_inVec = instream_inVec;
+	interface_actions.outstream_output = outstream_output;
+	(void) pthread_once(&slic_bs_is_initialised, MatrixVector_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", NULL);
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = MatrixVector_convert_internal(stored_maxfile, &interface_actions, 1, &cb_func, &cb_data);
+	CHECK_NULL(actions, "Unable to build actions", NULL);
+	max_validate(actions);
+	CHECK_ERRORS_ST(actions, NULL);
+	CHECK_ERRORS_ST(stored_engine, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(stored_engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(stored_engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+void MatrixVector_run(
+	max_engine_t *engine,
+	MatrixVector_actions_t *interface_actions)
+{
+	max_run_t *run = MatrixVector_run_nonblock(engine, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *MatrixVector_run_nonblock(
+	max_engine_t *engine,
+	MatrixVector_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_engine_get_max_file(engine); 
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = MatrixVector_convert_internal(maxfile, interface_actions, 1, &cb_func, &cb_data);
+	CHECK_NULL(actions, "Unable to build actions", NULL);
+	max_validate(actions);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void MatrixVector_run_group(max_group_t *group, MatrixVector_actions_t *interface_actions)
+{
+	max_run_t *run = MatrixVector_run_group_nonblock(group, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *MatrixVector_run_group_nonblock(max_group_t *group, MatrixVector_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_group_get_max_file(group);
+	max_actions_t *actions = MatrixVector_convert_internal(maxfile, interface_actions, 1, NULL, NULL);
+	if(actions == NULL) return NULL;
+	if(!max_ok(actions->errors)) return NULL;
+	max_validate(actions);
+	max_run_t *run = max_run_group_nonblock(group, actions);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void MatrixVector_run_array(max_engarray_t *engarray, MatrixVector_actions_t *interface_actions[])
+{
+	max_run_t *run = MatrixVector_run_array_nonblock(engarray, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *MatrixVector_run_array_nonblock(max_engarray_t *engarray, MatrixVector_actions_t *interface_actions[])
+{
+	max_file_t *maxfile = max_engarray_get_max_file(engarray, 0);
+	int i;
+	max_actarray_t *actarray = max_actarray_init(maxfile, engarray->size);
+	if (actarray == NULL) return NULL;
+	max_actions_t **arr_actions = malloc(engarray->size * sizeof(max_actions_t*));
+	for ( i = 0 ; i < actarray->size; i++ ) {
+		max_actions_t *actions = MatrixVector_convert_internal(maxfile, interface_actions[i], 1, NULL, NULL);
+		if (actions == NULL) return NULL;
+		arr_actions[i] = actions;
+		max_set_action(actarray, i, actions);
+	}
+	max_run_t *run = max_run_array_nonblock(engarray, actarray);
+	for ( i = 0 ; i < actarray->size ; i++ ) { max_actions_free(arr_actions[i]); }
+	max_actarray_free(actarray);
+	free(arr_actions);
+	return run;
+}
+
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* MatrixVector_convert(max_file_t *maxfile, MatrixVector_actions_t *interface_actions)
+{
+	return MatrixVector_convert_internal(maxfile, interface_actions, 0, NULL, NULL);
+}
+
+#undef CHECK_ERRORS_ST
+#undef CHECK_NULL
+
+
+
+#endif /* SLIC_USE_DEFINITIONS */
+
+#ifdef SLIC_DYNAMIC_CODE
+SLIC_MODE_START(default)	
+SLIC_SET_TICKS(MatrixVectorKernel, 1)	
+SLIC_STREAM(inMat, 64)	
+SLIC_STREAM(inVec, 16)	
+SLIC_STREAM(output, 16)	
+SLIC_MODE_END(default)
+
+#endif /* SLIC_DYNAMIC_CODE */
+
+#ifdef SKIN_META_DATA
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PG1h
+eGZpbGUgZm9ybWF0LXZlcnNpb249IjIwMTIwMjAwIiBoZWFkZXI9Ik1hdHJpeFZlY3Rvci5oIiBu
+YW1lPSJNYXRyaXhWZWN0b3IiPjxjb25zdGFudCBuYW1lPSJQQ0lFX0FMSUdOTUVOVCIgdHlwZT0i
+bG9uZyIgdmFsdWU9IjE2Ii8+PGNvbnN0YW50IG5hbWU9Ik4iIHR5cGU9ImxvbmciIHZhbHVlPSI0
+Ii8+PGVuZ2luZW1vZGUgbmFtZT0iZGVmYXVsdCI+PGZ1bmN0aW9uIG5hbWU9Ik1hdHJpeFZlY3Rv
+ciIgcmV0dXJuLXZhbHVlPSJ2b2lkIj48YXJyYXkgZGVzYz0iVGhlIHN0cmVhbSBzaG91bGQgYmUg
+b2Ygc2l6ZSA2NCBieXRlcy4iIGRpcmVjdGlvbj0iSW5wdXQiIG5hbWU9Imluc3RyZWFtX2luTWF0
+IiBzaXplPSI2NCIgdHJhbnNwb3NlPSJ0cnVlIiB0eXBlPSJmbG9hdCI+PGRpbWVuc2lvbiBpbmRl
+eD0iMCI+PGxlbmd0aD48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBvcGVyYXRvcj0i
+LyIgdmFsdWU9Iig2NCAvIDQpIj48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iNjQiLz48Y29uc3RhbnRW
+YWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PC9sZW5n
+dGg+PC9kaW1lbnNpb24+PC9hcnJheT48YXJyYXkgZGVzYz0iVGhlIHN0cmVhbSBzaG91bGQgYmUg
+b2Ygc2l6ZSAxNiBieXRlcy4iIGRpcmVjdGlvbj0iSW5wdXQiIG5hbWU9Imluc3RyZWFtX2luVmVj
+IiBzaXplPSIxNiIgdHJhbnNwb3NlPSJ0cnVlIiB0eXBlPSJmbG9hdCI+PGRpbWVuc2lvbiBpbmRl
+eD0iMCI+PGxlbmd0aD48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBvcGVyYXRvcj0i
+LyIgdmFsdWU9IigxNiAvIDQpIj48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iMTYiLz48Y29uc3RhbnRW
+YWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PC9sZW5n
+dGg+PC9kaW1lbnNpb24+PC9hcnJheT48YXJyYXkgZGVzYz0iVGhlIHN0cmVhbSBzaG91bGQgYmUg
+b2Ygc2l6ZSAxNiBieXRlcy4iIGRpcmVjdGlvbj0iT3V0cHV0IiBuYW1lPSJvdXRzdHJlYW1fb3V0
+cHV0IiBzaXplPSIxNiIgdHJhbnNwb3NlPSJ0cnVlIiB0eXBlPSJmbG9hdCI+PGRpbWVuc2lvbiBp
+bmRleD0iMCI+PGxlbmd0aD48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBvcGVyYXRv
+cj0iLyIgdmFsdWU9IigxNiAvIDQpIj48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iMTYiLz48Y29uc3Rh
+bnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PC9s
+ZW5ndGg+PC9kaW1lbnNpb24+PC9hcnJheT48L2Z1bmN0aW9uPjwvZW5naW5lbW9kZT48L21heGZp
+bGU+
+#endif /* SKIN_META_DATA */
+
+#ifdef SLIC_B64_DEFINITIONS
+I2luY2x1ZGUgPHN0ZGlvLmg+CiNpbmNsdWRlIDxtYXRoLmg+CiNpbmNsdWRlIDxwdGhyZWFkLmg+
+CiNpbmNsdWRlIDxzdHJpbmcuaD4KI2luY2x1ZGUgPHVuaXN0ZC5oPgojaW5jbHVkZSA8c3RkbGli
+Lmg+CnN0YXRpYyBtYXhfZmlsZV90ICpzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7CnN0YXRpYyBtYXhf
+ZW5naW5lX3QgKnN0b3JlZF9lbmdpbmUgPSBOVUxMOwpzdGF0aWMgY2hhciAqc3RvcmVkX2Vycm9y
+ID0gTlVMTDsKc3RhdGljIGludCBzdG9yZWRfaGFzX2Vycm9yID0gMDsKc3RhdGljIHB0aHJlYWRf
+b25jZV90IHNsaWNfYnNfaXNfaW5pdGlhbGlzZWQgPSBQVEhSRUFEX09OQ0VfSU5JVDsKCnN0YXRp
+YyB2b2lkIHNldF9lcnJvcihjb25zdCBjaGFyICplcnJvcl9zdHIpCnsKCXN0b3JlZF9oYXNfZXJy
+b3IgPSAxOyAKCWlmKHN0b3JlZF9lcnJvciA9PSBOVUxMKSB7CgkJc3RvcmVkX2Vycm9yID0gc3Ry
+ZHVwKGVycm9yX3N0cik7Cgl9IGVsc2UgewoJCWNoYXIgKm5lcnIgPSBtYWxsb2Moc3RybGVuKHN0
+b3JlZF9lcnJvcikgKyBzdHJsZW4oZXJyb3Jfc3RyKSArIDIpOwoJCXNwcmludGYobmVyciwgIiVz
+XG4lcyIsIHN0b3JlZF9lcnJvciwgZXJyb3Jfc3RyKTsKCQlmcmVlKHN0b3JlZF9lcnJvcik7CgkJ
+c3RvcmVkX2Vycm9yID0gbmVycjsKCX0KfQpzdGF0aWMgdm9pZCBzZXRfZXJyb3JfYW5kX2ZyZWUo
+Y2hhciAqZXJyb3Jfc3RyKXsKCXNldF9lcnJvcihlcnJvcl9zdHIpOwoJZnJlZShlcnJvcl9zdHIp
+Owp9CmludCBNYXRyaXhWZWN0b3JfaGFzX2Vycm9ycyh2b2lkKQp7CXJldHVybiBzdG9yZWRfaGFz
+X2Vycm9yOyB9CmNvbnN0IGNoYXIqIE1hdHJpeFZlY3Rvcl9nZXRfZXJyb3JzKHZvaWQpCnsJcmV0
+dXJuIHN0b3JlZF9lcnJvcjsgfQp2b2lkIE1hdHJpeFZlY3Rvcl9jbGVhcl9lcnJvcnModm9pZCkK
+ewoJZnJlZShzdG9yZWRfZXJyb3IpOwoJc3RvcmVkX2Vycm9yID0gTlVMTDsKCXN0b3JlZF9oYXNf
+ZXJyb3IgPSAwOwp9CgpzdGF0aWMgY2hhciBNYXRyaXhWZWN0b3JfdXNlX3NpbXVsYXRpb25bMTZd
+OwpzdGF0aWMgdm9pZCBNYXRyaXhWZWN0b3JfZGVmX3VzZV9zaW11bGF0aW9uKHZvaWQpCnsKCWxv
+bmcgcGlkID0gKChsb25nKSBnZXRwaWQoKSkgJSAxMDAwMDA7CglzbnByaW50ZihNYXRyaXhWZWN0
+b3JfdXNlX3NpbXVsYXRpb24sIDE2LCAiTWF0cml4VmVfJTA1bGRfIiwgcGlkKTsKfQpzdGF0aWMg
+Y29uc3QgY2hhciAqTWF0cml4VmVjdG9yX2NoZWNrX3VzZV9zaW11bGF0aW9uKHZvaWQpCnsKCU1h
+dHJpeFZlY3Rvcl9kZWZfdXNlX3NpbXVsYXRpb24oKTsKCWNvbnN0IGNoYXIgKnVzZV9zaW0gPSBt
+YXhfY29uZmlnX2dldF9zdHJpbmcoTUFYX0NPTkZJR19VU0VfU0lNVUxBVElPTik7CglpZiAodXNl
+X3NpbSA9PSBOVUxMKSB7CgkJdXNlX3NpbSA9IE1hdHJpeFZlY3Rvcl91c2Vfc2ltdWxhdGlvbjsK
+CQltYXhfY29uZmlnX3NldF9zdHJpbmcoTUFYX0NPTkZJR19VU0VfU0lNVUxBVElPTiwgdXNlX3Np
+bSk7Cgl9CglyZXR1cm4gdXNlX3NpbTsKfQoKc3RhdGljIGludCBNYXRyaXhWZWN0b3Jfc2ltdWxh
+dGlvbl9sYXVuY2ggPSAwOwppbnQgTWF0cml4VmVjdG9yX3NpbXVsYXRvcl9zdGFydCh2b2lkKQp7
+CglpbnQgcmV0dmFsID0gMDsKCWNvbnN0IGNoYXIgKnVzZV9zaW0gPSBNYXRyaXhWZWN0b3JfY2hl
+Y2tfdXNlX3NpbXVsYXRpb24oKTsKCWNoYXIgYnVmZlsxMDI0XTsKCXNucHJpbnRmKGJ1ZmYsIDEw
+MjQsICJQQVRIPXNpbXV0aWxzOiRQQVRIIG1heGNvbXBpbGVyc2ltIC1kIDEgLW4gJXMgLWMgTUFY
+MzQyNEEgLVMgc2ltdXRpbHMgcmVzdGFydCIsIHVzZV9zaW0pOwoJRklMRSAqcGlwZV9mcCA9IHBv
+cGVuKGJ1ZmYsICJyIik7CglpZiAocGlwZV9mcCA9PSBOVUxMKSB7CgkJc3RybmNhdChidWZmLCAi
+IDogZmFpbGVkIHRvIGV4ZWN1dGUuIiwgKDEwMjQgLSBzdHJsZW4oYnVmZikpKTsKCQlzZXRfZXJy
+b3IoYnVmZik7CgkJcmV0dXJuIC0xOwoJfQoJd2hpbGUgKGZnZXRzKGJ1ZmYsIDEwMjQsIHBpcGVf
+ZnApICE9IE5VTEwpIHsKCQkvKiBVbmNvbW1lbnQgdGhpcyB0byBnZXQgc2ltdWxhdG9yIGNvbW1h
+bmQgb3V0cHV0ICovCgkJLyogZnByaW50ZihzdGRlcnIsIGJ1ZmYpOyAqLwoJCWlmIChzdHJzdHIo
+YnVmZiwgIkVycm9yIikpIHsKCQkJc2V0X2Vycm9yKGJ1ZmYpOwoJCQlyZXR2YWwgPSAtMTsKCQl9
+Cgl9CglwY2xvc2UocGlwZV9mcCk7CglyZXR1cm4gcmV0dmFsOwp9CgppbnQgTWF0cml4VmVjdG9y
+X3NpbXVsYXRvcl9zdG9wKHZvaWQpCnsKCWNvbnN0IGNoYXIgKnVzZV9zaW0gPSBNYXRyaXhWZWN0
+b3JfY2hlY2tfdXNlX3NpbXVsYXRpb24oKTsKCWNoYXIgYnVmZlsxMDI0XTsKCXNucHJpbnRmKGJ1
+ZmYsIDEwMjQsICJQQVRIPXNpbXV0aWxzOiRQQVRIIG1heGNvbXBpbGVyc2ltIC1kIDEgLW4gJXMg
+LWMgTUFYMzQyNEEgLVMgc2ltdXRpbHMgc3RvcCIsIHVzZV9zaW0pOwoJRklMRSAqcGlwZV9mcCA9
+IHBvcGVuKGJ1ZmYsICJyIik7CglpZiAocGlwZV9mcCA9PSBOVUxMKSB7CgkJc3RybmNhdChidWZm
+LCAiIDogZmFpbGVkIHRvIGV4ZWN1dGUuIiwgKDEwMjQgLSBzdHJsZW4oYnVmZikpKTsKCQlzZXRf
+ZXJyb3IoYnVmZik7CgkJcmV0dXJuIC0xOwoJfQoJd2hpbGUgKGZnZXRzKGJ1ZmYsIDEwMjQsIHBp
+cGVfZnApICE9IE5VTEwpIHsKCQkvKiBVbmNvbW1lbnQgdGhpcyB0byBnZXQgc2ltdWxhdG9yIGNv
+bW1hbmQgb3V0cHV0ICovCgkJLyogZnByaW50ZihzdGRlcnIsIGJ1ZmYpOyAqLwoJCTsKCX0KCXBj
+bG9zZShwaXBlX2ZwKTsKCXJldHVybiAwOwp9CgpzdGF0aWMgdm9pZCBNYXRyaXhWZWN0b3Jfc3Rh
+dGljX2luaXQodm9pZCkgCnsKCXN0b3JlZF9tYXhmaWxlID0gTWF0cml4VmVjdG9yX2luaXQoKTsK
+CWlmIChzdG9yZWRfbWF4ZmlsZSA9PSBOVUxMIHx8ICFtYXhfb2soc3RvcmVkX21heGZpbGUtPmVy
+cm9ycykpIHsKCQlzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7CgkJaWYobWF4X2NvbmZpZ19nZXRfYm9v
+bChNQVhfQ09ORklHX1NUQVRJQ19JTlRFUkZBQ0VfQUJPUlRfT05fRVJST1IpKSBhYm9ydCgpOwoJ
+CWVsc2UgeyBzZXRfZXJyb3IoIlVuYWJsZSB0byBsb2FkIG1heGZpbGUiKTsgcmV0dXJuOyB9Cgl9
+CglpZighbWF4X29rKG1heF9nbG9iYWxfZXJyb3JzKCkpKSB7CgkJc2V0X2Vycm9yX2FuZF9mcmVl
+KG1heF9lcnJvcnNfdHJhY2UobWF4X2dsb2JhbF9lcnJvcnMoKSkpOwoJCXJldHVybjsKCX0KCWlm
+KCFtYXhfY29uZmlnX2dldF9ib29sKE1BWF9DT05GSUdfU1RBVElDX0lOVEVSRkFDRV9BQk9SVF9P
+Tl9FUlJPUikpCgkJbWF4X2Vycm9yc19tb2RlKHN0b3JlZF9tYXhmaWxlLT5lcnJvcnMsIDApOwoJ
+dGltZV90IHRpbWVvdXRfcHJldmlvdXMgPSBtYXhfbG9hZF90aW1lb3V0KHN0b3JlZF9tYXhmaWxl
+LCAzMCk7Cgljb25zdCBjaGFyICp1c2Vfc2ltID0gTWF0cml4VmVjdG9yX2NoZWNrX3VzZV9zaW11
+bGF0aW9uKCk7CglpZiAobWF4X3BpbmdfZGFlbW9uKHN0b3JlZF9tYXhmaWxlLCB1c2Vfc2ltKSA9
+PSAwKSB7CgkJaW50IHNpbV9zdGF0ID0gTWF0cml4VmVjdG9yX3NpbXVsYXRvcl9zdGFydCgpOwoJ
+CWlmICgoc2ltX3N0YXQgPT0gMCkgJiYgKG1heF9waW5nX2RhZW1vbihzdG9yZWRfbWF4ZmlsZSwg
+dXNlX3NpbSkgPT0gMSkpIHsKCQkJTWF0cml4VmVjdG9yX3NpbXVsYXRpb25fbGF1bmNoID0gMTsK
+CQl9IGVsc2UgewoJCQlzZXRfZXJyb3IoIkVycm9yOiBBbiBlcnJvciBvY2N1cnJlZCB3aGlsZSB0
+cnlpbmcgdG8gc3RhcnQgdGhlIHNpbXVsYXRpb24gaW5mcmFzdHJ1Y3R1cmUgYXV0b21hdGljYWxs
+eS4iKTsKCQkJc2V0X2Vycm9yKCJFcnJvcjogQ2hlY2sgdGhhdCAndXNlX3NpbXVsYXRpb249PHNp
+bXVsYXRvcl9uYW1lPicgaXMgc2V0IGNvcnJlY3RseSBpbiB5b3VyIFNMaUMgY29uZmlndXJhdGlv
+biIpOwoJCQlzZXRfZXJyb3IoIkVycm9yOiBhbmQgdGhhdCB0aGUgYXNzb2NpYXRlZCBzaW11bGF0
+ZWQgc3lzdGVtIGRhZW1vbiBpcyBydW5uaW5nLiIpOwoJCQltYXhfZmlsZV9mcmVlKHN0b3JlZF9t
+YXhmaWxlKTsKCQkJc3RvcmVkX21heGZpbGUgPSBOVUxMOwoJCQlyZXR1cm47CgkJfQoJfQoJc3Rv
+cmVkX2VuZ2luZSA9IG1heF9sb2FkKHN0b3JlZF9tYXhmaWxlLCAiKiIpOwoJaWYgKCFtYXhfb2so
+c3RvcmVkX21heGZpbGUtPmVycm9ycykpIHsKCQlpZihtYXhfY29uZmlnX2dldF9ib29sKE1BWF9D
+T05GSUdfU1RBVElDX0lOVEVSRkFDRV9BQk9SVF9PTl9FUlJPUikpIHsKCQkJZnByaW50ZihzdGRl
+cnIsICJcblVuYWJsZSB0byBsb2FkIGVuZ2luZTogYWJvcnRpbmcgbm93LlxuXG4iKTsKCQkJZmZs
+dXNoKHN0ZGVycik7CgkJCWFib3J0KCk7CgkJfSBlbHNlIHsKCQkJc2V0X2Vycm9yX2FuZF9mcmVl
+KG1heF9lcnJvcnNfdHJhY2Uoc3RvcmVkX21heGZpbGUtPmVycm9ycykpOwoJCQltYXhfZmlsZV9m
+cmVlKHN0b3JlZF9tYXhmaWxlKTsKCQkJc3RvcmVkX21heGZpbGUgPSBOVUxMOwoJCQlyZXR1cm47
+CgkJfSAKCX0gCgltYXhfbG9hZF90aW1lb3V0KHN0b3JlZF9tYXhmaWxlLCB0aW1lb3V0X3ByZXZp
+b3VzKTsKfQp2b2lkIE1hdHJpeFZlY3Rvcl9mcmVlKHZvaWQpCnsKCWlmIChzdG9yZWRfZW5naW5l
+ICE9IE5VTEwpIHsKCQltYXhfdW5sb2FkKHN0b3JlZF9lbmdpbmUpOwoJCXN0b3JlZF9lbmdpbmUg
+PSBOVUxMOwoJfQoJaWYgKHN0b3JlZF9tYXhmaWxlICE9IE5VTEwpIHsKCQltYXhfZmlsZV9mcmVl
+KHN0b3JlZF9tYXhmaWxlKTsKCQlzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7Cgl9CglpZiAoc3RvcmVk
+X2Vycm9yICE9IE5VTEwpIHsKCQlmcmVlKHN0b3JlZF9lcnJvcik7CgkJc3RvcmVkX2Vycm9yID0g
+TlVMTDsKCX0KCWlmIChNYXRyaXhWZWN0b3Jfc2ltdWxhdGlvbl9sYXVuY2ggPT0gMSkgewoJCWlu
+dCBzaW1fc3RhdCA9IE1hdHJpeFZlY3Rvcl9zaW11bGF0b3Jfc3RvcCgpOwoJCWlmIChzaW1fc3Rh
+dCAhPSAwICkgewoJCQlmcHJpbnRmKHN0ZGVyciwgIkVycm9yIHN0b3BwaW5nIHNpbXVsYXRvci4i
+KTsKCQl9CgkJTWF0cml4VmVjdG9yX3NpbXVsYXRpb25fbGF1bmNoID0gMDsKCX0KfQoKc3RhdGlj
+IGludCBNYXRyaXhWZWN0b3JfZ2V0X3BjaWVfYWxpZ25tZW50KHZvaWQpCnsKI2lmZGVmIE1hdHJp
+eFZlY3Rvcl9QQ0lFX0FMSUdOTUVOVAoJcmV0dXJuICgoTWF0cml4VmVjdG9yX1BDSUVfQUxJR05N
+RU5UIDwgMSkgPyAxNiA6IE1hdHJpeFZlY3Rvcl9QQ0lFX0FMSUdOTUVOVCk7CiNlbHNlCglyZXR1
+cm4gMTY7CiNlbmRpZgp9CgpzdGF0aWMgaW50IE1hdHJpeFZlY3Rvcl9jaGVja19hbGlnbmVkKGNv
+bnN0IHZvaWQgKmRhdGEpCnsKCXVpbnRwdHJfdCBwb2ludGVyID0gKHVpbnRwdHJfdCkgZGF0YTsK
+CWludCBhbGlnbm1lbnQgPSBNYXRyaXhWZWN0b3JfZ2V0X3BjaWVfYWxpZ25tZW50KCk7CglyZXR1
+cm4gKHBvaW50ZXIgJSBhbGlnbm1lbnQpID8gMSA6IDA7Cn0KCnN0YXRpYyB2b2lkICpNYXRyaXhW
+ZWN0b3JfbWFsbG9jX2FsaWduZWQoY29uc3Qgc2l6ZV90IHNpemUpCnsKCXZvaWQgKnB0cjsKCWlu
+dCBhbGlnbm1lbnQgPSBNYXRyaXhWZWN0b3JfZ2V0X3BjaWVfYWxpZ25tZW50KCk7Cglwb3NpeF9t
+ZW1hbGlnbigmcHRyLCBhbGlnbm1lbnQsIHNpemUpOwoJcmV0dXJuIHB0cjsKfQoKCgovKi0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0qLwovKi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gSW50ZXJmYWNl
+IGRlZmF1bHQgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwovKi0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0qLwoKCgojZGVmaW5lIENIRUNLX0VSUk9SU19TVChTVCwgUkVUKSBpZighbWF4X29rKFNU
+LT5lcnJvcnMpKSB7IGlmKG1heF9jb25maWdfZ2V0X2Jvb2woTUFYX0NPTkZJR19TVEFUSUNfSU5U
+RVJGQUNFX0FCT1JUX09OX0VSUk9SKSkgeyBmcHJpbnRmKHN0ZGVyciwgIiVzXG4iLCBtYXhfZXJy
+b3JzX3RyYWNlKFNULT5lcnJvcnMpKTsgYWJvcnQoKTsgfSBzZXRfZXJyb3JfYW5kX2ZyZWUobWF4
+X2Vycm9yc190cmFjZShTVC0+ZXJyb3JzKSk7IHJldHVybiBSRVQ7IH0gCiNkZWZpbmUgQ0hFQ0tf
+TlVMTChWQUxVRSwgTUVTU0FHRSwgUkVUKSBpZihWQUxVRSA9PSBOVUxMKSB7IGlmIChtYXhfY29u
+ZmlnX2dldF9ib29sKE1BWF9DT05GSUdfU1RBVElDX0lOVEVSRkFDRV9BQk9SVF9PTl9FUlJPUikp
+IHsgZnByaW50ZihzdGRlcnIsICIlc1xuJXNcbiIsIChzdG9yZWRfZXJyb3IgPT0gTlVMTCkgPyAi
+IiA6IHN0b3JlZF9lcnJvciwgTUVTU0FHRSk7IGFib3J0KCk7IH0gc2V0X2Vycm9yKE1FU1NBR0Up
+OyByZXR1cm4gUkVUOyB9CgogCnR5cGVkZWYgc3RydWN0IE1hdHJpeFZlY3Rvcl9jYWxsYmFja19z
+dHJlYW0gewoJdWludDhfdCAqdXNlcl9wdHI7Cgl1aW50OF90ICphbGlnbmVkX3B0cjsKCXNpemVf
+dCAgIHNpemU7CglpbnQgICAgICBpc19vdXRwdXQ7Cn0gTWF0cml4VmVjdG9yX2NhbGxiYWNrX3N0
+cmVhbV90OwoKdHlwZWRlZiBzdHJ1Y3QgTWF0cml4VmVjdG9yX2NhbGxiYWNrX2RhdGEgewoJTWF0
+cml4VmVjdG9yX2NhbGxiYWNrX3N0cmVhbV90IHN0cmVhbVszXTsgCglpbnQgY291bnQ7CglpbnQg
+bWF4X2NvdW50Owp9IE1hdHJpeFZlY3Rvcl9jYWxsYmFja19kYXRhX3Q7CgpzdGF0aWMgdm9pZCBN
+YXRyaXhWZWN0b3JfY2FsbGJhY2tfaW50ZXJuYWwodm9pZCAqY2JfZGF0YSkKewoJTWF0cml4VmVj
+dG9yX2NhbGxiYWNrX2RhdGFfdCAqZGF0YSA9IChNYXRyaXhWZWN0b3JfY2FsbGJhY2tfZGF0YV90
+KikgY2JfZGF0YTsKCWZvciAoaW50IGkgPSAwIDsgaSA8IGRhdGEtPmNvdW50IDsgaSsrICkgewoJ
+CU1hdHJpeFZlY3Rvcl9jYWxsYmFja19zdHJlYW1fdCAqcyA9ICZkYXRhLT5zdHJlYW1baV07CgkJ
+aWYgKHMtPmlzX291dHB1dCAmJiAocy0+c2l6ZSA+IDApKSB7CgkJCW1lbWNweShzLT51c2VyX3B0
+ciwgcy0+YWxpZ25lZF9wdHIsIHMtPnNpemUpOwoJCX0KCQlmcmVlKHMtPmFsaWduZWRfcHRyKTsK
+CX0KCWZyZWUoZGF0YSk7Cn0KCnN0YXRpYyBtYXhfYWN0aW9uc190KiBNYXRyaXhWZWN0b3JfY29u
+dmVydF9pbnRlcm5hbCgKCW1heF9maWxlX3QgKm1heGZpbGUsCglNYXRyaXhWZWN0b3JfYWN0aW9u
+c190ICppbnRlcmZhY2VfYWN0aW9ucywKCWludCAgaXNfaW50ZXJuYWxfY2FsbCwKCXZvaWQgKCoq
+Y2FsbGJhY2tfZnVuYykodm9pZCopLAoJdm9pZCAqKmNhbGxiYWNrX2RhdGEpCnsKCW1heF9hY3Rp
+b25zX3QgKmFjdGlvbnMgPSBtYXhfYWN0aW9uc19pbml0KG1heGZpbGUsIE5VTEwpOwoJaWYoYWN0
+aW9ucyA9PSBOVUxMKSByZXR1cm4gTlVMTDsKCiNkZWZpbmUgQ0hFQ0tfRVJST1JTIGlmKCFtYXhf
+b2soYWN0aW9ucy0+ZXJyb3JzKSkgeyBzZXRfZXJyb3JfYW5kX2ZyZWUobWF4X2Vycm9yc190cmFj
+ZShhY3Rpb25zLT5lcnJvcnMpKTsgcmV0dXJuIE5VTEw7IH0gCgoJTWF0cml4VmVjdG9yX2NhbGxi
+YWNrX2RhdGFfdCAqY2JfZGF0YSA9IE5VTEw7CglpbnQgdXNlX2NhbGxiYWNrID0gKGNhbGxiYWNr
+X2Z1bmMgIT0gTlVMTCkgJiYgKGNhbGxiYWNrX2RhdGEgIT0gTlVMTCk7CglpZiAodXNlX2NhbGxi
+YWNrKSB7CgkJY2JfZGF0YSA9IG1hbGxvYyhzaXplb2YoTWF0cml4VmVjdG9yX2NhbGxiYWNrX2Rh
+dGFfdCkpOwoJCWlmIChjYl9kYXRhID09IE5VTEwpIHsKCQkJZnByaW50ZihzdGRlcnIsICJVbmFi
+bGUgdG8gYWxsb2NhdGUgbWVtb3J5IGZvciBzdHJlYW0gY2FsbGJhY2sgZGF0YSBpbiBmdW5jdGlv
+biBNYXRyaXhWZWN0b3JfY29udmVydF9pbnRlcm5hbFxuIik7CgkJCXJldHVybiBOVUxMOwoJCX0K
+CQljYl9kYXRhLT5tYXhfY291bnQgPSAzOwoJCWNiX2RhdGEtPmNvdW50ICAgICA9IDA7CgkJKmNh
+bGxiYWNrX2RhdGEgICAgID0gY2JfZGF0YTsKCQkqY2FsbGJhY2tfZnVuYyAgICAgPSAmTWF0cml4
+VmVjdG9yX2NhbGxiYWNrX2ludGVybmFsOwoJfQoKCS8qIGNvZGUgZm9yIHNjYWxhciBNYXRyaXhW
+ZWN0b3JLZXJuZWwucnVuX2N5Y2xlX2NvdW50ICovCgl1aW50NjRfdCB0aWNrc19NYXRyaXhWZWN0
+b3JLZXJuZWwgPSAxOwoJbWF4X3NldF90aWNrcyhhY3Rpb25zLCAiTWF0cml4VmVjdG9yS2VybmVs
+IiwgMSk7CglDSEVDS19FUlJPUlM7CgkvKiBlbmQgb2YgY29kZSBmb3Igc2NhbGFyIE1hdHJpeFZl
+Y3Rvcktlcm5lbC5ydW5fY3ljbGVfY291bnQqLwoJCgkvKiBjb2RlIGZvciBzdHJlYW0gaW5NYXQg
+Ki8KCXNpemVfdCBpbnN0cmVhbV9zaXplX2luTWF0ID0gNjQ7CglpZiAoaW5zdHJlYW1fc2l6ZV9p
+bk1hdCA+IDApIHsKCQljb25zdCBmbG9hdCAqc3RyZWFtX3B0ciA9IGludGVyZmFjZV9hY3Rpb25z
+LT5pbnN0cmVhbV9pbk1hdDsKCQlpZiAodXNlX2NhbGxiYWNrICYmICgxID09IE1hdHJpeFZlY3Rv
+cl9jaGVja19hbGlnbmVkKGludGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV9pbk1hdCkpKSB7CgkJ
+CWZsb2F0ICphbGlnbmVkX2luc3RyZWFtX2luTWF0ID0gbWFsbG9jKGluc3RyZWFtX3NpemVfaW5N
+YXQpOwoJCQlpZiAoYWxpZ25lZF9pbnN0cmVhbV9pbk1hdCA9PSBOVUxMKSB7CgkJCQltYXhfcmVw
+b3J0X2Vycm9yX3NsaWMoYWN0aW9ucy0+ZXJyb3JzLCBfX0ZJTEVfXywgX19MSU5FX18sIDUyNiwg
+IkZhaWxlZCB0byBhbGxvY2F0ZSBhbGlnbmVkIG1lbW9yeSBmb3Igc3RyZWFtICdpbk1hdCciKTsK
+CQkJCUNIRUNLX0VSUk9SUzsKCQkJfQoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3Vu
+dF0pLT51c2VyX3B0ciAgICA9ICh1aW50OF90KikgaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFt
+X2luTWF0OwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5hbGlnbmVkX3B0
+ciA9ICh1aW50OF90KikgYWxpZ25lZF9pbnN0cmVhbV9pbk1hdDsKCQkJKCZjYl9kYXRhLT5zdHJl
+YW1bY2JfZGF0YS0+Y291bnRdKS0+c2l6ZSAgICAgICAgPSBpbnN0cmVhbV9zaXplX2luTWF0OwoJ
+CQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5pc19vdXRwdXQgICA9IDA7CgkJ
+CWNiX2RhdGEtPmNvdW50ICs9IDE7CgkJCW1lbWNweShhbGlnbmVkX2luc3RyZWFtX2luTWF0LCBp
+bnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1faW5NYXQsIGluc3RyZWFtX3NpemVfaW5NYXQpOwoJ
+CQlzdHJlYW1fcHRyID0gYWxpZ25lZF9pbnN0cmVhbV9pbk1hdDsKCQl9CgkJbWF4X3F1ZXVlX2lu
+cHV0KGFjdGlvbnMsICJpbk1hdCIsIHN0cmVhbV9wdHIsIGluc3RyZWFtX3NpemVfaW5NYXQpOwoJ
+CUNIRUNLX0VSUk9SUzsKCX0KCS8qIGVuZCBvZiBjb2RlIGZvciBzdHJlYW0gaW5NYXQgKi8KCQoJ
+LyogY29kZSBmb3Igc3RyZWFtIGluVmVjICovCglzaXplX3QgaW5zdHJlYW1fc2l6ZV9pblZlYyA9
+IDE2OwoJaWYgKGluc3RyZWFtX3NpemVfaW5WZWMgPiAwKSB7CgkJY29uc3QgZmxvYXQgKnN0cmVh
+bV9wdHIgPSBpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1faW5WZWM7CgkJaWYgKHVzZV9jYWxs
+YmFjayAmJiAoMSA9PSBNYXRyaXhWZWN0b3JfY2hlY2tfYWxpZ25lZChpbnRlcmZhY2VfYWN0aW9u
+cy0+aW5zdHJlYW1faW5WZWMpKSkgewoJCQlmbG9hdCAqYWxpZ25lZF9pbnN0cmVhbV9pblZlYyA9
+IG1hbGxvYyhpbnN0cmVhbV9zaXplX2luVmVjKTsKCQkJaWYgKGFsaWduZWRfaW5zdHJlYW1faW5W
+ZWMgPT0gTlVMTCkgewoJCQkJbWF4X3JlcG9ydF9lcnJvcl9zbGljKGFjdGlvbnMtPmVycm9ycywg
+X19GSUxFX18sIF9fTElORV9fLCA1MjYsICJGYWlsZWQgdG8gYWxsb2NhdGUgYWxpZ25lZCBtZW1v
+cnkgZm9yIHN0cmVhbSAnaW5WZWMnIik7CgkJCQlDSEVDS19FUlJPUlM7CgkJCX0KCQkJKCZjYl9k
+YXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+dXNlcl9wdHIgICAgPSAodWludDhfdCopIGlu
+dGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV9pblZlYzsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2Jf
+ZGF0YS0+Y291bnRdKS0+YWxpZ25lZF9wdHIgPSAodWludDhfdCopIGFsaWduZWRfaW5zdHJlYW1f
+aW5WZWM7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnNpemUgICAgICAg
+ID0gaW5zdHJlYW1fc2l6ZV9pblZlYzsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291
+bnRdKS0+aXNfb3V0cHV0ICAgPSAwOwoJCQljYl9kYXRhLT5jb3VudCArPSAxOwoJCQltZW1jcHko
+YWxpZ25lZF9pbnN0cmVhbV9pblZlYywgaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFtX2luVmVj
+LCBpbnN0cmVhbV9zaXplX2luVmVjKTsKCQkJc3RyZWFtX3B0ciA9IGFsaWduZWRfaW5zdHJlYW1f
+aW5WZWM7CgkJfQoJCW1heF9xdWV1ZV9pbnB1dChhY3Rpb25zLCAiaW5WZWMiLCBzdHJlYW1fcHRy
+LCBpbnN0cmVhbV9zaXplX2luVmVjKTsKCQlDSEVDS19FUlJPUlM7Cgl9CgkvKiBlbmQgb2YgY29k
+ZSBmb3Igc3RyZWFtIGluVmVjICovCgkKCS8qIGNvZGUgZm9yIHN0cmVhbSBvdXRwdXQgKi8KCXNp
+emVfdCBvdXRzdHJlYW1fc2l6ZV9vdXRwdXQgPSAxNjsKCWlmIChvdXRzdHJlYW1fc2l6ZV9vdXRw
+dXQgPiAwKSB7CgkJZmxvYXQgKnN0cmVhbV9wdHIgPSBpbnRlcmZhY2VfYWN0aW9ucy0+b3V0c3Ry
+ZWFtX291dHB1dDsKCQlpZiAodXNlX2NhbGxiYWNrICYmICgxID09IE1hdHJpeFZlY3Rvcl9jaGVj
+a19hbGlnbmVkKGludGVyZmFjZV9hY3Rpb25zLT5vdXRzdHJlYW1fb3V0cHV0KSkpIHsKCQkJZmxv
+YXQgKmFsaWduZWRfb3V0c3RyZWFtX291dHB1dCA9IG1hbGxvYyhvdXRzdHJlYW1fc2l6ZV9vdXRw
+dXQpOwoJCQlpZiAoYWxpZ25lZF9vdXRzdHJlYW1fb3V0cHV0ID09IE5VTEwpIHsKCQkJCW1heF9y
+ZXBvcnRfZXJyb3Jfc2xpYyhhY3Rpb25zLT5lcnJvcnMsIF9fRklMRV9fLCBfX0xJTkVfXywgNTI2
+LCAiRmFpbGVkIHRvIGFsbG9jYXRlIGFsaWduZWQgbWVtb3J5IGZvciBzdHJlYW0gJ291dHB1dCci
+KTsKCQkJCUNIRUNLX0VSUk9SUzsKCQkJfQoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5j
+b3VudF0pLT51c2VyX3B0ciAgICA9ICh1aW50OF90KikgaW50ZXJmYWNlX2FjdGlvbnMtPm91dHN0
+cmVhbV9vdXRwdXQ7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmFsaWdu
+ZWRfcHRyID0gKHVpbnQ4X3QqKSBhbGlnbmVkX291dHN0cmVhbV9vdXRwdXQ7CgkJCSgmY2JfZGF0
+YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnNpemUgICAgICAgID0gb3V0c3RyZWFtX3NpemVf
+b3V0cHV0OwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5pc19vdXRwdXQg
+ICA9IDE7CgkJCWNiX2RhdGEtPmNvdW50ICs9IDE7CgkJCXN0cmVhbV9wdHIgPSBhbGlnbmVkX291
+dHN0cmVhbV9vdXRwdXQ7CgkJfQoJCW1heF9xdWV1ZV9vdXRwdXQoYWN0aW9ucywgIm91dHB1dCIs
+IHN0cmVhbV9wdHIsIG91dHN0cmVhbV9zaXplX291dHB1dCk7CgkJQ0hFQ0tfRVJST1JTOwoJfQoJ
+LyogZW5kIG9mIGNvZGUgZm9yIHN0cmVhbSBvdXRwdXQgKi8KCQoJaWYgKHVzZV9jYWxsYmFjayAm
+JiBjYl9kYXRhLT5jb3VudCA9PSAwKSB7CgkJKmNhbGxiYWNrX2RhdGEgPSBOVUxMOwoJCSpjYWxs
+YmFja19mdW5jID0gTlVMTDsKCQlmcmVlKGNiX2RhdGEpOwoJfQoJcmV0dXJuIGFjdGlvbnM7CiN1
+bmRlZiBDSEVDS19FUlJPUlMKfQoKdm9pZCBNYXRyaXhWZWN0b3IoCgljb25zdCBmbG9hdCAqaW5z
+dHJlYW1faW5NYXQsCgljb25zdCBmbG9hdCAqaW5zdHJlYW1faW5WZWMsCglmbG9hdCAqb3V0c3Ry
+ZWFtX291dHB1dCkKewoJKHZvaWQpIHB0aHJlYWRfb25jZSgmc2xpY19ic19pc19pbml0aWFsaXNl
+ZCwgTWF0cml4VmVjdG9yX3N0YXRpY19pbml0KTsKCUNIRUNLX05VTEwoc3RvcmVkX21heGZpbGUs
+ICJNYXhmaWxlIHdhcyBub3QgbG9hZGVkIiwgKTsKCW1heF9ydW5fdCAqcnVuID0gTWF0cml4VmVj
+dG9yX25vbmJsb2NrKGluc3RyZWFtX2luTWF0LCBpbnN0cmVhbV9pblZlYywgb3V0c3RyZWFtX291
+dHB1dCk7CglDSEVDS19OVUxMKHJ1biwgIlVuYWJsZSB0byBydW4gYWN0aW9ucyIsICk7CgltYXhf
+d2FpdChydW4pOwp9CgptYXhfcnVuX3QgKk1hdHJpeFZlY3Rvcl9ub25ibG9jaygKCWNvbnN0IGZs
+b2F0ICppbnN0cmVhbV9pbk1hdCwKCWNvbnN0IGZsb2F0ICppbnN0cmVhbV9pblZlYywKCWZsb2F0
+ICpvdXRzdHJlYW1fb3V0cHV0KQp7CglNYXRyaXhWZWN0b3JfYWN0aW9uc190IGludGVyZmFjZV9h
+Y3Rpb25zOwoJaW50ZXJmYWNlX2FjdGlvbnMuaW5zdHJlYW1faW5NYXQgPSBpbnN0cmVhbV9pbk1h
+dDsKCWludGVyZmFjZV9hY3Rpb25zLmluc3RyZWFtX2luVmVjID0gaW5zdHJlYW1faW5WZWM7Cglp
+bnRlcmZhY2VfYWN0aW9ucy5vdXRzdHJlYW1fb3V0cHV0ID0gb3V0c3RyZWFtX291dHB1dDsKCSh2
+b2lkKSBwdGhyZWFkX29uY2UoJnNsaWNfYnNfaXNfaW5pdGlhbGlzZWQsIE1hdHJpeFZlY3Rvcl9z
+dGF0aWNfaW5pdCk7CglDSEVDS19OVUxMKHN0b3JlZF9tYXhmaWxlLCAiTWF4ZmlsZSB3YXMgbm90
+IGxvYWRlZCIsIE5VTEwpOwoJdm9pZCAoKmNiX2Z1bmMpKHZvaWQqKSA9IE5VTEw7Cgl2b2lkICAq
+Y2JfZGF0YSAgICAgICAgID0gTlVMTDsKCW1heF9hY3Rpb25zX3QgKmFjdGlvbnMgPSBNYXRyaXhW
+ZWN0b3JfY29udmVydF9pbnRlcm5hbChzdG9yZWRfbWF4ZmlsZSwgJmludGVyZmFjZV9hY3Rpb25z
+LCAxLCAmY2JfZnVuYywgJmNiX2RhdGEpOwoJQ0hFQ0tfTlVMTChhY3Rpb25zLCAiVW5hYmxlIHRv
+IGJ1aWxkIGFjdGlvbnMiLCBOVUxMKTsKCW1heF92YWxpZGF0ZShhY3Rpb25zKTsKCUNIRUNLX0VS
+Uk9SU19TVChhY3Rpb25zLCBOVUxMKTsKCUNIRUNLX0VSUk9SU19TVChzdG9yZWRfZW5naW5lLCBO
+VUxMKTsKCW1heF9ydW5fdCAqcnVuOwoJaWYgKGNiX2Z1bmMgPT0gTlVMTCkgewoJCXJ1biA9IG1h
+eF9ydW5fbm9uYmxvY2soc3RvcmVkX2VuZ2luZSwgYWN0aW9ucyk7Cgl9IGVsc2UgewoJCXJ1biA9
+IG1heF9ydW5fbm9uYmxvY2tfd2l0aF9jYihzdG9yZWRfZW5naW5lLCBhY3Rpb25zLCBjYl9mdW5j
+LCBjYl9kYXRhKTsKCX0KCUNIRUNLX05VTEwocnVuLCAiVW5hYmxlIHRvIHJ1biBhY3Rpb25zIiwg
+TlVMTCk7CglDSEVDS19FUlJPUlNfU1QoYWN0aW9ucywgTlVMTCk7CgltYXhfYWN0aW9uc19mcmVl
+KGFjdGlvbnMpOwoJcmV0dXJuIHJ1bjsKfQoKdm9pZCBNYXRyaXhWZWN0b3JfcnVuKAoJbWF4X2Vu
+Z2luZV90ICplbmdpbmUsCglNYXRyaXhWZWN0b3JfYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9u
+cykKewoJbWF4X3J1bl90ICpydW4gPSBNYXRyaXhWZWN0b3JfcnVuX25vbmJsb2NrKGVuZ2luZSwg
+aW50ZXJmYWNlX2FjdGlvbnMpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVuIGFjdGlv
+bnMiLCApOwoJbWF4X3dhaXQocnVuKTsKfQoKbWF4X3J1bl90ICpNYXRyaXhWZWN0b3JfcnVuX25v
+bmJsb2NrKAoJbWF4X2VuZ2luZV90ICplbmdpbmUsCglNYXRyaXhWZWN0b3JfYWN0aW9uc190ICpp
+bnRlcmZhY2VfYWN0aW9ucykKewoJbWF4X2ZpbGVfdCAqbWF4ZmlsZSA9IG1heF9lbmdpbmVfZ2V0
+X21heF9maWxlKGVuZ2luZSk7IAoJdm9pZCAoKmNiX2Z1bmMpKHZvaWQqKSA9IE5VTEw7Cgl2b2lk
+ICAqY2JfZGF0YSAgICAgICAgID0gTlVMTDsKCW1heF9hY3Rpb25zX3QgKmFjdGlvbnMgPSBNYXRy
+aXhWZWN0b3JfY29udmVydF9pbnRlcm5hbChtYXhmaWxlLCBpbnRlcmZhY2VfYWN0aW9ucywgMSwg
+JmNiX2Z1bmMsICZjYl9kYXRhKTsKCUNIRUNLX05VTEwoYWN0aW9ucywgIlVuYWJsZSB0byBidWls
+ZCBhY3Rpb25zIiwgTlVMTCk7CgltYXhfdmFsaWRhdGUoYWN0aW9ucyk7CglDSEVDS19FUlJPUlNf
+U1QoYWN0aW9ucywgTlVMTCk7CgltYXhfcnVuX3QgKnJ1bjsKCWlmIChjYl9mdW5jID09IE5VTEwp
+IHsKCQlydW4gPSBtYXhfcnVuX25vbmJsb2NrKGVuZ2luZSwgYWN0aW9ucyk7Cgl9IGVsc2UgewoJ
+CXJ1biA9IG1heF9ydW5fbm9uYmxvY2tfd2l0aF9jYihlbmdpbmUsIGFjdGlvbnMsIGNiX2Z1bmMs
+IGNiX2RhdGEpOwoJfQoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVuIGFjdGlvbnMiLCBO
+VUxMKTsKCW1heF9hY3Rpb25zX2ZyZWUoYWN0aW9ucyk7CglyZXR1cm4gcnVuOwp9CgoKLyoqCiAq
+IFxicmllZiBHcm91cCBydW4gYWR2YW5jZWQgc3RhdGljIGZ1bmN0aW9uIGZvciB0aGUgaW50ZXJm
+YWNlICdkZWZhdWx0Jy4KICogCiAqIFxwYXJhbSBbaW5dIGdyb3VwIEdyb3VwIHRvIHVzZS4KICog
+XHBhcmFtIFtpbixvdXRdIGludGVyZmFjZV9hY3Rpb25zIEFjdGlvbnMgdG8gcnVuLgogKgogKiBS
+dW4gdGhlIGFjdGlvbnMgb24gdGhlIGZpcnN0IGRldmljZSBhdmFpbGFibGUgaW4gdGhlIGdyb3Vw
+LgogKi8Kdm9pZCBNYXRyaXhWZWN0b3JfcnVuX2dyb3VwKG1heF9ncm91cF90ICpncm91cCwgTWF0
+cml4VmVjdG9yX2FjdGlvbnNfdCAqaW50ZXJmYWNlX2FjdGlvbnMpCnsKCW1heF9ydW5fdCAqcnVu
+ID0gTWF0cml4VmVjdG9yX3J1bl9ncm91cF9ub25ibG9jayhncm91cCwgaW50ZXJmYWNlX2FjdGlv
+bnMpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVuIGFjdGlvbnMiLCApOwoJbWF4X3dh
+aXQocnVuKTsKfQoKCi8qKgogKiBcYnJpZWYgR3JvdXAgcnVuIGFkdmFuY2VkIHN0YXRpYyBub24t
+YmxvY2tpbmcgZnVuY3Rpb24gZm9yIHRoZSBpbnRlcmZhY2UgJ2RlZmF1bHQnLgogKiAKICoKICog
+U2NoZWR1bGUgdGhlIGFjdGlvbnMgdG8gcnVuIG9uIHRoZSBmaXJzdCBkZXZpY2UgYXZhaWxhYmxl
+IGluIHRoZSBncm91cCBhbmQgcmV0dXJuIGltbWVkaWF0ZWx5LgogKiBUaGUgc3RhdHVzIG9mIHRo
+ZSBydW4gbXVzdCBiZSBjaGVja2VkIHdpdGggOjptYXhfd2FpdC4gCiAqIE5vdGUgdGhhdCB1c2Ug
+b2YgOjptYXhfbm93YWl0IGlzIHByb2hpYml0ZWQgd2l0aCBub24tYmxvY2tpbmcgcnVubmluZyBv
+biBncm91cHM6CiAqIHNlZSB0aGUgOjptYXhfcnVuX2dyb3VwX25vbmJsb2NrIGRvY3VtZW50YXRp
+b24gZm9yIG1vcmUgZXhwbGFuYXRpb24uCiAqCiAqIFxwYXJhbSBbaW5dIGdyb3VwIEdyb3VwIHRv
+IHVzZS4KICogXHBhcmFtIFtpbl0gaW50ZXJmYWNlX2FjdGlvbnMgQWN0aW9ucyB0byBydW4uCiAq
+IFxyZXR1cm4gQSBoYW5kbGUgb24gdGhlIGV4ZWN1dGlvbiBzdGF0dXMgb2YgdGhlIGFjdGlvbnMs
+IG9yIE5VTEwgaW4gY2FzZSBvZiBlcnJvci4KICovCm1heF9ydW5fdCAqTWF0cml4VmVjdG9yX3J1
+bl9ncm91cF9ub25ibG9jayhtYXhfZ3JvdXBfdCAqZ3JvdXAsIE1hdHJpeFZlY3Rvcl9hY3Rpb25z
+X3QgKmludGVyZmFjZV9hY3Rpb25zKQp7CgltYXhfZmlsZV90ICptYXhmaWxlID0gbWF4X2dyb3Vw
+X2dldF9tYXhfZmlsZShncm91cCk7CgltYXhfYWN0aW9uc190ICphY3Rpb25zID0gTWF0cml4VmVj
+dG9yX2NvbnZlcnRfaW50ZXJuYWwobWF4ZmlsZSwgaW50ZXJmYWNlX2FjdGlvbnMsIDEsIE5VTEws
+IE5VTEwpOwoJaWYoYWN0aW9ucyA9PSBOVUxMKSByZXR1cm4gTlVMTDsKCWlmKCFtYXhfb2soYWN0
+aW9ucy0+ZXJyb3JzKSkgcmV0dXJuIE5VTEw7CgltYXhfdmFsaWRhdGUoYWN0aW9ucyk7CgltYXhf
+cnVuX3QgKnJ1biA9IG1heF9ydW5fZ3JvdXBfbm9uYmxvY2soZ3JvdXAsIGFjdGlvbnMpOwoJbWF4
+X2FjdGlvbnNfZnJlZShhY3Rpb25zKTsKCXJldHVybiBydW47Cn0KCgovKioKICogXGJyaWVmIEFy
+cmF5IHJ1biBhZHZhbmNlZCBzdGF0aWMgZnVuY3Rpb24gZm9yIHRoZSBpbnRlcmZhY2UgJ2RlZmF1
+bHQnLgogKiAKICogXHBhcmFtIFtpbl0gZW5nYXJyYXkgVGhlIGFycmF5IG9mIGRldmljZXMgdG8g
+dXNlLgogKiBccGFyYW0gW2luLG91dF0gaW50ZXJmYWNlX2FjdGlvbnMgVGhlIGFycmF5IG9mIGFj
+dGlvbnMgdG8gcnVuLgogKgogKiBSdW4gdGhlIGFycmF5IG9mIGFjdGlvbnMgb24gdGhlIGFycmF5
+IG9mIGVuZ2luZXMuICBUaGUgbGVuZ3RoIG9mIGludGVyZmFjZV9hY3Rpb25zCiAqIG11c3QgbWF0
+Y2ggdGhlIHNpemUgb2YgZW5nYXJyYXkuCiAqLwp2b2lkIE1hdHJpeFZlY3Rvcl9ydW5fYXJyYXko
+bWF4X2VuZ2FycmF5X3QgKmVuZ2FycmF5LCBNYXRyaXhWZWN0b3JfYWN0aW9uc190ICppbnRlcmZh
+Y2VfYWN0aW9uc1tdKQp7CgltYXhfcnVuX3QgKnJ1biA9IE1hdHJpeFZlY3Rvcl9ydW5fYXJyYXlf
+bm9uYmxvY2soZW5nYXJyYXksIGludGVyZmFjZV9hY3Rpb25zKTsKCUNIRUNLX05VTEwocnVuLCAi
+VW5hYmxlIHRvIHJ1biBhY3Rpb25zIiwgKTsKCW1heF93YWl0KHJ1bik7Cn0KCgovKioKICogXGJy
+aWVmIEFycmF5IHJ1biBhZHZhbmNlZCBzdGF0aWMgbm9uLWJsb2NraW5nIGZ1bmN0aW9uIGZvciB0
+aGUgaW50ZXJmYWNlICdkZWZhdWx0Jy4KICogCiAqCiAqIFNjaGVkdWxlIHRvIHJ1biB0aGUgYXJy
+YXkgb2YgYWN0aW9ucyBvbiB0aGUgYXJyYXkgb2YgZW5naW5lcywgYW5kIHJldHVybiBpbW1lZGlh
+dGVseS4KICogVGhlIGxlbmd0aCBvZiBpbnRlcmZhY2VfYWN0aW9ucyBtdXN0IG1hdGNoIHRoZSBz
+aXplIG9mIGVuZ2FycmF5LgogKiBUaGUgc3RhdHVzIG9mIHRoZSBydW4gY2FuIGJlIGNoZWNrZWQg
+ZWl0aGVyIGJ5IDo6bWF4X3dhaXQgb3IgOjptYXhfbm93YWl0OwogKiBub3RlIHRoYXQgb25lIG9m
+IHRoZXNlICptdXN0KiBiZSBjYWxsZWQsIHNvIHRoYXQgYXNzb2NpYXRlZCBtZW1vcnkgY2FuIGJl
+IHJlbGVhc2VkLgogKgogKiBccGFyYW0gW2luXSBlbmdhcnJheSBUaGUgYXJyYXkgb2YgZGV2aWNl
+cyB0byB1c2UuCiAqIFxwYXJhbSBbaW5dIGludGVyZmFjZV9hY3Rpb25zIFRoZSBhcnJheSBvZiBh
+Y3Rpb25zIHRvIHJ1bi4KICogXHJldHVybiBBIGhhbmRsZSBvbiB0aGUgZXhlY3V0aW9uIHN0YXR1
+cyBvZiB0aGUgYWN0aW9ucywgb3IgTlVMTCBpbiBjYXNlIG9mIGVycm9yLgogKi8KbWF4X3J1bl90
+ICpNYXRyaXhWZWN0b3JfcnVuX2FycmF5X25vbmJsb2NrKG1heF9lbmdhcnJheV90ICplbmdhcnJh
+eSwgTWF0cml4VmVjdG9yX2FjdGlvbnNfdCAqaW50ZXJmYWNlX2FjdGlvbnNbXSkKewoJbWF4X2Zp
+bGVfdCAqbWF4ZmlsZSA9IG1heF9lbmdhcnJheV9nZXRfbWF4X2ZpbGUoZW5nYXJyYXksIDApOwoJ
+aW50IGk7CgltYXhfYWN0YXJyYXlfdCAqYWN0YXJyYXkgPSBtYXhfYWN0YXJyYXlfaW5pdChtYXhm
+aWxlLCBlbmdhcnJheS0+c2l6ZSk7CglpZiAoYWN0YXJyYXkgPT0gTlVMTCkgcmV0dXJuIE5VTEw7
+CgltYXhfYWN0aW9uc190ICoqYXJyX2FjdGlvbnMgPSBtYWxsb2MoZW5nYXJyYXktPnNpemUgKiBz
+aXplb2YobWF4X2FjdGlvbnNfdCopKTsKCWZvciAoIGkgPSAwIDsgaSA8IGFjdGFycmF5LT5zaXpl
+OyBpKysgKSB7CgkJbWF4X2FjdGlvbnNfdCAqYWN0aW9ucyA9IE1hdHJpeFZlY3Rvcl9jb252ZXJ0
+X2ludGVybmFsKG1heGZpbGUsIGludGVyZmFjZV9hY3Rpb25zW2ldLCAxLCBOVUxMLCBOVUxMKTsK
+CQlpZiAoYWN0aW9ucyA9PSBOVUxMKSByZXR1cm4gTlVMTDsKCQlhcnJfYWN0aW9uc1tpXSA9IGFj
+dGlvbnM7CgkJbWF4X3NldF9hY3Rpb24oYWN0YXJyYXksIGksIGFjdGlvbnMpOwoJfQoJbWF4X3J1
+bl90ICpydW4gPSBtYXhfcnVuX2FycmF5X25vbmJsb2NrKGVuZ2FycmF5LCBhY3RhcnJheSk7Cglm
+b3IgKCBpID0gMCA7IGkgPCBhY3RhcnJheS0+c2l6ZSA7IGkrKyApIHsgbWF4X2FjdGlvbnNfZnJl
+ZShhcnJfYWN0aW9uc1tpXSk7IH0KCW1heF9hY3RhcnJheV9mcmVlKGFjdGFycmF5KTsKCWZyZWUo
+YXJyX2FjdGlvbnMpOwoJcmV0dXJuIHJ1bjsKfQoKCi8qKgogKiBcYnJpZWYgQ29udmVydHMgYSBz
+dGF0aWMtaW50ZXJmYWNlIGFjdGlvbiBzdHJ1Y3QgaW50byBhIGR5bmFtaWMtaW50ZXJmYWNlIG1h
+eF9hY3Rpb25zX3Qgc3RydWN0LgogKgogKiBOb3RlIHRoYXQgdGhpcyBpcyBhbiBpbnRlcm5hbCB1
+dGlsaXR5IGZ1bmN0aW9uIHVzZWQgYnkgb3RoZXIgZnVuY3Rpb25zIGluIHRoZSBzdGF0aWMgaW50
+ZXJmYWNlLgogKgogKiBccGFyYW0gW2luXSBtYXhmaWxlIFRoZSBtYXhmaWxlIHRvIHVzZS4KICog
+XHBhcmFtIFtpbl0gaW50ZXJmYWNlX2FjdGlvbnMgVGhlIGludGVyZmFjZS1zcGVjaWZpYyBhY3Rp
+b25zIHRvIHJ1bi4KICogXHJldHVybiBUaGUgZHluYW1pYy1pbnRlcmZhY2UgYWN0aW9ucyB0byBy
+dW4sIG9yIE5VTEwgaW4gY2FzZSBvZiBlcnJvci4KICovCm1heF9hY3Rpb25zX3QqIE1hdHJpeFZl
+Y3Rvcl9jb252ZXJ0KG1heF9maWxlX3QgKm1heGZpbGUsIE1hdHJpeFZlY3Rvcl9hY3Rpb25zX3Qg
+KmludGVyZmFjZV9hY3Rpb25zKQp7CglyZXR1cm4gTWF0cml4VmVjdG9yX2NvbnZlcnRfaW50ZXJu
+YWwobWF4ZmlsZSwgaW50ZXJmYWNlX2FjdGlvbnMsIDAsIE5VTEwsIE5VTEwpOwp9CgojdW5kZWYg
+Q0hFQ0tfRVJST1JTX1NUCiN1bmRlZiBDSEVDS19OVUxMCgoK
+#endif /* SLIC_B64_DEFINITIONS */
+
+#ifdef SLIC_EXTRA_FILES
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHVz
+ZXJmaWxlcyBmb3JtYXQtdmVyc2lvbj0iMjAxMjAyMDAiLz4=
+#endif /* SLIC_EXTRA_FILES */
+
+#ifdef PHOTON_NODE_ADD_DATA
+#define PHOTON_NODE_ADD_DATA_PRESENT 1
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 83, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 84, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 0, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 1, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 2, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 27, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 28, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 35, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 36, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 37, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 38, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 39, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 74, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 29, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 30, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 40, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 41, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 76, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 77, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 31, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 32, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 42, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 43, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 78, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 106, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 79, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 33, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 34, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 44, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 45, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 80, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 107, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 81, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 92, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 19, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 20, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 65, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 21, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 22, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 67, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 68, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 23, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 24, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 69, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 108, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 70, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 25, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 26, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 71, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 109, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 72, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 90, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 11, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 12, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 56, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 13, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 14, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 58, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 59, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 15, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 16, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 60, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 110, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 61, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 17, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 18, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 62, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 111, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 63, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 88, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 3, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 4, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 47, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 5, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 6, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 49, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 50, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 7, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 8, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 51, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 112, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 52, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 9, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 10, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 53, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 113, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 54, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 87, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 89, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 91, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 93, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 86, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 98, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 115, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 95, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 96, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 97, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 99, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 114, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 101, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 102, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 104, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 105, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(MatrixVectorKernel, 103, "SquashFactor", 0.0)
+#endif
+
+#ifdef MAXFILE_SIGNATURE
+#define MAXFILE_SIGNATURE_PRESENT 1
+MAXFILE_SIGNATURE("302c0214466f710a46ad34453f05bcc07002f176e0231c0002143e136fb3fa17114a29bf96338f666878e2c99de5")
+#endif
+

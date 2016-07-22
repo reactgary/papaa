@@ -1,0 +1,48 @@
+Thu 00:28: ########################################## 
+Thu 00:28: Compiling.
+Thu 00:28: ########################################## 
+
+Thu 00:28: MaxCompiler version: 2015.2 (simulation only).
+Thu 00:28: Build Simulation run rule for training-chap01-solution1-brightness start time: Thu Jul 21 00:28:49 PDT 2016.
+Thu 00:28: Project location: /home/demo/Desktop/training-exercises/Solution/training-chap01-solution1-brightness.
+Thu 00:28: Detailed build log: /home/demo/Desktop/training-exercises/Solution/training-chap01-solution1-brightness/RunRules/Simulation/build.log.
+
+Thu 00:28: Compiling Engine Code.
+Thu 00:28: Engine building skipped (no changes on .max files).
+Thu 00:28: Compiling CPU Code.
+Thu 00:28: Run CPU project make files updating
+Thu 00:28: Executing command:
+Thu 00:28: java -jar /opt/maxeler/maxcompiler/lib/MaxIDE/projectAdmin.jar -u /home/demo/Desktop/training-exercises/Solution/training-chap01-solution1-brightness Simulation 
+Thu 00:28: Command output:
+
+Thu 00:28: MaxCompiler Project Admin Tool Version 2015.2.00001
+Thu 00:28:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+
+Thu 00:28: Handler version 1
+Thu 00:28: Updating RunRule dependent Makefiles for RunRule 'Simulation'
+Thu 00:28: Found makefiles: 1
+Thu 00:28: 	Updated: Simulation
+Thu 00:28: Run CPU make.
+Thu 00:28: make RUNRULE=Simulation 
+Thu 00:28: Command output:
+Thu 00:28: make -f Makefile ../RunRules/Simulation/binaries/BrightnessSolution
+Thu 00:28: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/training-chap01-solution1-brightness/CPUCode'
+Thu 00:28: cc -g -O3 -Wall -Wextra -fmessage-length=0 -I ../RunRules/Simulation/include -I. -I/opt/maxeler/maxcompiler/lib/maxeleros-sim/include -I/opt/maxeler/maxcompiler/include/slic -D_XOPEN_SOURCE=600  -std=c99 -DBUILDNAME_MAXFILE_1=BrightnessSolution -DMAXFILE_1="BrightnessSolution.max"  -o "../RunRules/Simulation/objects/BrightnessSolutionCpuCode.o" -c "BrightnessSolutionCpuCode.c"
+Thu 00:28: cc -g -O3 -Wall -Wextra -fmessage-length=0 -I ../RunRules/Simulation/include -I. -I/opt/maxeler/maxcompiler/lib/maxeleros-sim/include -I/opt/maxeler/maxcompiler/include/slic -D_XOPEN_SOURCE=600  -std=c99 -DBUILDNAME_MAXFILE_1=BrightnessSolution -DMAXFILE_1="BrightnessSolution.max"  -MM -MP -MT "../RunRules/Simulation/objects/BrightnessSolutionCpuCode.o" "BrightnessSolutionCpuCode.c" > "../RunRules/Simulation/objects/BrightnessSolutionCpuCode.d"
+Thu 00:28: cc ../RunRules/Simulation/objects/BrightnessSolutionCpuCode.o ../RunRules/Simulation/objects/ppmIO.o ../RunRules/Simulation/objects/slic_BrightnessSolution.o  -L/opt/maxeler/maxcompiler/lib -L/opt/maxeler/maxcompiler/lib/maxeleros-sim/lib -lslic -lmaxeleros -lm -lpthread  -o "../RunRules/Simulation/binaries/BrightnessSolution"
+Thu 00:28: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/training-chap01-solution1-brightness/CPUCode'
+Thu 00:28: Build completed: Thu Jul 21 00:28:50 PDT 2016
+
+
+Thu 00:28: ########################################## 
+Thu 00:28: Running
+Thu 00:28: ########################################## 
+Thu 00:28: Executing command:
+Thu 00:28: '/home/demo/Desktop/training-exercises/Solution/training-chap01-solution1-brightness/RunRules/Simulation/binaries/BrightnessSolution' 
+Thu 00:28: Command output:
+Thu 00:28: Loading image.
+Thu 00:28: Running Kernel.
+Thu 00:28: Saving image.
+Thu 00:28: Test passed OK!
+Thu 00:28: Exiting
+Thu 00:28: Process terminated with exit code 0.

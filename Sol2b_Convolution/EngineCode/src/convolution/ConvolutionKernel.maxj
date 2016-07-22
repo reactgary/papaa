@@ -1,0 +1,54 @@
+package convolution;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+
+class ConvolutionKernel extends Kernel {
+
+	ConvolutionKernel(KernelParameters parameters, int nyMax) {
+		super(parameters);
+		// Input
+		DFEVar inStream = io.input("inStream", dfeFloat(8, 24));
+		DFEVar w[] = new DFEVar[9];
+		w[0] = io.scalarInput("w1", dfeFloat(8,24));
+		w[1] = io.scalarInput("w2", dfeFloat(8,24));
+		w[2] = io.scalarInput("w3", dfeFloat(8,24));
+		w[3] = io.scalarInput("w4", dfeFloat(8,24));
+		w[4] = io.scalarInput("w5", dfeFloat(8,24));
+		w[5] = io.scalarInput("w6", dfeFloat(8,24));
+		w[6] = io.scalarInput("w7", dfeFloat(8,24));
+		w[7] = io.scalarInput("w8", dfeFloat(8,24));
+		w[8] = io.scalarInput("w9", dfeFloat(8,24));
+		OffsetExpr ny = stream.makeOffsetParam("ny", 3, nyMax);
+
+		// Configuration
+		DFEVar height = io.scalarInput("height",dfeUInt(32));
+		DFEVar width = io.scalarInput("width", dfeUInt(32));
+		// Counters
+		CounterChain chain = control.count.makeCounterChain();
+		DFEVar countColumn = chain.addCounter(width, 1);
+		DFEVar countLine = chain.addCounter(height, 1);
+
+		// Extract 8 point window around the current point
+		DFEVar window[] = new DFEVar[9];
+		for (int x=-1, i=0; x<=1; x++){
+			for (int y=-1; y<=1; y++, i++){
+				window[i] = stream.offset(inStream, x*ny+y);
+				window[i] = window[i] * w[i];
+			}
+		}
+
+
+		// Output, discard output when it is in the margin
+		DFEVar sum = constant.var(dfeFloat(8, 24), 0);
+		for (DFEVar dfeVar : window) {
+			sum = sum + dfeVar;
+		}
+		DFEVar isMargin = ~(countColumn.eq(0)|countColumn.eq(width-1)|countLine.eq(0)|countLine.eq(height-1));
+		io.output("outStream", sum, dfeFloat(8, 24),isMargin);
+		}
+}
+

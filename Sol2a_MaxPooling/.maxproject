@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<maxCompilerManager version="2">
+<enginePart internalEngineSubproject="Sol2a_MaxPooling_EngineCode" isSrcBin="false" isUseDefaultSelected="false" outputLocation="/Sol2a_MaxPooling_EngineCode/bin" projectName="Sol2a_MaxPooling"/>
+<cpuPart internalCpuSubproject="Sol2a_MaxPooling_CPUCode"/>
+<watchedFiles/>
+</maxCompilerManager>

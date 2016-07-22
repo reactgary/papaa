@@ -1,0 +1,48 @@
+Thu 00:26: ########################################## 
+Thu 00:26: Compiling.
+Thu 00:26: ########################################## 
+
+Thu 00:26: MaxCompiler version: 2015.2 (simulation only).
+Thu 00:26: Build Simulation run rule for Sol1b_DotProduct start time: Thu Jul 21 00:26:23 PDT 2016.
+Thu 00:26: Project location: /home/demo/Desktop/training-exercises/Solution/Sol1b_DotProduct.
+Thu 00:26: Detailed build log: /home/demo/Desktop/training-exercises/Solution/Sol1b_DotProduct/RunRules/Simulation/build.log.
+
+Thu 00:26: Compiling Engine Code.
+Thu 00:26: Engine building skipped (no changes on .max files).
+Thu 00:26: Compiling CPU Code.
+Thu 00:26: Run CPU project make files updating
+Thu 00:26: Executing command:
+Thu 00:26: java -jar /opt/maxeler/maxcompiler/lib/MaxIDE/projectAdmin.jar -u /home/demo/Desktop/training-exercises/Solution/Sol1b_DotProduct Simulation 
+Thu 00:26: Command output:
+
+Thu 00:26: MaxCompiler Project Admin Tool Version 2015.2.00001
+Thu 00:26:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+
+Thu 00:26: Handler version 1
+Thu 00:26: Updating RunRule dependent Makefiles for RunRule 'Simulation'
+Thu 00:26: Found makefiles: 1
+Thu 00:26: 	Updated: Simulation
+Thu 00:26: Run CPU make.
+Thu 00:26: make RUNRULE=Simulation 
+Thu 00:26: Command output:
+Thu 00:26: make -f Makefile ../RunRules/Simulation/binaries/DotProduct
+Thu 00:26: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/Sol1b_DotProduct/CPUCode'
+Thu 00:26: cc -g -O3 -Wall -Wextra -fmessage-length=0 -I ../RunRules/Simulation/include -I. -I/opt/maxeler/maxcompiler/lib/maxeleros-sim/include -I/opt/maxeler/maxcompiler/include/slic -D_XOPEN_SOURCE=600  -std=c99 -DBUILDNAME_MAXFILE_1=DotProduct -DMAXFILE_1="DotProduct.max"  -o "../RunRules/Simulation/objects/DotProductCpuCode.o" -c "DotProductCpuCode.c"
+Thu 00:26: cc -g -O3 -Wall -Wextra -fmessage-length=0 -I ../RunRules/Simulation/include -I. -I/opt/maxeler/maxcompiler/lib/maxeleros-sim/include -I/opt/maxeler/maxcompiler/include/slic -D_XOPEN_SOURCE=600  -std=c99 -DBUILDNAME_MAXFILE_1=DotProduct -DMAXFILE_1="DotProduct.max"  -MM -MP -MT "../RunRules/Simulation/objects/DotProductCpuCode.o" "DotProductCpuCode.c" > "../RunRules/Simulation/objects/DotProductCpuCode.d"
+Thu 00:26: cc ../RunRules/Simulation/objects/DotProductCpuCode.o ../RunRules/Simulation/objects/slic_DotProduct.o  -L/opt/maxeler/maxcompiler/lib -L/opt/maxeler/maxcompiler/lib/maxeleros-sim/lib -lslic -lmaxeleros -lm -lpthread  -o "../RunRules/Simulation/binaries/DotProduct"
+Thu 00:26: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/Sol1b_DotProduct/CPUCode'
+Thu 00:26: Build completed: Thu Jul 21 00:26:24 PDT 2016
+
+
+Thu 00:26: ########################################## 
+Thu 00:26: Running
+Thu 00:26: ########################################## 
+Thu 00:26: Executing command:
+Thu 00:26: '/home/demo/Desktop/training-exercises/Solution/Sol1b_DotProduct/RunRules/Simulation/binaries/DotProduct' 
+Thu 00:26: Command output:
+Thu 00:26: Running on DFE.
+Thu 00:26:     83     77     93     86     49     62     90     63     40     72     11     67     82     62     67     29   X
+Thu 00:26:     86     15     35     92     21     27     59     26     26     36     68     29     30     23     35      2 
+Thu 00:26:  = 41723 (expected = 41723)
+Thu 00:26: Done.
+Thu 00:26: Process terminated with exit code 0.

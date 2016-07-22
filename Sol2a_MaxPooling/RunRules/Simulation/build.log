@@ -1,0 +1,51 @@
+Thu 00:26: ########################################## 
+Thu 00:26: Compiling.
+Thu 00:26: ########################################## 
+
+Thu 00:26: MaxCompiler version: 2015.2 (simulation only).
+Thu 00:26: Build Simulation run rule for Sol2a_MaxPooling start time: Thu Jul 21 00:26:45 PDT 2016.
+Thu 00:26: Project location: /home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling.
+Thu 00:26: Detailed build log: /home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling/RunRules/Simulation/build.log.
+
+Thu 00:26: Compiling Engine Code.
+Thu 00:26: Engine building skipped (no changes on .max files).
+Thu 00:26: Compiling CPU Code.
+Thu 00:26: Run CPU project make files updating
+Thu 00:26: Executing command:
+Thu 00:26: java -jar /opt/maxeler/maxcompiler/lib/MaxIDE/projectAdmin.jar -u /home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling Simulation 
+Thu 00:26: Command output:
+
+Thu 00:26: MaxCompiler Project Admin Tool Version 2015.2.00001
+Thu 00:26:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+
+Thu 00:26: Handler version 2
+Thu 00:26: Updating RunRule dependent Makefiles for RunRule 'Simulation'
+Thu 00:26: 	Updating: Simulation
+Thu 00:26: Found makefiles: 1
+Thu 00:26: 	Updated: Simulation
+Thu 00:26: Run CPU make.
+Thu 00:26: make RUNRULE=Simulation 
+Thu 00:26: Command output:
+Thu 00:26: make -f Makefile.rules build
+Thu 00:26: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling/CPUCode'
+Thu 00:26: set -e; rm -f ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.d ;                                                             \
+Thu 00:26: 	  cc -M -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -Wno-error MaxpoolingCpuCode.c > ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.d.$$ ;                                 \
+Thu 00:26:       sed 's,\(MaxpoolingCpuCode\)\.o[ :]*,../RunRules/Simulation/objects/c/\1.o ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.d : ,g' < ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.d.$$ > ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.d; \
+Thu 00:26:       rm -f ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.d.$$
+Thu 00:26: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling/CPUCode'
+Thu 00:26: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling/CPUCode'
+Thu 00:26: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -c MaxpoolingCpuCode.c -o ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.o
+Thu 00:26: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -o ../RunRules/Simulation/binaries/Maxpooling ../RunRules/Simulation/objects/maxfiles/slic_Maxpooling.o ../RunRules/Simulation/objects/c/MaxpoolingCpuCode.o -g -O3  -L '/opt/maxeler/maxcompiler/lib' -lslic -L '/opt/maxeler/maxcompiler/lib/maxeleros-sim/lib' -lmaxeleros -lpthread -lm -lrt 
+Thu 00:26: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling/CPUCode'
+Thu 00:26: Build completed: Thu Jul 21 00:26:47 PDT 2016
+
+
+Thu 00:26: ########################################## 
+Thu 00:26: Running
+Thu 00:26: ########################################## 
+Thu 00:26: Executing command:
+Thu 00:26: '/home/demo/Desktop/training-exercises/Solution/Sol2a_MaxPooling/RunRules/Simulation/binaries/Maxpooling' 
+Thu 00:26: Command output:
+Thu 00:26: Running DFE.
+Thu 00:26: Test passed OK!
+Thu 00:26: Process terminated with exit code 0.

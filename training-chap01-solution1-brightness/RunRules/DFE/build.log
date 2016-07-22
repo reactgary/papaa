@@ -1,0 +1,31 @@
+Mon 13:16: ########################################## 
+Mon 13:16: Compiling.
+Mon 13:16: ########################################## 
+
+Mon 13:16: MaxCompiler version: 2013.3.
+Mon 13:16: Build DFE run rule for training-chap01-solution1-brightness start time: Mon Apr 07 13:16:47 BST 2014.
+Mon 13:16: Project location: /home/trainingm/workspace/training-chap01-solution1-brightness.
+Mon 13:16: Detailed build log: /home/trainingm/workspace/training-chap01-solution1-brightness/RunRules/DFE/build.log.
+
+Mon 13:16: Compiling Engine Code.
+Mon 13:16: Building BrightnessSolution.max file. 
+Mon 13:16: Setting environment variable:
+Mon 13:16: MAXCOMPILER_BUILD_DIR : /network-scratch/trainingm/maxdc_builds/
+Mon 13:16: MAX_BUILDPARAMS : DFEModel='MAX2C' target='DFE' maxFileName='BrightnessSolution'  
+Mon 13:16: Building output:
+Mon 13:16: MaxCompiler version: 2013.3
+Mon 13:16: Build "BrightnessSolution" start time: Mon Apr 07 13:16:55 BST 2014
+Mon 13:16: Main build process running as user trainingm on host maxworkstation7478.office.maxeler.com
+Mon 13:16: Build location: /home/trainingm/maxcompiler-builds/BrightnessSolution_MAX2C_DFE
+Mon 13:16: Detailed build log available in "_build.log"
+Mon 13:16: Instantiating manager
+Mon 13:16: Instantiating kernel "BrightnessSolutionKernel"
+Mon 13:16: Compiling manager (CPU I/O Only)
+Mon 13:16: 
+Mon 13:16: Compiling kernel "BrightnessSolutionKernel"
+Mon 13:19: Generating input files (VHDL, netlists, MegaWizard/CoreGen)
+Mon 13:21: Engine build terminated by user.
+Mon 13:21: Engine build terminated by user
+Mon 13:21: Build failed: Mon Apr 07 13:21:18 BST 2014
+
+

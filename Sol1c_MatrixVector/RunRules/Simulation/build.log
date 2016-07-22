@@ -1,0 +1,55 @@
+Thu 00:26: ########################################## 
+Thu 00:26: Compiling.
+Thu 00:26: ########################################## 
+
+Thu 00:26: MaxCompiler version: 2015.2 (simulation only).
+Thu 00:26: Build Simulation run rule for Sol1c_MatrixVector start time: Thu Jul 21 00:26:33 PDT 2016.
+Thu 00:26: Project location: /home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector.
+Thu 00:26: Detailed build log: /home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector/RunRules/Simulation/build.log.
+
+Thu 00:26: Compiling Engine Code.
+Thu 00:26: Engine building skipped (no changes on .max files).
+Thu 00:26: Compiling CPU Code.
+Thu 00:26: Run CPU project make files updating
+Thu 00:26: Executing command:
+Thu 00:26: java -jar /opt/maxeler/maxcompiler/lib/MaxIDE/projectAdmin.jar -u /home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector Simulation 
+Thu 00:26: Command output:
+
+Thu 00:26: MaxCompiler Project Admin Tool Version 2015.2.00001
+Thu 00:26:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+
+Thu 00:26: Handler version 2
+Thu 00:26: Updating RunRule dependent Makefiles for RunRule 'Simulation'
+Thu 00:26: 	Updating: Simulation
+Thu 00:26: Found makefiles: 1
+Thu 00:26: 	Updated: Simulation
+Thu 00:26: Run CPU make.
+Thu 00:26: make RUNRULE=Simulation 
+Thu 00:26: Command output:
+Thu 00:26: make -f Makefile.rules build
+Thu 00:26: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector/CPUCode'
+Thu 00:26: set -e; rm -f ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.d ;                                                             \
+Thu 00:26: 	  cc -M -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -Wno-error MatrixVectorCpuCode.c > ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.d.$$ ;                                 \
+Thu 00:26:       sed 's,\(MatrixVectorCpuCode\)\.o[ :]*,../RunRules/Simulation/objects/c/\1.o ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.d : ,g' < ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.d.$$ > ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.d; \
+Thu 00:26:       rm -f ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.d.$$
+Thu 00:26: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector/CPUCode'
+Thu 00:26: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector/CPUCode'
+Thu 00:26: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -c MatrixVectorCpuCode.c -o ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.o
+Thu 00:26: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -o ../RunRules/Simulation/binaries/MatrixVector ../RunRules/Simulation/objects/maxfiles/slic_MatrixVector.o ../RunRules/Simulation/objects/c/MatrixVectorCpuCode.o -g -O3  -L '/opt/maxeler/maxcompiler/lib' -lslic -L '/opt/maxeler/maxcompiler/lib/maxeleros-sim/lib' -lmaxeleros -lpthread -lm -lrt 
+Thu 00:26: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector/CPUCode'
+Thu 00:26: Build completed: Thu Jul 21 00:26:34 PDT 2016
+
+
+Thu 00:26: ########################################## 
+Thu 00:26: Running
+Thu 00:26: ########################################## 
+Thu 00:26: Executing command:
+Thu 00:26: '/home/demo/Desktop/training-exercises/Solution/Sol1c_MatrixVector/RunRules/Simulation/binaries/MatrixVector' 
+Thu 00:26: Command output:
+Thu 00:26: Running on DFE.
+Thu 00:26: 86.000 77.000 15.000 93.000      83.000                                  
+Thu 00:26: 86.000 92.000 49.000 21.000      35.000                                  
+Thu 00:26: 27.000 90.000 59.000 63.000   X  62.000   =   13181.000 13942.000 10687.000 9630.000 
+Thu 00:26: 40.000 26.000 72.000 36.000      26.000                                  
+Thu 00:26: Done.
+Thu 00:26: Process terminated with exit code 0.

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<maxCompilerManager version="2">
+<enginePart internalEngineSubproject="Sol1a_DotProductSimple_EngineCode" isSrcBin="false" isUseDefaultSelected="false" outputLocation="/Sol1a_DotProductSimple_EngineCode/bin" projectName="Sol1a_DotProductSimple"/>
+<cpuPart internalCpuSubproject="Sol1a_DotProductSimple_CPUCode"/>
+<watchedFiles/>
+</maxCompilerManager>

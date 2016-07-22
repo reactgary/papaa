@@ -1,0 +1,40 @@
+/**
+ * Document: Dataflow Programming with Maxeler (pappa16.pdf)
+ * Exercise 4      Name: Max-pooling layer
+ * MaxFile name: Exercise4
+ * Summary:
+ *      CPU code for a kernel design of Max-pooling layer.
+ */
+
+package maxpooling;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+
+public class MaxpoolingKernel extends Kernel {
+	public MaxpoolingKernel(KernelParameters parameters, int height) {
+		super(parameters);
+
+		DFEVar inStream = io.input("inStream", dfeUInt(32));
+
+		// Control Counter
+		CounterChain chain = control.count.makeCounterChain();
+		DFEVar i = chain.addCounter(height, 1);
+		DFEVar j = chain.addCounter(8, 1);
+
+		// @TODO add max-pool of 2x2 pixel square here
+		DFEVar result = inStream;
+		result = stream.offset(inStream, -1) > result? stream.offset(inStream, -1) : result ;
+		result = stream.offset(inStream, -height) > result? stream.offset(inStream, -height) : result ;
+		result = stream.offset(inStream, -height-1) > result? stream.offset(inStream, -height-1) : result ;
+
+		// @TODO add controlled output condition here
+		DFEVar enable = (i & j & 1) === 1;
+
+		// Outputs
+		io.output("outStream", result, dfeUInt(32), enable);
+
+	}
+}

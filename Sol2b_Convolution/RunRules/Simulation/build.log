@@ -1,0 +1,141 @@
+Thu 00:26: ########################################## 
+Thu 00:26: Compiling.
+Thu 00:26: ########################################## 
+
+Thu 00:26: MaxCompiler version: 2015.2 (simulation only).
+Thu 00:26: Build Simulation run rule for Sol2b_Convolution start time: Thu Jul 21 00:26:51 PDT 2016.
+Thu 00:26: Project location: /home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution.
+Thu 00:26: Detailed build log: /home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/RunRules/Simulation/build.log.
+
+Thu 00:26: Compiling Engine Code.
+Thu 00:26: Building Convolution.max file. 
+Thu 00:26: Setting environment variable:
+Thu 00:26: MAXCOMPILER_BUILD_DIR : /home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/RunRules/Simulation/maxfiles
+Thu 00:26: MAX_BUILDPARAMS : DFEModel='MAIA' target='DFE_SIM' maxFileName='Convolution'  
+Thu 00:26: Building output:
+Thu 00:26: MaxCompiler version: 2015.2 (simulation only)
+Thu 00:26: Build "Convolution" start time: Thu Jul 21 00:26:52 PDT 2016
+Thu 00:26: Main build process running as user demo on host localhost.localdomain
+Thu 00:26: Build location: /home/demo/Desktop/MaxCompiler-Builds/Convolution_MAIA_DFE_SIM
+Thu 00:26: Detailed build log available in "_build.log"
+Thu 00:26: Instantiating manager
+Thu 00:26: Instantiating kernel "ConvolutionKernel"
+Thu 00:26: Compiling manager (CPU I/O Only)
+Thu 00:26: 
+Thu 00:26: Compiling kernel "ConvolutionKernel"
+Thu 00:26: Running back-end simulation build (3 phases)
+Thu 00:26: (1/3) - Prepare MaxFile Data (GenerateMaxFileDataFile)
+Thu 00:26: (2/3) - Compile Simulation Modules (SimCompilePass)
+Thu 00:27: (3/3) - Generate MaxFile (AddSimObjectToMaxFilePass)
+Thu 00:27: MaxFile: /home/demo/Desktop/MaxCompiler-Builds/Convolution_MAIA_DFE_SIM/results/Convolution.max (MD5Sum: 9cbdd77cfc4b1541d13f2b4bebfa7098)
+Thu 00:27: Build completed: Thu Jul 21 00:27:08 PDT 2016 (took 15 secs)
+Thu 00:27: Executing command:
+Thu 00:27: cp /home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/RunRules/Simulation/maxfiles/Convolution.h /home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/RunRules/Simulation/include/Convolution.h 
+Thu 00:27: Command output:
+Thu 00:27: Building: Convolution.max file finished.
+Thu 00:27: Engine build finished.
+Thu 00:27: Compiling CPU Code.
+Thu 00:27: Run CPU project make files updating
+Thu 00:27: Executing command:
+Thu 00:27: java -jar /opt/maxeler/maxcompiler/lib/MaxIDE/projectAdmin.jar -u /home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution Simulation 
+Thu 00:27: Command output:
+
+Thu 00:27: MaxCompiler Project Admin Tool Version 2015.2.00001
+Thu 00:27:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+
+Thu 00:27: Handler version 2
+Thu 00:27: Updating RunRule dependent Makefiles for RunRule 'Simulation'
+Thu 00:27: 	Updating: Simulation
+Thu 00:27: Found makefiles: 1
+Thu 00:27: 	Updated: Simulation
+Thu 00:27: Run CPU make.
+Thu 00:27: make RUNRULE=Simulation 
+Thu 00:27: Command output:
+Thu 00:27: make -f Makefile.rules build
+Thu 00:27: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/CPUCode'
+Thu 00:27: set -e; rm -f ../RunRules/Simulation/objects/c/ConvolutionCpuCode.d ;                                                             \
+Thu 00:27: 	  cc -M -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -Wno-error ConvolutionCpuCode.c > ../RunRules/Simulation/objects/c/ConvolutionCpuCode.d.$$ ;                                 \
+Thu 00:27:       sed 's,\(ConvolutionCpuCode\)\.o[ :]*,../RunRules/Simulation/objects/c/\1.o ../RunRules/Simulation/objects/c/ConvolutionCpuCode.d : ,g' < ../RunRules/Simulation/objects/c/ConvolutionCpuCode.d.$$ > ../RunRules/Simulation/objects/c/ConvolutionCpuCode.d; \
+Thu 00:27:       rm -f ../RunRules/Simulation/objects/c/ConvolutionCpuCode.d.$$
+Thu 00:27: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/CPUCode'
+Thu 00:27: make[1]: Entering directory `/home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/CPUCode'
+Thu 00:27: "/opt/maxeler/maxcompiler/bin/sliccompile" ../RunRules/Simulation/maxfiles/Convolution.max ../RunRules/Simulation/objects/maxfiles/slic_Convolution.o
+Thu 00:27: Processing maxfile for MAIA_SIM from '../RunRules/Simulation/maxfiles/Convolution.max'.
+Thu 00:27: /opt/maxeler/maxcompiler/lib/clang/bin/start.sh clang -fgnu89-inline -pipe -O0 -std=gnu99 -Wall -Werror -frandom-seed=foo -Wno-unused-variable -Wno-unused-function -fPIC -I /opt/maxeler/maxcompiler/include/slic -DMAXFILE_INC="/dev/null" -DSLIC_NO_DESTRUCTORS -c /tmp/sliccompile_196011019221313002/cobject/max_2566870869454045905.c -o /tmp/sliccompile_196011019221313002/cobject/max_2566870869454045905.c.o 
+Thu 00:27: /opt/maxeler/maxcompiler/lib/clang/bin/start.sh clang -fgnu89-inline -pipe -O0 -std=gnu99 -Wall -Werror -frandom-seed=foo -Wno-unused-variable -Wno-unused-function -fPIC -I /opt/maxeler/maxcompiler/include/slic -DMAXFILE_INC="/home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/CPUCode/../RunRules/Simulation/maxfiles/Convolution.max" -DSLIC_NO_DESTRUCTORS -c /opt/maxeler/maxcompiler/src/slicinterface/MaxFileInit.c -o max_1412667159935975129.o 
+Thu 00:27: ld -r /tmp/sliccompile_196011019221313002/cobject/max_2566870869454045905.c.o max_1412667159935975129.o -o slic_Convolution.o 
+Thu 00:27: Copying .max file C object into '/home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/CPUCode/../RunRules/Simulation/objects/maxfiles'
+Thu 00:27: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -c ConvolutionCpuCode.c -o ../RunRules/Simulation/objects/c/ConvolutionCpuCode.o
+Thu 00:27: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -o ../RunRules/Simulation/binaries/convolution ../RunRules/Simulation/objects/maxfiles/slic_Convolution.o ../RunRules/Simulation/objects/c/ConvolutionCpuCode.o -g -O3  -L '/opt/maxeler/maxcompiler/lib' -lslic -L '/opt/maxeler/maxcompiler/lib/maxeleros-sim/lib' -lmaxeleros -lpthread -lm -lrt 
+Thu 00:27: make[1]: Leaving directory `/home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/CPUCode'
+Thu 00:27: Build completed: Thu Jul 21 00:27:10 PDT 2016
+
+
+Thu 00:27: ########################################## 
+Thu 00:27: Running
+Thu 00:27: ########################################## 
+Thu 00:27: Executing command:
+Thu 00:27: '/home/demo/Desktop/training-exercises/Solution/Sol2b_Convolution/RunRules/Simulation/binaries/convolution' 
+Thu 00:27: Command output:
+Thu 00:27: Running DFE.
+
+Thu 00:27: INPUT DATA
+Thu 00:27: Column y
+Thu 00:27:     0    1    2    3    4    5    6    7
+Thu 00:27: ----------------------------------------
+Thu 00:27:   215  101  200  204  233 50.6 85.8  197 | row x=[0]
+Thu 00:27:  71.1  142  122  161 93.4  131  244  235 | row x=[1]
+Thu 00:27:   163  184 36.3  155 4.17 62.2 35.1  206 | row x=[2]
+Thu 00:27:  40.1  103 33.2 27.9  256 55.9  131  215 | row x=[3]
+Thu 00:27:   157 75.8  163  134  126  249 74.9  197 | row x=[4]
+Thu 00:27:   135  197  102  228 72.5 90.2  207  235 | row x=[5]
+Thu 00:27:  17.9  243  135   22 49.2  170  228 89.3 | row x=[6]
+Thu 00:27:  16.4 5.13  117 16.2   61  248  231  218 | row x=[7]
+Thu 00:27:  68.3  138 96.1  195  131  171  136 10.1 | row x=[8]
+Thu 00:27:   112  239  238  185 72.8  189  164 90.6 | row x=[9]
+Thu 00:27:   176 42.5  113  225  212 84.6 58.6  229 | row x=[10]
+Thu 00:27:  89.7  176  245  151  168  220  113  237 | row x=[11]
+Thu 00:27:   102  209  175  233  124 55.3  243  236 | row x=[12]
+Thu 00:27:  37.8  226  164  111  159   72  201 78.7 | row x=[13]
+Thu 00:27:   114 57.9   48 70.7  142  107 43.4  232 | row x=[14]
+Thu 00:27:  26.4 32.3  127  195  252  239  175 98.1 | row x=[15]
+
+Thu 00:27: EXPECTED DATA
+Thu 00:27: Column y
+Thu 00:27:     0    1    2    3    4    5
+Thu 00:27: ------------------------------
+Thu 00:27:   134  138  142  119  112  154 | row x=[0]
+Thu 00:27:   118   98   99 95.4 89.1  129 | row x=[1]
+Thu 00:27:  99.7 83.9 99.9  128  116  125 | row x=[2]
+Thu 00:27:   116  119  131  146  147  154 | row x=[3]
+Thu 00:27:   148  146  128  116  140  174 | row x=[4]
+Thu 00:27:   128  122 81.1 89.4  155  194 | row x=[5]
+Thu 00:27:  85.4 98.2 79.1  106  175  189 | row x=[6]
+Thu 00:27:   116  138  133  135  164  153 | row x=[7]
+Thu 00:27:   154  176  172  150  142  131 | row x=[8]
+Thu 00:27:   141  169  184  168  138  134 | row x=[9]
+Thu 00:27:   153  182  186  168  147  161 | row x=[10]
+Thu 00:27:   170  192  174  142  136  174 | row x=[11]
+Thu 00:27:   142  147  137  125  118  144 | row x=[12]
+Thu 00:27:  89.2 99.6  123  148  138  131 | row x=[13]
+
+Thu 00:27: OUTPUT DATA
+Thu 00:27: Column y
+Thu 00:27:     0    1    2    3    4    5
+Thu 00:27: ------------------------------
+Thu 00:27:   134  138  142  119  112  154 | row x=[0]
+Thu 00:27:   118   98   99 95.4 89.1  129 | row x=[1]
+Thu 00:27:  99.7 83.9 99.9  128  116  125 | row x=[2]
+Thu 00:27:   116  119  131  146  147  154 | row x=[3]
+Thu 00:27:   148  146  128  116  140  174 | row x=[4]
+Thu 00:27:   128  122 81.1 89.4  155  194 | row x=[5]
+Thu 00:27:  85.4 98.2 79.1  106  175  189 | row x=[6]
+Thu 00:27:   116  138  133  135  164  153 | row x=[7]
+Thu 00:27:   154  176  172  150  142  131 | row x=[8]
+Thu 00:27:   141  169  184  168  138  134 | row x=[9]
+Thu 00:27:   153  182  186  168  147  161 | row x=[10]
+Thu 00:27:   170  192  174  142  136  174 | row x=[11]
+Thu 00:27:   142  147  137  125  118  144 | row x=[12]
+Thu 00:27:  89.2 99.6  123  148  138  131 | row x=[13]
+Thu 00:27: Test passed OK!
+Thu 00:27: Process terminated with exit code 0.
